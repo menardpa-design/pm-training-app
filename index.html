@@ -409,6 +409,15 @@ h2.two span{display:block;color:var(--muted)}
 .cap{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);font-size:.82rem;font-weight:600;color:#fff;backdrop-filter:blur(6px)}
 .cap span{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 4px rgba(61,220,132,.25)}
 .cpro{display:inline-block;margin-top:10px;font-size:.78rem;color:#d9d6d1;text-decoration:underline;text-underline-offset:3px}
+.ml-l{background:none;border:0;padding:6px 0 0;font:inherit;color:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+#ml{border:0;border-radius:20px;padding:0;margin:auto;width:min(560px,calc(100% - 32px));max-height:85vh;color:var(--text,#272727);background:#fff;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+#ml::backdrop{background:rgba(15,18,19,.55)}
+.ml-in{padding:22px 20px 26px;position:relative;font-size:.88rem;line-height:1.55}
+.ml-in h2{font-size:1.2rem;margin:0 36px 10px 0}
+.ml-in h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin:18px 0 6px;color:var(--muted)}
+.ml-in p{margin:0 0 8px}
+.ml-in a{color:inherit}
+.ml-x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:0;background:#f3f1ee;font-size:1rem;cursor:pointer;color:inherit}
 </style>
 </head>
 <body>
@@ -754,7 +763,23 @@ h2.two span{display:block;color:var(--muted)}
 
 </main>
 
-<footer>© <span id="y">2026</span> PM Training · Les réglages et mesures proposés sont des repères d’entraînement. Ils ne remplacent pas un avis médical, ni une étude posturale réalisée par un professionnel de santé.</footer>
+<footer>© <span id="y">2026</span> PM Training · Les réglages et mesures proposés sont des repères d’entraînement. Ils ne remplacent pas un avis médical, ni une étude posturale réalisée par un professionnel de santé.<br><button type="button" class="ml-l" onclick="document.getElementById('ml').showModal()">Mentions légales</button></footer>
+<dialog id="ml" aria-labelledby="ml-t"><div class="ml-in">
+<button class="ml-x" type="button" aria-label="Fermer" onclick="this.closest('dialog').close()">✕</button>
+<h2 id="ml-t">Mentions légales</h2>
+<h3>Éditeur du site</h3>
+<p>Paul Ménard, entrepreneur individuel (micro-entreprise), exerçant sous le nom PM Training.<br>SIRET : 888 541 703 00029<br>Chambéry (73000), Savoie<br>Téléphone : <a href="tel:+33621349226">06 21 34 92 26</a><br>Directeur de la publication : Paul Ménard</p>
+<p>Éducateur sportif titulaire du DEJEPS Triathlon, carte professionnelle n° <a href="https://recherche-educateur.sports.gouv.fr/CartePro/07326ED0063" target="_blank" rel="noopener">07326ED0063</a>.</p>
+<p>TVA non applicable, article 293 B du Code général des impôts.</p>
+<h3>Hébergement</h3>
+<p>GitHub Pages, GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.</p>
+<h3>Données personnelles</h3>
+<p>Le site ne demande aucun compte et ne dépose aucun cookie publicitaire ou de mesure d’audience. Les valeurs saisies dans les calculateurs restent dans la mémoire de ton téléphone. Les photos et vidéos analysées dans l’onglet Position sont traitées sur ton téléphone et ne sont jamais envoyées.</p>
+<p>Pour s’afficher et fonctionner, le site charge des polices (Google Fonts) et l’outil d’analyse de posture (jsDelivr, Google). Ces services reçoivent l’adresse IP de ton appareil, comme pour tout site web.</p>
+<p>Si tu me contactes par téléphone, WhatsApp ou Instagram, tes messages servent uniquement à te répondre et à organiser ton suivi. Tu peux demander à tout moment l’accès ou la suppression de tes données au 06 21 34 92 26.</p>
+<h3>Propriété intellectuelle</h3>
+<p>Les textes, photos et logos de ce site appartiennent à Paul Ménard ou sont utilisés avec l’accord des athlètes concernés. Toute reproduction sans autorisation est interdite.</p>
+</div></dialog>
 
 <nav class="tabs" aria-label="Sections">
   <div class="wrap" role="tablist">
