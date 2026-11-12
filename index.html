@@ -127,7 +127,9 @@ td:not(:first-child),th:not(:first-child){text-align:right}
 .ck .v{grid-column:1/-1;font-size:.85rem;font-weight:600;display:none}
 .ck .v.on{display:block}
 .v.ok{color:var(--ok)} .v.lo,.v.hi{color:var(--warn)}
-.bike-svg{width:100%;height:auto;display:block;background:var(--card);border:1px solid var(--line);margin-bottom:14px}
+.bike-fig{background:var(--card);border:1px solid var(--line);margin-bottom:14px}
+.bike-svg{width:100%;height:auto;display:block}
+.bike-fig figcaption{font-size:.78rem;color:var(--muted);text-align:center;padding:8px 10px}
 
 /* Offers */
 .offer{background:var(--card);border:1px solid var(--line);padding:20px;margin-bottom:18px;position:relative}
@@ -301,73 +303,30 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
     <p class="note" style="margin-top:10px">Entrejambe : pieds nus, dos au mur, un livre bien calé entre les jambes comme une selle. Mesure du sol au haut du livre.</p>
   </div>
 
-  <svg class="bike-svg" id="bikeSvg" viewBox="-22 0 444 302" role="img" aria-label="Vélo de profil avec les mesures de position : A hauteur de selle, B selle-cintre, C drop, D recul">
-    <defs>
-      <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--accent)"/></marker>
-    </defs>
-    <line x1="-14" y1="285" x2="414" y2="285" stroke="var(--line)" stroke-width="2"/>
-    <!-- roues -->
-    <g fill="none" stroke="var(--muted)">
-      <circle cx="70" cy="200" r="84" stroke-width="7" stroke="var(--text)" opacity=".85"/>
-      <circle cx="70" cy="200" r="76" stroke-width="2"/>
-      <circle cx="320" cy="200" r="84" stroke-width="7" stroke="var(--text)" opacity=".85"/>
-      <circle cx="320" cy="200" r="76" stroke-width="2"/>
-      <g stroke-width=".8" opacity=".6">
-        <path d="M70 124V276M-6 200H146M16 146L124 254M16 254L124 146"/>
-        <path d="M320 124V276M244 200H396M266 146L374 254M266 254L374 146"/>
-      </g>
-      <circle cx="70" cy="200" r="5" fill="var(--muted)"/><circle cx="320" cy="200" r="5" fill="var(--muted)"/>
+  <figure class="bike-fig">
+  <svg class="bike-svg" id="bikeSvg" viewBox="30 290 720 480" role="img" aria-label="Photo du vélo de Paul avec les mesures de position : A hauteur de selle, B selle-cintre, C drop, D recul">
+    <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#d8341c"/></marker></defs>
+    <image href="img/velo.jpg" x="30" y="290" width="720" height="480"/>
+    <g stroke="#d8341c" fill="none" stroke-linecap="round">
+      <line x1="348" y1="646" x2="258" y2="334" stroke-width="4" stroke-dasharray="10 7" marker-start="url(#ar)" marker-end="url(#ar)"/>
+      <line x1="321" y1="336" x2="574" y2="401" stroke-width="4" marker-start="url(#ar)" marker-end="url(#ar)"/>
+      <line x1="348" y1="646" x2="348" y2="300" stroke-width="2" stroke-dasharray="3 6"/>
+      <line x1="317" y1="314" x2="348" y2="314" stroke-width="4" marker-start="url(#ar)" marker-end="url(#ar)"/>
+      <line x1="317" y1="336" x2="317" y2="308" stroke-width="2" stroke-dasharray="3 5"/>
+      <line x1="327" y1="334" x2="725" y2="334" stroke-width="2" stroke-dasharray="3 6"/>
+      <line x1="586" y1="401" x2="725" y2="401" stroke-width="2" stroke-dasharray="3 6"/>
+      <line x1="712" y1="337" x2="712" y2="398" stroke-width="4" marker-start="url(#ar)" marker-end="url(#ar)"/>
     </g>
-    <!-- transmission -->
-    <circle cx="171" cy="217" r="24" fill="none" stroke="var(--muted)" stroke-width="3"/>
-    <path d="M147 217 L70 207 M171 241 L70 208" stroke="var(--muted)" stroke-width="1.5" fill="none" opacity=".7"/>
-    <line x1="171" y1="217" x2="183" y2="258" stroke="var(--text)" stroke-width="6" stroke-linecap="round"/>
-    <rect x="174" y="256" width="20" height="6" rx="2" fill="var(--text)"/>
-    <!-- cadre -->
-    <g fill="none" stroke="var(--text)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M171 217 L70 200 L136 96 L171 217 L279 113 L268 77 L136 92"/>
-      <path d="M279 113 L320 200" stroke-width="5"/>
+    <circle cx="348" cy="646" r="7" fill="#d8341c" stroke="#fff" stroke-width="2"/>
+    <g font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="22" text-anchor="middle" fill="#fff">
+      <circle cx="281" cy="500" r="17" fill="#d8341c"/><text x="281" y="508">A</text>
+      <circle cx="450" cy="345" r="17" fill="#d8341c"/><text x="450" y="353">B</text>
+      <circle cx="712" cy="434" r="17" fill="#d8341c"/><text x="712" y="442">C</text>
+      <circle cx="372" cy="314" r="17" fill="#d8341c"/><text x="372" y="322">D</text>
     </g>
-    <!-- tige de selle et selle -->
-    <line x1="134" y1="92" x2="120" y2="44" stroke="var(--muted)" stroke-width="5" stroke-linecap="round"/>
-    <path d="M88 36 Q92 31 112 33 L152 36 Q158 37 156 40 L118 42 Q96 44 88 40 Z" fill="var(--text)"/>
-    <!-- poste de pilotage : route / gravel -->
-    <g class="ck-road" fill="none" stroke="var(--text)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M268 77 L266 67 L293 63"/>
-      <path d="M293 63 h12 q8 0 9 6 l2 8 q2 10 -2 18 q-4 8 -16 6" stroke-width="5"/>
-      <path d="M314 69 l5 -6" stroke-width="5"/>
-    </g>
-    <!-- poste de pilotage : triathlon -->
-    <g class="ck-tri" fill="none" stroke="var(--text)" stroke-linecap="round" stroke-linejoin="round" hidden>
-      <path d="M268 77 L266 69 L290 68" stroke-width="4"/>
-      <path d="M290 68 h14 q6 0 6 6 v10" stroke-width="5"/>
-      <path d="M278 58 h18" stroke-width="7"/>
-      <path d="M288 60 L288 67 M284 60 L334 55 q6 -1 6 -8" stroke-width="4"/>
-    </g>
-    <!-- poste de pilotage : VTT -->
-    <g class="ck-flat" fill="none" stroke="var(--text)" stroke-linecap="round" stroke-linejoin="round" hidden>
-      <path d="M268 77 L266 64 L286 60" stroke-width="4"/>
-      <path d="M282 62 L296 58" stroke-width="6"/>
-      <circle cx="294" cy="58" r="4" fill="var(--text)" stroke="none"/>
-    </g>
-    <!-- cotes -->
-    <g stroke="var(--accent)" stroke-width="2" fill="none">
-      <line x1="171" y1="217" x2="120" y2="40" stroke-dasharray="5 4" marker-end="url(#ar)" marker-start="url(#ar)"/>
-      <line x1="156" y1="38" x2="290" y2="62" class="dimB" marker-end="url(#ar)" marker-start="url(#ar)"/>
-      <line x1="171" y1="230" x2="171" y2="14" stroke-dasharray="2 4" stroke-width="1.2" opacity=".7"/>
-      <line x1="156" y1="18" x2="171" y2="18" marker-end="url(#ar)" marker-start="url(#ar)"/>
-      <line x1="158" y1="36" x2="372" y2="36" stroke-dasharray="2 4" stroke-width="1.2" opacity=".7"/>
-      <line x1="300" y1="61" x2="372" y2="61" stroke-dasharray="2 4" stroke-width="1.2" opacity=".7" class="dimCline"/>
-      <line x1="366" y1="37" x2="366" y2="60" class="dimC" marker-end="url(#ar)" marker-start="url(#ar)"/>
-    </g>
-    <g font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="13" text-anchor="middle">
-      <g><circle cx="132" cy="140" r="11" fill="var(--accent)"/><text x="132" y="145" fill="#fff">A</text></g>
-      <g><circle cx="222" cy="35" r="11" fill="var(--accent)"/><text x="222" y="40" fill="#fff">B</text></g>
-      <g><circle cx="384" cy="49" r="11" fill="var(--accent)"/><text x="384" y="54" fill="#fff">C</text></g>
-      <g><circle cx="144" cy="12" r="11" fill="var(--accent)"/><text x="144" y="17" fill="#fff">D</text></g>
-    </g>
-    <text x="200" y="298" font-family="Inter,sans-serif" font-size="10" fill="var(--muted)" text-anchor="middle">A hauteur de selle · B selle → cintre · C drop · D recul de selle</text>
   </svg>
+  <figcaption>A hauteur de selle · B selle → cintre · C drop · D recul de selle</figcaption>
+  </figure>
 
   <div class="kpis" id="fitOut"></div>
   <div class="result" id="fitCmp" hidden></div>
@@ -606,9 +565,7 @@ function angCalc(){
     if(v<lo){out.className='v on lo';out.textContent='▼ '+a.lo}else if(v>hi){out.className='v on hi';out.textContent='▲ '+a.hi}else{out.className='v on ok';out.textContent='✓ Dans la cible.'}});
 }
 angRender();
-function bikeDraw(){const v=bType==='tri'?'tri':bType==='vtt'?'flat':'road';['road','tri','flat'].forEach(k=>document.querySelectorAll('.ck-'+k).forEach(g=>g.toggleAttribute('hidden',k!==v)));
-  const y={road:62,tri:57,flat:59}[v],x={road:290,tri:286,flat:290}[v];const B=document.querySelector('.dimB');B.setAttribute('x2',x);B.setAttribute('y2',y);
-  document.querySelector('.dimC').setAttribute('y2',y-1);document.querySelector('.dimCline').setAttribute('y1',y);document.querySelector('.dimCline').setAttribute('y2',y);}
+function bikeDraw(){}
 seg('#bType',b=>{bType=b.dataset.t;store.set('bType',bType);bikeDraw();fitCalc()});
 ['flex'].forEach(id=>{const el=$('#'+id);const v=store.get(id,null);if(v!==null)el.value=v;el.addEventListener('change',()=>{store.set(id,el.value);fitCalc()})});
 persist(['inseam','height','curH'],fitCalc);
