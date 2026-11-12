@@ -286,12 +286,6 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
   <div class="hero" style="--img:url(img/position.jpg);background-position:center,center 15%"><div class="hero-in"><p class="eyebrow">Calculateur</p><h2>Ta position vélo<span>.</span></h2></div></div>
   <p class="intro">Quelques mesures et tu obtiens un point de départ pour régler ton vélo. Ensuite, une photo de profil sur home-trainer permet de vérifier tes angles.</p>
 
-  <div class="seg" id="bType" role="group" aria-label="Pratique">
-    <button type="button" aria-pressed="true" data-t="route">Route</button>
-    <button type="button" aria-pressed="false" data-t="tri">Triathlon / CLM</button>
-    <button type="button" aria-pressed="false" data-t="gravel">Gravel</button>
-    <button type="button" aria-pressed="false" data-t="vtt">VTT</button>
-  </div>
 
   <div class="panel">
     <div class="grid2">
@@ -530,7 +524,7 @@ const FIT={
   tri:{n:'Triathlon',reach:[.50,.55],drop:[[2,6],[6,9],[9,12]],trunk:[15,25],elbow:[90,105],setback:'0 à 3 cm, selle avancée (angle de tube de selle 76 à 80°)',frame:.665},
   gravel:{n:'Gravel',reach:[.51,.55],drop:[[-2,2],[1,5],[4,7]],trunk:[45,55],elbow:[150,165],setback:'5 à 8 cm derrière l\'axe du pédalier',frame:.65},
   vtt:{n:'VTT',reach:[.55,.60],drop:[[-4,0],[-1,3],[2,5]],trunk:[45,60],elbow:[150,165],setback:'4 à 7 cm derrière l\'axe du pédalier',frame:.573}};
-let bType=store.get('bType','route');
+const bType='route';
 const crank=i=>i<74?165:i<80?167.5:i<86?170:i<93?172.5:175;
 const ANG=[
   {id:'knee',t:'Genou en bas du coup de pédale',s:'Angle hanche-genou-cheville, pédale à 6 h',r:()=>[140,150],lo:'Genou trop fléchi : remonte ta selle de 3 à 5 mm et revérifie.',hi:'Jambe trop tendue : descends ta selle de 3 à 5 mm et revérifie.'},
@@ -565,8 +559,6 @@ function angCalc(){
     if(v<lo){out.className='v on lo';out.textContent='▼ '+a.lo}else if(v>hi){out.className='v on hi';out.textContent='▲ '+a.hi}else{out.className='v on ok';out.textContent='✓ Dans la cible.'}});
 }
 angRender();
-function bikeDraw(){}
-seg('#bType',b=>{bType=b.dataset.t;store.set('bType',bType);bikeDraw();fitCalc()});
 ['flex'].forEach(id=>{const el=$('#'+id);const v=store.get(id,null);if(v!==null)el.value=v;el.addEventListener('change',()=>{store.set(id,el.value);fitCalc()})});
 persist(['inseam','height','curH'],fitCalc);
 
@@ -579,7 +571,7 @@ seg('#tFilter',b=>tRender(b.dataset.f));
 $$('[data-offer]').forEach(a=>{a.href=NOLIO;a.target='_blank';a.rel='noopener'});
 
 /* ---------- Démarrage ---------- */
-setSeg('#zSport','s',sport);setSeg('#hrM','m',hrMode);setSeg('#bType','t',bType);
+setSeg('#zSport','s',sport);setSeg('#hrM','m',hrMode);
 runCalc();hrCalc();bikeCalc();swimCalc();fitCalc();tRender('all');
 $('#y').textContent=new Date().getFullYear();
 
