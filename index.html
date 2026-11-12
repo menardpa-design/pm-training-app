@@ -194,13 +194,90 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
 .install{display:none;margin:0 0 14px;background:var(--card2);border:1px solid var(--line);padding:12px 14px;font-size:.88rem}
 .install.on{display:flex;gap:10px;align-items:center;justify-content:space-between}
 .install button{background:var(--accent);color:#fff;border:0;padding:8px 12px;font-weight:800;font-size:.75rem;text-transform:uppercase;cursor:pointer}
+
+/* ===== Finition « pro » : sobriété, rythme, rouge réservé aux actions ===== */
+:root{--r:12px;--shadow:0 1px 2px rgba(39,39,39,.05),0 6px 20px rgba(39,39,39,.05);--bg:#f5f4f1;--line:#e7e3dd;--muted:#706c66}
+body{font-size:15.5px;letter-spacing:-.003em}
+h1,h2,h3,.logo,.big-num,.price{font-weight:800}
+h2{letter-spacing:-.02em}
+h3{text-transform:none;font-size:1.12rem;letter-spacing:-.01em;font-weight:800}
+.block>h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:700;margin-bottom:10px}
+.eyebrow{font-size:.68rem;letter-spacing:.18em;font-weight:700}
+.top{background:rgba(255,255,255,.92);border-bottom:1px solid var(--line)}
+.logo{gap:10px;font-size:.95rem;letter-spacing:.01em;text-transform:none}
+.logo img{width:40px;height:40px}
+.logo .lt{display:flex;flex-direction:column;line-height:1.1}
+.logo .lt b{font:800 .98rem var(--display);text-transform:uppercase;letter-spacing:.02em}
+.logo .lt small{font:500 .7rem Inter,sans-serif;color:var(--muted);letter-spacing:0;text-transform:none}
+.top .btn-sm{background:transparent;color:var(--text);border:1.5px solid var(--text);border-radius:999px;padding:7px 14px;font-size:.72rem}
+.tabs{background:rgba(255,255,255,.96)}
+.tabs button{font-size:.66rem;letter-spacing:.06em;font-weight:700}
+.tabs button[aria-selected="true"]::before{left:34%;right:34%;height:2px;border-radius:2px}
+.hero{min-height:250px;margin-bottom:22px}
+.hero h2{font-size:2.05rem;font-weight:800}
+.intro{font-size:1rem;line-height:1.6;margin-bottom:22px}
+.panel,.kpi,.z,.offer,.tm,.coach,.stat,.ck,.bike-fig,.cta-band,.cred,.install{border-radius:var(--r);box-shadow:var(--shadow);border-color:var(--line)}
+.panel{padding:18px}
+.seg{gap:8px}
+.seg button{border-radius:999px;padding:8px 16px;font-weight:600;box-shadow:none}
+.seg button[aria-pressed="true"]{background:var(--text);border-color:var(--text)}
+input[type=number],input[type=text],select{border-radius:10px;font-weight:600}
+.btn{border-radius:10px;letter-spacing:.04em;font-size:.85rem}
+.inline button,.ghost{border-radius:999px}
+.result{border-radius:10px;border-left-width:3px}
+.z{border-left-width:4px}
+.offer{padding:22px}
+.offer.featured{border-width:1.5px;box-shadow:0 10px 30px rgba(216,52,28,.12)}
+.tag{border-radius:999px;padding:4px 11px;font-size:.62rem}
+.price{font-size:2.2rem}
+.offer li{border-bottom-color:var(--line)}
+.offer li::before{content:"✓ ";color:var(--accent)}
+.cred{border-left:0;background:var(--logo)}
+.badge{border-radius:999px;padding:3px 10px;font-size:.62rem}
+.coach img{border-radius:8px}
+.cta-band{padding:26px 20px}
+.cta-band h3{font-size:1.35rem}
+.steps li::before{font-weight:800;font-size:1.5rem}
+
+.btn.ghost{color:var(--text)}
+.cta-band .btn.ghost{color:#fff}
+.logo .lt{color:var(--text)}
+.promise{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:-8px 0 22px}
+.promise div{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:14px}
+.promise b{display:block;font:800 .95rem/1.25 var(--display);margin-bottom:4px;padding-left:22px;position:relative}
+.promise b::before{content:"";position:absolute;left:0;top:2px;width:15px;height:15px;border-radius:50%;background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/11px no-repeat}
+.promise span{display:block;color:var(--muted);font-size:.84rem;line-height:1.45}
+/* Statistiques : bandeau unique avec séparateurs */
+.stats{gap:0;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);margin-bottom:22px}
+.stat{background:none;border:0;box-shadow:none;border-radius:0;padding:16px 8px}
+.stat+.stat{border-left:1px solid var(--line)}
+.stat b{font-size:1.45rem;font-weight:800;color:var(--text)}
+.stat span{display:block;font-size:.74rem;letter-spacing:0;text-transform:none;font-weight:500;line-height:1.3;margin-top:4px}
+
+/* Témoignages */
+.tm{padding:20px;margin-bottom:14px}
+.tm-head{display:flex;align-items:center;gap:14px}
+.tm-av{width:64px;height:64px;border-radius:50%;object-fit:cover;flex:0 0 auto;box-shadow:0 0 0 3px var(--card),0 0 0 4px var(--line)}
+.tm-head b{display:block;font:800 1.05rem/1.2 var(--display);text-transform:none;letter-spacing:-.01em}
+.tm-head small{display:block;color:var(--muted);font-size:.84rem;margin-top:2px}
+.tm-k{position:static;display:inline-block;background:none;color:var(--accent);padding:0;font-size:.62rem;letter-spacing:.14em;margin-bottom:3px}
+.tm blockquote{border-left:0;padding:0;margin-top:14px;font-size:1.02rem;line-height:1.6;color:var(--text)}
+.tm blockquote::before{content:"“";display:block;font:800 2.6rem/1 var(--display);color:var(--accent);height:20px;margin:0 0 6px}
+.res-l{flex-direction:column;gap:6px;margin:14px 0 0}
+.res{background:none;color:var(--text);text-transform:none;letter-spacing:0;font-size:.9rem;font-weight:600;padding:0 0 0 24px;position:relative}
+.res::before{content:"";position:absolute;left:0;top:3px;width:15px;height:15px;border-radius:50%;background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/11px no-repeat}
+.tm-l,.tm-c{font-size:.92rem;line-height:1.55;margin-top:12px}
+.tm-c{padding:12px 14px;background:var(--card2);border-radius:10px}
+.tm summary{color:var(--text);font-size:.82rem;text-decoration:underline;text-underline-offset:3px;list-style:none}
+.tm summary::-webkit-details-marker{display:none}
+.tm-ig{color:var(--muted);font-weight:600;font-size:.78rem;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:block}
 </style>
 </head>
 <body>
 
 <header class="top">
   <div class="wrap top-in">
-    <a href="#avis" class="logo" data-go="avis"><img src="img/logo-160.png" alt="">PM<span>·</span>Training</a>
+    <a href="#avis" class="logo" data-go="avis"><img src="img/logo-160.png" alt=""><span class="lt"><b>PM Training</b><small>Coaching triathlon · Chambéry</small></span></a>
     <a class="btn-sm" href="https://www.instagram.com/pm.training_/" target="_blank" rel="noopener">Me contacter</a>
   </div>
 </header>
@@ -211,11 +288,11 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
 <section id="avis" role="tabpanel" aria-labelledby="t-avis"><div class="wrap">
   <div class="hero" style="--img:url(img/avis.jpg)"><div class="hero-in"><p class="eyebrow">Ils l'ont fait</p><h2>Retours d'athlètes<span>.</span></h2></div></div>
   <div class="install" id="install"><span>Installe l'app sur ton téléphone.</span><button type="button" id="installBtn">Installer</button></div>
-  <p class="intro">Débutants ou confirmés, en triathlon ou à vélo : leurs projets, leurs résultats et ce qu’ils en disent.</p>
+  <p class="intro">Débutants ou confirmés, en triathlon ou à vélo : un suivi très individualisé, avec un groupe restreint d’athlètes. Voici leurs projets, leurs résultats et ce qu’ils en disent.</p>
 
   <div class="stats">
+    <div class="stat"><b>40+</b><span>athlètes accompagnés vers leurs objectifs</span></div>
     <div class="stat"><b>11h17</b><span>1er Ironman en 9 mois</span></div>
-    <div class="stat"><b>81e</b><span>1er Xterra Suisse</span></div>
     <div class="stat"><b>5/5</b><span>sur Nolio</span></div>
   </div>
 
@@ -227,7 +304,7 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
   <div id="tList"></div>
 
   <div class="cta-band">
-    <h3>Ton tour<span style="color:var(--accent)">.</span></h3>
+    <h3>Prêt à passer un cap ?</h3>
     <p>Écris-moi ton objectif et ton niveau, je te réponds personnellement.</p>
     <a class="btn" href="https://www.instagram.com/pm.training_/" target="_blank" rel="noopener">Écris-moi sur Instagram</a>
     <a class="btn ghost" href="https://pmtraining.fr" target="_blank" rel="noopener">pmtraining.fr</a>
@@ -241,6 +318,10 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
   <div class="cred">
     <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="19" r="14" fill="var(--accent)"/><path d="M15 30l-5 14 7-3 4 6 3-9M33 30l5 14-7-3-4 6-3-9" fill="var(--accent)"/><path d="M18 19l4 4 8-8" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <div><span class="cred-k">Coach diplômé d'État</span><strong>DEJEPS Triathlon</strong><p>Le diplôme d'État de référence pour entraîner en triathlon. Un coaching construit sur une vraie formation, pas sur des recettes trouvées sur internet.</p></div>
+  </div>
+  <div class="promise">
+    <div><b>Suivi très individualisé</b><span>Ton plan est construit et ajusté pour toi, séance après séance.</span></div>
+    <div><b>Groupe restreint d’athlètes</b><span>Peu d’athlètes suivis en même temps, pour garder du temps et de l’attention pour chacun.</span></div>
   </div>
   <article class="offer">
     <h3>Formule Course à pied</h3>
@@ -709,14 +790,13 @@ persist(['inseam','height','curH'],fitCalc);
 /* ---------- Témoignages ---------- */
 const KIND={avis:'Parole d’athlète',result:'Résultat',projet:'Athlète PM Training'};
 function tRender(f){$('#tList').innerHTML=TESTIMONIALS.filter(t=>f==='all'||t.f===f).map(t=>`<article class="tm">
-<div class="tm-ph"><img src="img/avis/${t.img}.jpg" alt="${t.name}" loading="lazy" style="object-position:${t.pos}"><span class="tm-k">${KIND[t.kind]}</span></div>
-<div class="tm-b"><div class="who"><div><b>${t.name}</b><small>${t.info}</small></div></div>
-<div class="res-l">${t.res.map(r=>`<span class="res">${r}</span>`).join('')}</div>
+<div class="tm-head"><img class="tm-av" src="img/avis/${t.img}.jpg" alt="${t.name}" loading="lazy" style="object-position:${t.pos}"><div><span class="tm-k">${KIND[t.kind]}</span><b>${t.name}</b><small>${t.info}</small></div></div>
 ${t.quote?`<blockquote>${t.quote}</blockquote>`:''}
 ${t.more?`<details><summary>Lire la suite</summary><p>${t.more}</p></details>`:''}
+<div class="res-l">${t.res.map(r=>`<span class="res">${r}</span>`).join('')}</div>
 ${t.work?`<p class="tm-l"><b>Ce qu’on travaille :</b> ${t.work}</p>`:''}
-${t.coach?`<p class="tm-c"><b>Ce que j’admire chez ${t.name.split(' ')[0]} :</b> ${t.coach}</p>`:''}
-<a class="tm-ig" href="${t.url}" target="_blank" rel="noopener">Voir le post Instagram →</a></div></article>`).join('');}
+${t.coach?`<p class="tm-c"><b>Le mot du coach :</b> ${t.coach}</p>`:''}
+<a class="tm-ig" href="${t.url}" target="_blank" rel="noopener">Voir sur Instagram</a></article>`).join('');}
 seg('#tFilter',b=>tRender(b.dataset.f));
 
 /* ---------- Offres : boutons vers le contact ---------- */
