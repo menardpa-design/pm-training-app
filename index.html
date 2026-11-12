@@ -381,6 +381,15 @@ h2.two span{display:block;color:var(--muted)}
 .gfig{background:var(--card2);border-radius:12px;margin:0 0 12px;padding:6px}
 .gsvg{display:block;width:100%;max-width:340px;margin:0 auto;height:auto}
 .gdone{margin-top:4px;border:0;cursor:pointer}
+.protr{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:14px}
+.protr .seg{flex-wrap:wrap;margin-bottom:12px}
+.pfile{cursor:pointer;margin-bottom:8px;text-transform:none;letter-spacing:0;font-size:.85rem;color:#fff}
+.pwrap{margin-top:10px;border-radius:10px;overflow:hidden;background:#111;touch-action:none}
+.pwrap canvas{display:block;width:100%;height:auto;touch-action:none}
+.pbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px}
+.pbar span{font:600 1.6rem Inter,sans-serif;letter-spacing:-.02em;margin-right:auto}
+.outline-d{background:transparent;border:1px solid var(--line);color:var(--text);cursor:pointer}
+.pbar .pill{border:0;cursor:pointer}.pbar .outline-d{border:1px solid var(--line)}
 </style>
 </head>
 <body>
@@ -602,7 +611,16 @@ h2.two span{display:block;color:var(--muted)}
   </div>
 
   <div class="block" style="margin-top:22px"><h3>Vérifie tes angles</h3>
-    <p class="note" style="margin-bottom:12px">Filme-toi de profil sur home-trainer, à ton allure d'endurance. Mesure les angles sur une image avec une appli de rapporteur et entre-les ici.</p>
+    <p class="note" style="margin-bottom:12px">Filme-toi de profil sur home-trainer, à ton allure d'endurance. Fais une capture de ta vidéo au bon moment, puis mesure tes angles directement ici, du bout du doigt. Tu peux aussi les entrer à la main.</p>
+    <div class="protr" id="protr">
+      <div class="seg sm" id="pSel" role="group" aria-label="Angle à mesurer">
+        <button type="button" aria-pressed="true" data-a="knee">Genou en bas</button><button type="button" aria-pressed="false" data-a="kneeTop">Genou en haut</button><button type="button" aria-pressed="false" data-a="trunk">Dos</button><button type="button" aria-pressed="false" data-a="elbow">Coude</button>
+      </div>
+      <label class="pill dark sm pfile">Choisir une photo<input type="file" id="pFile" accept="image/*" hidden></label>
+      <p class="note" id="pHelp">Choisis une photo de profil prise sur home-trainer. Elle reste sur ton téléphone.</p>
+      <div class="pwrap" id="pWrap" hidden><canvas id="pCan"></canvas></div>
+      <div class="pbar" id="pBar" hidden><span id="pVal">—</span><button type="button" class="pill sm outline-d" id="pReset">Recommencer</button><button type="button" class="pill dark sm" id="pUse">Utiliser cette valeur</button></div>
+    </div>
     <div class="check" id="angles"></div>
   </div>
 
@@ -1022,6 +1040,27 @@ setInterval(()=>{st.forEach(o=>{if(!o.L[0].parentElement.offsetParent)return;o.L
 const up=()=>{S.forEach((s,i)=>s.classList.toggle('done',D.includes(i)));const n=D.length;document.getElementById('gBar').style.width=(n/S.length*100)+'%';document.getElementById('gTxt').textContent=n===S.length?'Ton vélo est réglé. Vérifie maintenant tes angles ci-dessous.':`${n} étape${n>1?'s':''} sur ${S.length}`;try{localStorage.setItem('pm.guide',JSON.stringify(D))}catch(e){}};
 S.forEach((s,i)=>s.querySelector('.gdone').addEventListener('click',()=>{if(!D.includes(i))D.push(i);s.open=false;const nx=S[i+1];if(nx){nx.open=true;nx.scrollIntoView({behavior:'smooth',block:'start'})}up()}));
 const first=S.findIndex((s,i)=>!D.includes(i));if(first>0){S[0].open=false;S[first].open=true}up();})();
+</script>
+<script>
+(()=>{const DEF={knee:{p:['la hanche','le genou','la cheville'],m:'3'},kneeTop:{p:['la hanche','le genou','la cheville'],m:'3'},trunk:{p:['la hanche','l’épaule'],m:'h'},elbow:{p:['l’épaule','le coude','le poignet'],m:'3'}};
+const $=q=>document.querySelector(q),can=$('#pCan'),ctx=can.getContext('2d');let img=null,cur='knee',pts=[],drag=-1,val=null;
+const help=()=>{const d=DEF[cur];$('#pHelp').textContent=!img?'Choisis une photo de profil prise sur home-trainer. Elle reste sur ton téléphone.':pts.length<d.p.length?`Touche ${d.p[pts.length]}.`:'Déplace les points du doigt pour ajuster, puis valide.'};
+const ang=()=>{const d=DEF[cur];if(pts.length<d.p.length)return null;if(d.m==='h'){const[h,s]=pts;return Math.round(Math.abs(Math.atan2(h.y-s.y,Math.abs(s.x-h.x))*180/Math.PI))}
+const[a,b,c]=pts;const v1=[a.x-b.x,a.y-b.y],v2=[c.x-b.x,c.y-b.y];return Math.round(Math.acos((v1[0]*v2[0]+v1[1]*v2[1])/(Math.hypot(...v1)*Math.hypot(...v2)))*180/Math.PI)};
+const draw=()=>{if(!img)return;ctx.drawImage(img,0,0,can.width,can.height);const k=can.width/700,R=Math.max(10,14*k);ctx.lineWidth=Math.max(3,5*k);ctx.strokeStyle='#d8341c';ctx.fillStyle='#d8341c';
+if(DEF[cur].m==='h'&&pts.length===2){ctx.setLineDash([8*k,8*k]);ctx.strokeStyle='#fff';ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);ctx.lineTo(pts[0].x+(pts[1].x-pts[0].x)*1.2,pts[0].y);ctx.stroke();ctx.setLineDash([]);ctx.strokeStyle='#d8341c'}
+ctx.beginPath();pts.forEach((q,i)=>i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y));ctx.stroke();
+pts.forEach(q=>{ctx.beginPath();ctx.arc(q.x,q.y,R,0,7);ctx.fillStyle='rgba(216,52,28,.35)';ctx.fill();ctx.beginPath();ctx.arc(q.x,q.y,R/3,0,7);ctx.fillStyle='#fff';ctx.fill()});
+val=ang();$('#pVal').textContent=val===null?'—':val+'°';$('#pBar').hidden=!img;help()};
+const pos=e=>{const r=can.getBoundingClientRect();return{x:(e.clientX-r.left)*can.width/r.width,y:(e.clientY-r.top)*can.height/r.height}};
+can.addEventListener('pointerdown',e=>{if(!img)return;const p=pos(e),hit=can.width/14;const i=pts.findIndex(q=>Math.hypot(q.x-p.x,q.y-p.y)<hit);if(i>=0){drag=i}else if(pts.length<DEF[cur].p.length){pts.push(p);drag=pts.length-1}can.setPointerCapture(e.pointerId);draw();e.preventDefault()});
+can.addEventListener('pointermove',e=>{if(drag<0)return;pts[drag]=pos(e);draw()});
+['pointerup','pointercancel'].forEach(t=>can.addEventListener(t,()=>drag=-1));
+$('#pFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const u=URL.createObjectURL(f);const im=new Image();im.onload=()=>{const sc=Math.min(1,1400/Math.max(im.width,im.height));can.width=Math.round(im.width*sc);can.height=Math.round(im.height*sc);img=im;pts=[];$('#pWrap').hidden=false;draw()};im.src=u});
+document.querySelectorAll('#pSel button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#pSel button').forEach(x=>x.setAttribute('aria-pressed',x===b));cur=b.dataset.a;pts=[];draw();help()}));
+$('#pReset').addEventListener('click',()=>{pts=[];draw()});
+$('#pUse').addEventListener('click',()=>{if(val===null)return;const el=document.getElementById('a-'+cur);if(!el)return;el.value=val;el.dispatchEvent(new Event('input',{bubbles:true}));el.scrollIntoView({behavior:'smooth',block:'center'})});
+help();})();
 </script>
 </body>
 </html>
