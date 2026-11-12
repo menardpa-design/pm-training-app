@@ -440,7 +440,7 @@ h2.two span{display:block;color:var(--muted)}
 
   <section class="sec">
     <h2 class="two">Sur la route.<span>Avec mes athlètes.</span></h2>
-    <div class="gal"><img src="img/g1.jpg" alt="Sortie vélo en forêt, maillot rouge" loading="lazy" width="640" height="800"><img src="img/g2.jpg" alt="Contre-la-montre en vélo de triathlon face aux montagnes" loading="lazy" width="640" height="800"><img src="img/g3.jpg" alt="Piste cyclable entre les arbres" loading="lazy" width="640" height="800"><img src="img/g4.jpg" alt="Vélo de triathlon sur une route de campagne" loading="lazy" width="640" height="800"><img src="img/g5.jpg" alt="Cyclosportive dans un col des Alpes" loading="lazy" width="640" height="800"></div>
+    <div class="gal"><img src="img/g1.jpg?v=2" alt="Sortie avec les athlètes, vue depuis le guidon" loading="lazy" width="1200" height="1500"><img src="img/g2.jpg?v=2" alt="Groupe d’athlètes à l’entraînement" loading="lazy" width="1200" height="1500"><img src="img/g3.jpg?v=2" alt="Ascension en cyclosportive" loading="lazy" width="1200" height="1500"><img src="img/g4.jpg?v=2" alt="Portrait casque sur la tête avant le départ" loading="lazy" width="1200" height="1500"><img src="img/g5.jpg?v=2" alt="Deux cyclistes à l’entraînement sous un ciel d’orage" loading="lazy" width="1200" height="1500"><img src="img/g6.jpg?v=2" alt="Cyclosportive dans les Alpes" loading="lazy" width="1200" height="1500"><img src="img/g7.jpg?v=2" alt="Sortie vélo en forêt" loading="lazy" width="1200" height="1500"><img src="img/g8.jpg?v=2" alt="Contre-la-montre en vélo de triathlon" loading="lazy" width="1200" height="1500"></div>
   </section>
 
   <section class="sec">
@@ -1011,7 +1011,7 @@ $('#installBtn').addEventListener('click',async()=>{if(!deferred)return;deferred
 if('serviceWorker' in navigator&&location.protocol.startsWith('http')){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 </script>
 <script>
-(()=>{const P=['img/avis.jpg','img/offres.jpg','img/position.jpg','img/zones.jpg','img/b5.jpg','img/b6.jpg'];
+(()=>{const P=['img/avis.jpg','img/offres.jpg','img/position.jpg','img/zones.jpg','img/b5.jpg','img/b6.jpg','img/b7.jpg','img/b8.jpg'];
 const H=[...document.querySelectorAll('.home-hero,.hero')];const st=[];
 H.forEach((h,k)=>{const L=P.map(u=>{const d=document.createElement('div');d.className='sl';d.style.setProperty('--u',`url(${u})`);h.prepend(d);return d});st.push({L,i:k%P.length});L[k%P.length].classList.add('on')});
 if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
