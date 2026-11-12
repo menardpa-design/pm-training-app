@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>PM Training App</title>
 <meta name="description" content="L'app PM Training : zones d'entraînement, position vélo, offres de coaching et retours d'athlètes.">
-<meta name="theme-color" content="#0f1213">
+<meta name="theme-color" content="#ffffff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -19,11 +19,11 @@
 <style>
 :root{
   /* Charte PM Training : noir du logo, bitume et brume des photos, rouge des cadres et maillots */
-  --bg:#0f1213;--bg2:#151a1b;--card:#1b2021;--card2:#232a2b;--text:#f2eff0;--muted:#a9a5a0;--line:#2c3334;
-  --logo:#272727;--accent:#e23b22;--accent2:#ff5a3c;--ok:#3ecf6e;--warn:#ffb020;
-  --z1:#5b8def;--z2:#3ecf6e;--z3:#ffd23f;--z4:#ff8a1f;--z5:#e23b22;--z6:#d61f69;--z7:#8e2de2;
+  --bg:#f3f1ee;--bg2:#e9e6e1;--card:#ffffff;--card2:#f7f5f2;--text:#272727;--muted:#6b6862;--line:#e2ded8;--field:#faf9f7;--fieldline:#cfcac3;
+  --logo:#272727;--accent:#d8341c;--accent2:#c22d17;--ok:#1f9d4c;--warn:#b86e00;
+  --z1:#3f74d8;--z2:#1f9d4c;--z3:#d9a300;--z4:#ea7a12;--z5:#d8341c;--z6:#c2185b;--z7:#7b2fd0;
   --display:Montserrat,'Arial Black',system-ui,sans-serif;
-  --tabh:64px;color-scheme:dark;
+  --tabh:64px;color-scheme:light;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--bg)}
@@ -38,7 +38,7 @@ h3{font-size:1.2rem;line-height:1.1;margin-bottom:12px}
 .wrap{max-width:720px;margin:0 auto;padding:0 16px}
 
 /* Header */
-.top{position:sticky;top:0;z-index:20;background:rgba(15,18,19,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
 .top-in{display:flex;align-items:center;justify-content:space-between;height:56px}
 .logo{display:flex;align-items:center;gap:10px;font-size:1.05rem;text-decoration:none;letter-spacing:.02em}
 .logo img{width:44px;height:44px;display:block}
@@ -46,7 +46,7 @@ h3{font-size:1.2rem;line-height:1.1;margin-bottom:12px}
 .top .btn-sm{background:var(--accent);color:#fff;text-decoration:none;font-weight:800;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;padding:8px 12px;border-radius:2px}
 
 /* Bottom tab bar */
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(15,18,19,.97);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
 .tabs .wrap{display:grid;grid-template-columns:repeat(4,1fr);height:var(--tabh);padding:0 4px}
 .tabs button{background:none;border:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:.7rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);cursor:pointer;position:relative}
 .tabs svg{width:24px;height:24px}
@@ -55,8 +55,10 @@ h3{font-size:1.2rem;line-height:1.1;margin-bottom:12px}
 .tabs button[aria-selected="true"]::before{content:"";position:absolute;top:0;left:22%;right:22%;height:3px;background:var(--accent)}
 
 main section{padding:0 0 36px}
-.hero{position:relative;margin:0 calc(50% - 50vw) 18px;min-height:230px;display:flex;align-items:flex-end;background:linear-gradient(180deg,rgba(15,18,19,.05) 0%,rgba(15,18,19,.35) 50%,var(--bg) 100%),var(--img) center/cover no-repeat,var(--card)}
-.hero-in{width:100%;max-width:720px;margin:0 auto;padding:0 16px 6px}
+.hero{position:relative;margin:0 calc(50% - 50vw) 18px;min-height:230px;display:flex;align-items:flex-end;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.6) 100%),var(--img) center/cover no-repeat,#272727}
+.hero-in{width:100%;max-width:720px;margin:0 auto;padding:0 16px 14px}
+.hero h2{color:#fff}
+.hero .eyebrow{color:#fff;opacity:.9}
 .hero h2{font-size:2.2rem;text-shadow:0 2px 18px rgba(0,0,0,.55)}
 .hero .eyebrow{text-shadow:0 1px 8px rgba(0,0,0,.6)}
 .coach{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);padding:14px;margin-bottom:22px}
@@ -65,7 +67,7 @@ main section{padding:0 0 36px}
 .coach h3{margin-bottom:6px}
 .eyebrow{color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem}
 .intro{color:var(--muted);margin-bottom:18px}
-.panel{background:var(--card);border:1px solid var(--line);padding:16px;margin-bottom:14px}
+.panel{background:var(--card);border:1px solid var(--line);box-shadow:0 1px 2px rgba(39,39,39,.04);padding:16px;margin-bottom:14px}
 .note{color:var(--muted);font-size:.85rem}
 .block{margin-bottom:22px}
 
@@ -73,15 +75,15 @@ main section{padding:0 0 36px}
 .seg{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:16px;-webkit-overflow-scrolling:touch}
 .seg::-webkit-scrollbar{display:none}
 .seg button{flex:0 0 auto;background:var(--card);border:1px solid var(--line);padding:9px 14px;font-weight:700;font-size:.85rem;cursor:pointer;border-radius:2px;white-space:nowrap}
-.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent)}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
 .seg.sm button{padding:7px 11px;font-size:.78rem}
 
 /* Forms */
 .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
 label,.lbl{display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px}
-input[type=number],input[type=text],select{width:100%;background:var(--bg);border:1px solid #3a3a3a;border-radius:2px;padding:11px 12px;font-size:1.05rem;font-weight:700;outline:none}
+input[type=number],input[type=text],select{width:100%;background:var(--field);border:1px solid var(--fieldline);border-radius:2px;padding:11px 12px;font-size:1.05rem;font-weight:700;outline:none}
 input:focus,select:focus{border-color:var(--accent)}
-input.big{font-family:var(--display);font-weight:900;font-size:2rem;font-weight:400;padding:6px 12px}
+input.big{font-family:var(--display);font-weight:900;font-size:2rem;padding:6px 12px}
 input[type=range]{width:100%;accent-color:var(--accent);margin-top:12px}
 output{display:block;font-weight:800;font-size:1.05rem;padding:11px 0}
 .unit{color:var(--muted);font-weight:600}
@@ -102,7 +104,7 @@ table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
 th,td{padding:9px 6px;text-align:left;border-bottom:1px solid var(--line);font-size:.92rem}
 th{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
 td:not(:first-child),th:not(:first-child){text-align:right}
-.result{margin-top:14px;padding:12px 14px;background:var(--bg);border-left:4px solid var(--accent);font-weight:600}
+.result{margin-top:14px;padding:12px 14px;background:var(--card2);border-left:4px solid var(--accent);font-weight:600}
 .result strong{color:var(--accent2)}
 
 /* Position */
@@ -112,7 +114,7 @@ td:not(:first-child),th:not(:first-child){text-align:right}
 .big-num{font-size:2rem;line-height:1.1}
 .big-num small{font-family:Inter,sans-serif;font-size:.85rem;color:var(--muted);text-transform:none}
 .kpi p{color:var(--muted);font-size:.8rem;margin-top:4px}
-.kpi.hl{border-color:var(--accent)}
+.kpi.hl{border-color:var(--accent);border-width:2px}
 .check{display:grid;gap:8px}
 .ck{display:grid;grid-template-columns:1fr 92px;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);padding:10px 12px}
 .ck .t{font-weight:700;line-height:1.25}
@@ -125,15 +127,15 @@ td:not(:first-child),th:not(:first-child){text-align:right}
 
 /* Offers */
 .offer{background:var(--card);border:1px solid var(--line);padding:20px;margin-bottom:18px;position:relative}
-.offer.featured{border:2px solid var(--accent);box-shadow:0 0 40px rgba(226,59,34,.18)}
+.offer.featured{border:2px solid var(--accent);box-shadow:0 8px 30px rgba(216,52,28,.15)}
 .tag{position:absolute;top:-11px;left:18px;background:var(--accent);color:#fff;font-weight:800;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;padding:3px 9px}
-.tag.dark{background:#fff;color:#000}
+.tag.dark{background:var(--logo);color:#fff}
 .price{font-size:2.4rem;line-height:1.1;margin:4px 0}
 .price small{font-family:Inter,sans-serif;font-size:.95rem;color:var(--muted);text-transform:none}
-.pitch{color:#d4d4d4}
+.pitch{color:var(--text)}
 .pitch strong{color:var(--accent2)}
 .offer ul{list-style:none;margin:12px 0 16px}
-.offer li{padding:8px 0;border-bottom:1px solid var(--line);color:#d4d4d4;font-size:.95rem}
+.offer li{padding:8px 0;border-bottom:1px solid var(--line);color:var(--text);font-size:.95rem}
 .offer li::before{content:"→ ";color:var(--accent);font-weight:800}
 .btn{display:block;text-align:center;background:var(--accent);color:#fff;text-decoration:none;font-weight:800;text-transform:uppercase;letter-spacing:.05em;font-size:.9rem;padding:14px 18px;border-radius:2px;border:2px solid var(--accent)}
 .btn.ghost{background:transparent;border-color:var(--text)}
@@ -151,20 +153,21 @@ td:not(:first-child),th:not(:first-child){text-align:right}
 .tm blockquote{font-size:1.02rem;line-height:1.55;position:relative;padding-left:4px}
 .tm blockquote::before{content:"“";font:900 3.2rem/0 var(--display);color:var(--accent);display:block;height:22px;margin-top:14px}
 .tm .who{display:flex;align-items:center;gap:12px;margin-top:14px}
-.av{width:42px;height:42px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font:900 1.05rem var(--display);flex:0 0 auto}
+.av{width:42px;height:42px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font:900 1.05rem var(--display);flex:0 0 auto;color:#fff}
 .who b{display:block;line-height:1.2}
 .who small{color:var(--muted)}
-.res{display:inline-block;margin-top:10px;background:rgba(226,59,34,.14);color:var(--accent2);font-weight:800;font-size:.78rem;padding:4px 9px;text-transform:uppercase;letter-spacing:.05em}
-.ph{border:1px dashed #555;color:#ccc;font-size:.8rem;padding:8px 10px;margin-bottom:16px}
+.res{display:inline-block;margin-top:10px;background:rgba(216,52,28,.1);color:var(--accent2);font-weight:800;font-size:.78rem;padding:4px 9px;text-transform:uppercase;letter-spacing:.05em}
+.ph{border:1px dashed var(--fieldline);color:var(--muted);font-size:.8rem;padding:8px 10px;margin-bottom:16px}
 
-.cta-band{background:linear-gradient(180deg,var(--bg2),#2a0a05);border:1px solid var(--line);padding:22px 18px;text-align:center;margin-top:8px}
+.cta-band{background:var(--logo);color:#fff;border:0;padding:22px 18px;text-align:center;margin-top:8px}
 .cta-band h3{font-size:1.5rem}
-.cta-band p{color:#d4d4d4;margin-bottom:14px}
+.cta-band p{color:#d9d6d1;margin-bottom:14px}
 .cta-band .btn+.btn{margin-top:10px}
+.cta-band .btn.ghost{border-color:#fff;color:#fff}
 footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20px}
 .install{display:none;margin:0 0 14px;background:var(--card2);border:1px solid var(--line);padding:12px 14px;font-size:.88rem}
 .install.on{display:flex;gap:10px;align-items:center;justify-content:space-between}
-.install button{background:var(--accent);border:0;padding:8px 12px;font-weight:800;font-size:.75rem;text-transform:uppercase;cursor:pointer}
+.install button{background:var(--accent);color:#fff;border:0;padding:8px 12px;font-weight:800;font-size:.75rem;text-transform:uppercase;cursor:pointer}
 </style>
 </head>
 <body>
@@ -295,22 +298,22 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
   </div>
 
   <svg class="bike-svg" viewBox="0 0 360 200" role="img" aria-label="Schéma des mesures sur le vélo">
-    <g fill="none" stroke="#555" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <g fill="none" stroke="#9a958e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="80" cy="140" r="48"/><circle cx="280" cy="140" r="48"/>
       <path d="M80 140 L160 145 L130 62 M160 145 L250 70 L132 70 M250 70 L280 140 M250 70 L246 52"/>
       <path d="M232 46 h30 q8 0 8 10" />
     </g>
-    <path d="M114 58 h36" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    <path d="M114 58 h36" stroke="var(--text)" stroke-width="5" stroke-linecap="round"/>
     <g stroke="var(--accent)" stroke-width="2" fill="none" stroke-dasharray="4 4">
       <path d="M160 145 L132 62"/>
       <path d="M150 58 L262 50"/>
       <path d="M300 58 V44 M300 58 h-12 M300 44 h-12"/>
     </g>
     <circle cx="160" cy="145" r="5" fill="var(--accent)"/>
-    <g fill="#fff" font-family="Inter,sans-serif" font-size="11" font-weight="700">
+    <g fill="var(--text)" font-family="Inter,sans-serif" font-size="11" font-weight="700">
       <text x="98" y="112">A</text><text x="200" y="44">B</text><text x="308" y="55">C</text>
     </g>
-    <g fill="#a3a3a3" font-family="Inter,sans-serif" font-size="10">
+    <g fill="var(--muted)" font-family="Inter,sans-serif" font-size="10">
       <text x="12" y="196">A hauteur de selle · B distance selle-cintre · C drop</text>
     </g>
   </svg>
