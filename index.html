@@ -394,6 +394,14 @@ h2.two span{display:block;color:var(--muted)}
 .pvid input[type=range]{width:100%;margin:12px 0 8px;accent-color:var(--accent)}
 .pvc{display:flex;gap:8px;justify-content:space-between;margin-bottom:10px}.pvc .pill{flex:1;cursor:pointer}
 #pGrab{width:100%;border:0;cursor:pointer}#pBack{margin-top:10px;cursor:pointer}
+.pvbox{position:relative}.pvbox canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.pauto{width:100%;background:var(--accent);color:#fff;border:0;cursor:pointer;margin:10px 0 4px}
+.plive{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.plive div{background:var(--card2);border-radius:10px;padding:8px;text-align:center}
+.plive span{display:block;font-size:.72rem;color:var(--muted)}.plive b{font:600 1.4rem Inter,sans-serif}
+.pres{background:var(--card2);border-radius:12px;padding:12px 14px;margin:8px 0 10px;font-size:.92rem}
+.pres ul{list-style:none;margin:6px 0 10px}.pres li{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--line)}
+.pres .pill{border:0;cursor:pointer}
 </style>
 </head>
 <body>
@@ -621,8 +629,11 @@ h2.two span{display:block;color:var(--muted)}
         <button type="button" aria-pressed="true" data-a="knee">Genou en bas</button><button type="button" aria-pressed="false" data-a="kneeTop">Genou en haut</button><button type="button" aria-pressed="false" data-a="trunk">Dos</button><button type="button" aria-pressed="false" data-a="elbow">Coude</button>
       </div>
       <label class="pill dark sm pfile">Choisir une vidéo ou une photo<input type="file" id="pFile" accept="video/*,image/*" hidden></label>
-      <p class="note" id="pHelp">Filme-toi de profil sur home-trainer, puis choisis la vidéo (ou une photo). Elle reste sur ton téléphone.</p>
-      <div class="pvid" id="pVid" hidden><video id="pVideo" playsinline muted preload="auto"></video>
+      <p class="note" id="pHelp">Filme-toi de profil sur home-trainer, le corps en entier, pendant 10 secondes. Choisis ensuite la vidéo (ou une photo) : elle reste sur ton téléphone.</p>
+      <div class="pvid" id="pVid" hidden><div class="pvbox"><video id="pVideo" playsinline muted preload="auto"></video><canvas id="pOver"></canvas></div>
+        <button type="button" class="pill sm pauto" id="pAuto">Analyse automatique en continu</button>
+        <div class="plive" id="pLive" hidden><div><span>Genou</span><b id="lvK">—</b></div><div><span>Dos</span><b id="lvT">—</b></div><div><span>Coude</span><b id="lvE">—</b></div></div>
+        <div class="pres" id="pRes" hidden></div>
         <input type="range" id="pSeek" min="0" max="1000" value="0" aria-label="Position dans la vidéo">
         <div class="pvc"><button type="button" class="pill sm outline-d" data-st="-1">◀ Image</button><button type="button" class="pill sm outline-d" id="pPlay">Lecture</button><button type="button" class="pill sm outline-d" data-st="1">Image ▶</button></div>
         <button type="button" class="pill dark sm" id="pGrab">Mesurer sur cette image</button></div>
@@ -1053,7 +1064,7 @@ const first=S.findIndex((s,i)=>!D.includes(i));if(first>0){S[0].open=false;S[fir
 <script>
 (()=>{const DEF={knee:{p:['la hanche','le genou','la cheville'],m:'3'},kneeTop:{p:['la hanche','le genou','la cheville'],m:'3'},trunk:{p:['la hanche','l’épaule'],m:'h'},elbow:{p:['l’épaule','le coude','le poignet'],m:'3'}};
 const $=q=>document.querySelector(q),can=$('#pCan'),ctx=can.getContext('2d');let img=null,cur='knee',pts=[],drag=-1,val=null;
-const help=()=>{const d=DEF[cur];$('#pHelp').textContent=!img?'Filme-toi de profil sur home-trainer, puis choisis la vidéo (ou une photo). Elle reste sur ton téléphone.':pts.length<d.p.length?`Touche ${d.p[pts.length]}.`:'Déplace les points du doigt pour ajuster, puis valide.'};
+const help=()=>{const d=DEF[cur];$('#pHelp').textContent=!img?'Filme-toi de profil sur home-trainer, le corps en entier, pendant 10 secondes. Choisis ensuite la vidéo (ou une photo) : elle reste sur ton téléphone.':pts.length<d.p.length?`Touche ${d.p[pts.length]}.`:'Déplace les points du doigt pour ajuster, puis valide.'};
 const ang=()=>{const d=DEF[cur];if(pts.length<d.p.length)return null;if(d.m==='h'){const[h,s]=pts;return Math.round(Math.abs(Math.atan2(h.y-s.y,Math.abs(s.x-h.x))*180/Math.PI))}
 const[a,b,c]=pts;const v1=[a.x-b.x,a.y-b.y],v2=[c.x-b.x,c.y-b.y];return Math.round(Math.acos((v1[0]*v2[0]+v1[1]*v2[1])/(Math.hypot(...v1)*Math.hypot(...v2)))*180/Math.PI)};
 const draw=()=>{if(!img)return;ctx.drawImage(img,0,0,can.width,can.height);const k=can.width/700,R=Math.max(10,14*k);ctx.lineWidth=Math.max(3,5*k);ctx.strokeStyle='#d8341c';ctx.fillStyle='#d8341c';
@@ -1068,7 +1079,7 @@ can.addEventListener('pointermove',e=>{if(drag<0)return;pts[drag]=pos(e);draw()}
 const V=$('#pVideo'),FR=1/30;let dur=0;
 const showImg=src=>{const w=src.videoWidth||src.width,h=src.videoHeight||src.height,sc=Math.min(1,1400/Math.max(w,h));const off=document.createElement('canvas');off.width=Math.round(w*sc);off.height=Math.round(h*sc);off.getContext('2d').drawImage(src,0,0,off.width,off.height);can.width=off.width;can.height=off.height;img=off;pts=[];$('#pWrap').hidden=false;draw()};
 $('#pFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const u=URL.createObjectURL(f);
- if(f.type.startsWith('video')){img=null;$('#pWrap').hidden=true;$('#pBar').hidden=true;$('#pBack').hidden=true;$('#pVid').hidden=false;V.src=u;V.load();$('#pHelp').textContent='Fais défiler jusqu’au bon moment (par exemple pédale en bas), puis touche « Mesurer sur cette image ».'}
+ if(f.type.startsWith('video')){img=null;$('#pWrap').hidden=true;$('#pBar').hidden=true;$('#pBack').hidden=true;$('#pVid').hidden=false;V.src=u;V.load();$('#pHelp').textContent='Lance l’analyse automatique : l’app suit tes angles pendant toute la vidéo. Tu peux aussi t’arrêter sur une image et mesurer à la main.'}
  else{$('#pVid').hidden=true;$('#pBack').hidden=true;const im=new Image();im.onload=()=>showImg(im);im.src=u}});
 V.addEventListener('loadedmetadata',()=>{dur=V.duration||0;V.currentTime=Math.min(.05,dur/2)});
 V.addEventListener('timeupdate',()=>{if(dur)$('#pSeek').value=Math.round(V.currentTime/dur*1000)});
@@ -1081,6 +1092,36 @@ document.querySelectorAll('#pSel button').forEach(b=>b.addEventListener('click',
 $('#pReset').addEventListener('click',()=>{pts=[];draw()});
 $('#pUse').addEventListener('click',()=>{if(val===null)return;const el=document.getElementById('a-'+cur);if(!el)return;el.value=val;el.dispatchEvent(new Event('input',{bubbles:true}));el.scrollIntoView({behavior:'smooth',block:'center'})});
 help();})();
+</script>
+<script type="module">
+const $=q=>document.querySelector(q),V=$('#pVideo'),O=$('#pOver'),oc=O.getContext('2d');let lm=null,run=false,rec=null,lastT=-1;
+const A3=(a,b,c)=>{const v1=[a.x-b.x,a.y-b.y],v2=[c.x-b.x,c.y-b.y];return Math.acos(Math.max(-1,Math.min(1,(v1[0]*v2[0]+v1[1]*v2[1])/(Math.hypot(...v1)*Math.hypot(...v2)))))*180/Math.PI};
+const pct=(arr,q)=>{if(!arr.length)return null;const a=[...arr].sort((x,y)=>x-y);return a[Math.min(a.length-1,Math.max(0,Math.round(q*(a.length-1))))]};
+async function load(){if(lm)return lm;$('#pAuto').textContent='Chargement de la détection…';
+ const v=await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs');
+ const fs=await v.FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');
+ const M='https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/1/pose_landmarker_full.task',mk=d=>v.PoseLandmarker.createFromOptions(fs,{baseOptions:{modelAssetPath:M,delegate:d},runningMode:'VIDEO',numPoses:1});
+ try{lm=await mk('GPU')}catch(e){lm=await mk('CPU')}return lm}
+function detect(ts){{const r=lm.detectForVideo(V,ts);O.width=V.videoWidth;O.height=V.videoHeight;oc.clearRect(0,0,O.width,O.height);
+ const L=r.landmarks&&r.landmarks[0];if(L){const W=O.width,H=O.height,P=i=>({x:L[i].x*W,y:L[i].y*H,v:L[i].visibility??1});
+  const left=[11,13,15,23,25,27].reduce((s,i)=>s+(L[i].visibility??0),0)>=[12,14,16,24,26,28].reduce((s,i)=>s+(L[i].visibility??0),0);
+  const [sh,el,wr,hp,kn,an]=(left?[11,13,15,23,25,27]:[12,14,16,24,26,28]).map(P);
+  const k=A3(hp,kn,an),e=A3(sh,el,wr),t=Math.abs(Math.atan2(hp.y-sh.y,Math.abs(sh.x-hp.x))*180/Math.PI);
+  rec.k.push(k);rec.e.push(e);rec.t.push(t);
+  oc.lineWidth=Math.max(4,W/180);oc.strokeStyle='#d8341c';oc.beginPath();[sh,hp,kn,an].forEach((q,i)=>i?oc.lineTo(q.x,q.y):oc.moveTo(q.x,q.y));oc.stroke();
+  oc.strokeStyle='#fff';oc.beginPath();[sh,el,wr].forEach((q,i)=>i?oc.lineTo(q.x,q.y):oc.moveTo(q.x,q.y));oc.stroke();
+  [sh,el,wr,hp,kn,an].forEach(q=>{oc.beginPath();oc.arc(q.x,q.y,Math.max(6,W/110),0,7);oc.fillStyle='#d8341c';oc.fill()});
+  $('#lvK').textContent=Math.round(k)+'°';$('#lvT').textContent=Math.round(t)+'°';$('#lvE').textContent=Math.round(e)+'°'}}
+}
+const seek=t=>new Promise(r=>{const f=()=>{V.removeEventListener('seeked',f);r()};V.addEventListener('seeked',f);V.currentTime=t});
+async function scan(){const d=V.duration||0,st=1/15;for(let t=0;t<=d&&run;t+=st){await seek(Math.min(t,d-.001));detect(Math.round(t*1000)+1);$('#pSeek').value=Math.round(t/d*1000);await new Promise(r=>setTimeout(r,0))}stop()}
+
+function stop(){if(!run&&!rec)return;run=false;V.pause();$('#pAuto').textContent='Relancer l’analyse';if(!rec||rec.k.length<10){$('#pRes').hidden=false;$('#pRes').innerHTML='<p>Je n’ai pas assez bien vu le corps. Filme bien de profil, en entier, avec une bonne lumière.</p>';return}
+ const R={knee:Math.round(pct(rec.k,.95)),kneeTop:Math.round(pct(rec.k,.05)),trunk:Math.round(pct(rec.t,.5)),elbow:Math.round(pct(rec.e,.5))};
+ $('#pRes').hidden=false;$('#pRes').innerHTML=`<b>Résultats sur ${rec.k.length} images</b><ul><li><span>Genou en bas</span><b>${R.knee}°</b></li><li><span>Genou en haut</span><b>${R.kneeTop}°</b></li><li><span>Dos</span><b>${R.trunk}°</b></li><li><span>Coude</span><b>${R.elbow}°</b></li></ul><p class="note" style="margin-bottom:10px">Mesure automatique : si un chiffre te semble faux, arrête la vidéo sur une image et mesure à la main.</p><button type="button" class="pill dark sm" id="pAll">Reporter dans la vérification</button>`;
+ $('#pAll').addEventListener('click',()=>{Object.entries(R).forEach(([id,v])=>{const el=document.getElementById('a-'+id);if(el){el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}))}});document.getElementById('a-knee').scrollIntoView({behavior:'smooth',block:'center'})})}
+$('#pAuto').addEventListener('click',async()=>{if(run){stop();return}try{await load()}catch(e){$('#pAuto').textContent='Analyse automatique en continu';$('#pRes').hidden=false;$('#pRes').textContent='La détection n’a pas pu se charger. Vérifie ta connexion, ou mesure image par image ci-dessous.';return}
+ rec={k:[],e:[],t:[]};$('#pRes').hidden=true;$('#pLive').hidden=false;$('#pAuto').textContent='Arrêter l’analyse';V.pause();run=true;scan()});
 </script>
 </body>
 </html>
