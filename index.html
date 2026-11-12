@@ -85,6 +85,10 @@ input[type=number],input[type=text],select{width:100%;background:var(--field);bo
 input:focus,select:focus{border-color:var(--accent)}
 input.big{font-family:var(--display);font-weight:900;font-size:2rem;padding:6px 12px}
 input[type=range]{width:100%;accent-color:var(--accent);margin-top:12px}
+label+.time,.lbl+.time{margin-top:0}
+.time{display:flex;align-items:center;gap:4px}
+.time input{min-width:0;flex:1 1 0;text-align:center;padding:11px 4px}
+.time span{color:var(--muted);font-weight:700}
 output{display:block;font-weight:800;font-size:1.05rem;padding:11px 0}
 .unit{color:var(--muted);font-weight:600}
 .inline{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
@@ -220,7 +224,7 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
       <div class="panel">
         <div class="grid2">
           <div><label for="rD">Course</label><select id="rD"><option value="5">5 km</option><option value="10" selected>10 km</option><option value="21.0975">Semi</option><option value="42.195">Marathon</option></select></div>
-          <div><label for="rT">Chrono</label><input id="rT" type="text" inputmode="numeric" value="50:00" placeholder="h:mm:ss"></div>
+          <div><span class="lbl">Chrono</span><div class="time"><input id="rTh" type="number" inputmode="numeric" min="0" max="9" value="0" aria-label="heures"><span>h</span><input id="rTm" type="number" inputmode="numeric" min="0" max="59" value="50" aria-label="minutes"><span>'</span><input id="rTs" type="number" inputmode="numeric" min="0" max="59" value="0" aria-label="secondes"><span>"</span></div></div>
         </div>
         <div class="result" id="rRes"></div>
         <div class="inline"><button type="button" id="rUse">Utiliser cette VMA</button></div>
@@ -265,8 +269,8 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
   <div data-sport="swim" hidden>
     <div class="panel">
       <div class="grid2">
-        <div><label for="s400">Temps 400 m</label><input id="s400" type="text" inputmode="numeric" value="7:00" placeholder="m:ss"></div>
-        <div><label for="s200">Temps 200 m</label><input id="s200" type="text" inputmode="numeric" value="3:20" placeholder="m:ss"></div>
+        <div><span class="lbl">Temps 400 m</span><div class="time"><input id="s4m" type="number" inputmode="numeric" min="0" max="30" value="7" aria-label="minutes 400 m"><span>'</span><input id="s4s" type="number" inputmode="numeric" min="0" max="59" value="0" aria-label="secondes 400 m"><span>"</span></div></div>
+        <div><span class="lbl">Temps 200 m</span><div class="time"><input id="s2m" type="number" inputmode="numeric" min="0" max="15" value="3" aria-label="minutes 200 m"><span>'</span><input id="s2s" type="number" inputmode="numeric" min="0" max="59" value="20" aria-label="secondes 200 m"><span>"</span></div></div>
       </div>
       <div class="result" id="css"></div>
       <p class="note" style="margin-top:10px">Test CSS : 400 m à fond, récupération complète, puis 200 m à fond.</p>
@@ -457,15 +461,15 @@ function runCalc(){
   const d=num($('#fd'),400),p=num($('#fp'),100)/100,sp=v*p;
   $('#fres').innerHTML=`Temps cible sur ${d} m : <strong>${hms(d/1000/sp*3600)}</strong> · allure ${pace(sp)}/km · ${sp.toFixed(1)} km/h`;
   $('#pred').innerHTML='<tr><th>Course</th><th>% VMA</th><th>Allure</th><th>Temps</th></tr>'+PRED.map(([n,km,f])=>`<tr><td>${n}</td><td>${Math.round(f*100)} %</td><td>${pace(v*f)}</td><td><b>${hms(km/(v*f)*3600)}</b></td></tr>`).join('');
-  const rd=parseFloat($('#rD').value),rt=parseT($('#rT').value);
+  const rd=parseFloat($('#rD').value),rt=num($('#rTh'),0)*3600+num($('#rTm'),0)*60+num($('#rTs'),0);
   const f=(PRED.find(x=>Math.abs(x[1]-rd)<.01)||[0,0,.89])[2];
   if(rt>0){const est=rd/(rt/3600)/f;$('#rRes').innerHTML=`Allure ${pace(rd/(rt/3600))}/km · VMA estimée : <strong>${est.toFixed(1)} km/h</strong>`;$('#rUse').dataset.v=est.toFixed(1);}
-  else $('#rRes').textContent='Entre un chrono au format h:mm:ss ou mm:ss.';
+  else $('#rRes').textContent='Entre ton chrono en heures, minutes et secondes.';
 }
 $('#vmaR').addEventListener('input',()=>{$('#vma').value=$('#vmaR').value;store.set('vma',$('#vma').value);runCalc()});
 $('#rD').addEventListener('change',runCalc);
 $('#rUse').addEventListener('click',e=>{if(e.target.dataset.v){$('#vma').value=e.target.dataset.v;store.set('vma',e.target.dataset.v);runCalc();window.scrollTo({top:0,behavior:'smooth'})}});
-persist(['vma','fd','fp','rT'],runCalc);
+persist(['vma','fd','fp','rTh','rTm','rTs'],runCalc);
 
 /* ---------- Cardio ---------- */
 const HRZ={
@@ -503,13 +507,13 @@ persist(['ftp','kg'],bikeCalc);
 /* ---------- Natation ---------- */
 const SWZ=[['Z1','z1','Récupération','Éducatifs, nage relâchée',15,20],['Z2','z2','Endurance','Séries longues',8,12],['Z3','z3','Tempo','Allure course longue',3,6],['Z4','z4','Seuil (CSS)','Séries 100-400 m',-2,2],['Z5','z5','Vitesse','Séries courtes 25-100 m',-8,-3]];
 function swimCalc(){
-  const a=parseT($('#s400').value),b=parseT($('#s200').value);
+  const a=num($('#s4m'),0)*60+num($('#s4s'),0),b=num($('#s2m'),0)*60+num($('#s2s'),0);
   if(!(a>b&&b>0)){$('#css').textContent='Entre deux temps valides (le 400 m doit être plus long que le 200 m).';$('#swimZones').innerHTML='';return}
   const c=(a-b)/2;
   $('#css').innerHTML=`Ton CSS : <strong>${mmss(c)} / 100 m</strong> · ${(200/(a-b)).toFixed(2)} m/s`;
   $('#swimZones').innerHTML=SWZ.map(([k,cl,n,s,lo,hi])=>zrow(k,cl,n,s,mmss(c+lo)+' – '+mmss(c+hi),'/100 m')).join('');
 }
-persist(['s400','s200'],swimCalc);
+persist(['s4m','s4s','s2m','s2s'],swimCalc);
 
 let sport=store.get('sport','run');
 seg('#zSport',b=>{sport=b.dataset.s;store.set('sport',sport);$$('[data-sport]').forEach(el=>el.hidden=el.dataset.sport!==sport)});
