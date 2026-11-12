@@ -419,6 +419,10 @@ h2.two span{display:block;color:var(--muted)}
 .ml-in a{color:inherit}
 .ml-x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:0;background:#f3f1ee;font-size:1rem;cursor:pointer;color:inherit}
 .ghead{display:flex;align-items:center;justify-content:space-between;gap:12px}.ghead .note{margin:0}.greset{background:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font:inherit;font-size:.8rem;font-weight:600;color:inherit;cursor:pointer;white-space:nowrap}
+.sizeg{margin-top:34px}.sz-res{margin-bottom:12px}.sz-res .big-num small{font-size:.95rem}
+.sz-tab table{width:100%;border-collapse:collapse;font-size:.88rem}.sz-tab th{text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:6px 8px}.sz-tab td{padding:8px;border-top:1px solid var(--line);text-align:left}.sz-tab tr.on td{background:#fdecea;font-weight:700}.sz-tab tr.on td:first-child{border-radius:8px 0 0 8px}.sz-tab tr.on td:last-child{border-radius:0 8px 8px 0}
+.szs .gbody ul{margin:6px 0 10px 18px}.szs .gbody li{margin-bottom:6px}
+.sz-cta{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}.sz-cta p{margin:0 0 12px}
 </style>
 </head>
 <body>
@@ -595,6 +599,25 @@ h2.two span{display:block;color:var(--muted)}
 
   <div class="kpis" id="fitOut"></div>
   <div class="result" id="fitCmp" hidden></div>
+
+  <div class="sizeg" id="sizeg">
+    <h2 class="two">Choisis ton vélo<span>à la bonne taille.</span></h2>
+    <p class="note" style="margin:-10px 0 14px">Calculé à partir de ta taille et de ton entrejambe, entrés plus haut.</p>
+    <div class="kpi hl sz-res" id="szRes"></div>
+    <div class="panel sz-tab"><table id="szTab"></table><p class="note" style="margin:8px 0 0">Repères pour un vélo de route. Les tailles changent d’une marque à l’autre : compare toujours la géométrie.</p></div>
+    <details class="gstep szs"><summary><span class="gn">1</span><b>Regarde le stack et le reach</b></summary><div class="gbody">
+      <p>La taille écrite sur le cadre ne suffit pas : un 54 d’une marque peut correspondre à un 56 chez une autre. Dans la fiche géométrie du vélo, regarde deux chiffres.</p>
+      <ul><li>Le stack : la hauteur du cadre, de l’axe du pédalier jusqu’au haut de la douille de direction. Plus il est grand, plus ta position est relevée.</li><li>Le reach : la longueur du cadre, mesurée à l’horizontale entre ces deux mêmes points. Plus il est grand, plus tu es allongé.</li></ul>
+      <p>Pour comparer deux vélos, compare leur stack et leur reach, pas leur taille.</p></div></details>
+    <details class="gstep szs"><summary><span class="gn">2</span><b>Entre deux tailles, choisis selon ton profil</b></summary><div class="gbody">
+      <p>Prends la plus petite si tu as les jambes longues pour ta taille, si tu es souple et que tu cherches une position sportive. La tige de selle compense la hauteur.</p>
+      <p>Prends la plus grande si tu as le buste long, peu de souplesse, ou si tu fais surtout de longues sorties et que tu cherches du confort.</p></div></details>
+    <details class="gstep szs"><summary><span class="gn">3</span><b>Vérifie que le vélo se règle sur toi</b></summary><div class="gbody">
+      <ul><li>Ta hauteur de selle (valeur A) est atteignable sans dépasser la marque maximum de la tige de selle.</li><li>Ta distance selle → cintre (valeur B) s’obtient avec une potence de 90 à 120 mm. S’il te faut moins de 80 mm ou plus de 130 mm, le cadre n’est pas à la bonne taille.</li><li>Debout au-dessus du vélo, pieds à plat, il reste quelques centimètres entre le tube horizontal et toi.</li></ul>
+      <p>Si possible, essaie le vélo avant de l’acheter, avec la selle réglée à ta hauteur.</p></div></details>
+    <div class="cta-in sz-cta"><p>Un doute entre deux tailles ? Envoie-moi tes mesures et le lien du vélo, je te dis lequel prendre.</p>
+    <a class="btn" id="szWa" href="https://wa.me/33621349226" target="_blank" rel="noopener">Envoyer mes mesures sur WhatsApp</a></div>
+  </div>
 
   <div class="guide" id="guide">
     <h2 class="two">Règle ton vélo<span>étape par étape.</span></h2>
@@ -1058,6 +1081,21 @@ function angCalc(){
 angRender();
 ['flex'].forEach(id=>{const el=$('#'+id);const v=store.get(id,null);if(v!==null)el.value=v;el.addEventListener('change',()=>{store.set(id,el.value);fitCalc()})});
 persist(['inseam','height','curH'],fitCalc);
+function sizeCalc(){
+  const i=num($('#inseam'),84),h=num($('#height'),178),cur=num($('#curH'),0);
+  const T=[[0,160,'XS','47 à 49'],[160,167,'S','49 à 51'],[167,174,'M','52 à 54'],[174,181,'M / L','54 à 56'],[181,188,'L','56 à 58'],[188,195,'XL','58 à 61'],[195,999,'XXL','61 et plus']];
+  const k=Math.max(0,T.findIndex(t=>h>=t[0]&&h<t[1]));const r=T[k];
+  const fi=Math.round(i*.665),ratio=i/h;
+  let prof,adv;
+  if(ratio>=.48){prof='Tes jambes sont longues pour ta taille';adv='Entre deux tailles, prends plutôt la plus petite : la tige de selle compense la hauteur, et le cadre ne sera pas trop long pour ton buste.'}
+  else if(ratio<.45){prof='Ton buste est long pour ta taille';adv='Entre deux tailles, prends plutôt la plus grande, ou un cadre au reach un peu plus long.'}
+  else{prof='Tes proportions sont dans la moyenne';adv='La taille conseillée pour ta taille devrait t’aller. Vérifie le stack et le reach du modèle.'}
+  $('#szRes').innerHTML=`<span class="lbl">Taille conseillée</span><div class="big-num">${r[2]} <small>· cadre ${r[3]} cm</small></div><p>D’après ton entrejambe : cadre d’environ ${fi} cm. ${prof} (entrejambe = ${Math.round(ratio*100)} % de ta taille). ${adv}</p>`;
+  $('#szTab').innerHTML='<tr><th>Ta taille</th><th>Taille</th><th>Cadre</th></tr>'+T.map((t,j)=>`<tr${j===k?' class="on"':''}><td>${t[0]===0?'moins de 1,60 m':t[1]===999?'plus de 1,95 m':dc((t[0]/100).toFixed(2))+' à '+dc((t[1]/100).toFixed(2))+' m'}</td><td>${t[2]}</td><td>${t[3]} cm</td></tr>`).join('');
+  const msg=`Bonjour Paul,\nvoici mes mesures pour choisir la taille de mon vélo :\n• taille ${dc((h/100).toFixed(2)).replace(',','m')}\n• entrejambe ${dc(i)} cm${cur>0?`\n• hauteur de selle actuelle ${dc(cur)} cm`:''}\n• vélo envisagé : \nMerci`;
+  $('#szWa').href='https://wa.me/33621349226?text='+encodeURIComponent(msg);
+}
+persist(['inseam','height','curH'],sizeCalc);
 
 /* ---------- Témoignages ---------- */
 const KIND={avis:'Parole d’athlète',result:'Résultat',projet:'Athlète PM Training'};
@@ -1076,7 +1114,7 @@ $$('[data-offer]').forEach(a=>{const o=a.closest('.offer'),t=o&&o.querySelector(
 
 /* ---------- Démarrage ---------- */
 setSeg('#zSport','s',sport);setSeg('#hrM','m',hrMode);
-runCalc();hrCalc();bikeCalc();swimCalc();fitCalc();tRender('all');
+runCalc();hrCalc();bikeCalc();swimCalc();fitCalc();sizeCalc();tRender('all');
 $('#y').textContent=new Date().getFullYear();
 
 /* ---------- PWA ---------- */
@@ -1094,7 +1132,7 @@ setInterval(()=>{st.forEach(o=>{if(!o.L[0].parentElement.offsetParent)return;con
 setTimeout(()=>st.forEach(o=>ld(o.L[(o.i+1)%P.length])),2500);})();
 </script>
 <script>
-(()=>{const S=[...document.querySelectorAll('.gstep')];let D;try{D=JSON.parse(localStorage.getItem('pm.guide')||'[]')}catch(e){D=[]}
+(()=>{const S=[...document.querySelectorAll('#guide .gstep')];let D;try{D=JSON.parse(localStorage.getItem('pm.guide')||'[]')}catch(e){D=[]}
 const up=()=>{S.forEach((s,i)=>s.classList.toggle('done',D.includes(i)));const n=D.length;document.getElementById('gBar').style.width=(n/S.length*100)+'%';document.getElementById('gTxt').textContent=n===S.length?'Ton vélo est réglé. Vérifie maintenant tes angles ci-dessous.':`${n} étape${n>1?'s':''} sur ${S.length}`;document.getElementById('gReset').hidden=n===0;try{localStorage.setItem('pm.guide',JSON.stringify(D))}catch(e){}};
 document.getElementById('gReset').addEventListener('click',()=>{D=[];S.forEach((s,i)=>s.open=i===0);up();S[0].scrollIntoView({behavior:'smooth',block:'center'})});
 S.forEach((s,i)=>s.querySelector('.gdone').addEventListener('click',()=>{if(!D.includes(i))D.push(i);s.open=false;const nx=S[i+1];if(nx){nx.open=true;nx.scrollIntoView({behavior:'smooth',block:'start'})}up()}));
