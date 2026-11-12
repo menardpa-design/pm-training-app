@@ -357,6 +357,12 @@ h2.two span{display:block;color:var(--muted)}
 .stat b{color:var(--text)}
 @media (min-width:640px){.steps3{grid-template-columns:repeat(3,1fr)}.home-hero h1{font-size:3rem}.coach2{grid-template-columns:200px 1fr}h2.two{font-size:2rem}}
 .home-k{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:12px}
+.gal{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 6px;scrollbar-width:none}.gal::-webkit-scrollbar{display:none}.gal img{flex:0 0 68%;max-width:300px;aspect-ratio:4/5;height:auto;object-fit:cover;border-radius:14px;scroll-snap-align:start}
+.hero,.home-hero{isolation:isolate;overflow:hidden;--grad:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.6) 100%)}
+.home-hero{--grad:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.25) 40%,rgba(0,0,0,.78) 100%)}
+.sl{position:absolute;inset:0;z-index:-1;background:var(--grad),var(--u) center 35%/cover no-repeat;opacity:0;transition:opacity 1.6s ease;transform:scale(1.04);transition:opacity 1.6s ease,transform 7s linear}
+.sl.on{opacity:1;transform:scale(1)}
+@media (prefers-reduced-motion:reduce){.sl{transition:none;transform:none}}
 </style>
 </head>
 <body>
@@ -412,6 +418,11 @@ h2.two span{display:block;color:var(--muted)}
         <a class="pill dark sm" href="#offres" data-go="offres">Découvrir les formules →</a>
       </div>
     </div>
+  </section>
+
+  <section class="sec">
+    <h2 class="two">Sur la route.<span>Avec mes athlètes.</span></h2>
+    <div class="gal"><img src="img/g1.jpg" alt="Sortie vélo en forêt, maillot rouge" loading="lazy" width="640" height="800"><img src="img/g2.jpg" alt="Contre-la-montre en vélo de triathlon face aux montagnes" loading="lazy" width="640" height="800"><img src="img/g3.jpg" alt="Piste cyclable entre les arbres" loading="lazy" width="640" height="800"><img src="img/g4.jpg" alt="Vélo de triathlon sur une route de campagne" loading="lazy" width="640" height="800"><img src="img/g5.jpg" alt="Cyclosportive dans un col des Alpes" loading="lazy" width="640" height="800"></div>
   </section>
 
   <section class="sec">
@@ -485,7 +496,7 @@ h2.two span{display:block;color:var(--muted)}
 
 <!-- ============ POSITION ============ -->
 <section id="position" role="tabpanel" aria-labelledby="t-position" hidden><div class="wrap">
-  <div class="hero" style="--img:url(img/position.jpg);background-position:center,center 15%"><div class="hero-in"><p class="eyebrow">Calculateur</p><h2>Ta position vélo</h2></div></div>
+  <div class="hero" style="--img:url(img/position.jpg)"><div class="hero-in"><p class="eyebrow">Calculateur</p><h2>Ta position vélo</h2></div></div>
   <p class="intro">Quelques mesures et tu obtiens un point de départ pour régler ton vélo. Ensuite, une photo de profil sur home-trainer permet de vérifier tes angles.</p>
 
 
@@ -934,6 +945,13 @@ $('#y').textContent=new Date().getFullYear();
 let deferred;addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;$('#install').classList.add('on')});
 $('#installBtn').addEventListener('click',async()=>{if(!deferred)return;deferred.prompt();await deferred.userChoice;deferred=null;$('#install').classList.remove('on')});
 if('serviceWorker' in navigator&&location.protocol.startsWith('http')){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
+</script>
+<script>
+(()=>{const P=['img/avis.jpg','img/offres.jpg','img/position.jpg','img/zones.jpg','img/b5.jpg','img/b6.jpg'];
+const H=[...document.querySelectorAll('.home-hero,.hero')];const st=[];
+H.forEach((h,k)=>{const L=P.map(u=>{const d=document.createElement('div');d.className='sl';d.style.setProperty('--u',`url(${u})`);h.prepend(d);return d});st.push({L,i:k%P.length});L[k%P.length].classList.add('on')});
+if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+setInterval(()=>{st.forEach(o=>{if(!o.L[0].parentElement.offsetParent)return;o.L[o.i].classList.remove('on');o.i=(o.i+1)%P.length;o.L[o.i].classList.add('on')})},5000);})();
 </script>
 </body>
 </html>
