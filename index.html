@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>PM Training App</title>
+<meta name="description" content="L'app PM Training : zones d'entraînement, position vélo, offres de coaching et retours d'athlètes.">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PM Training">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0a;--bg2:#121212;--card:#1a1a1a;--card2:#222;--text:#fff;--muted:#a3a3a3;--line:#2b2b2b;
+  --accent:#ff3b1f;--accent2:#ff6a3d;--ok:#3ecf6e;--warn:#ffb020;
+  --z1:#5b8def;--z2:#3ecf6e;--z3:#ffd23f;--z4:#ff8a1f;--z5:#ff3b1f;--z6:#d61f69;--z7:#8e2de2;
+  --tabh:64px;color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg)}
+body{color:var(--text);font:16px/1.5 Inter,system-ui,sans-serif;padding-bottom:calc(var(--tabh) + env(safe-area-inset-bottom,0px));-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+[hidden]{display:none!important}
+h1,h2,h3,.logo,.big-num,.price{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em}
+h2{font-size:2.1rem;line-height:1;margin:6px 0 6px}
+h2 span{color:var(--accent)}
+h3{font-size:1.2rem;line-height:1.1;margin-bottom:12px}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+
+/* Header */
+.top{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.top-in{display:flex;align-items:center;justify-content:space-between;height:56px}
+.logo{font-size:1.45rem;text-decoration:none}
+.logo span{color:var(--accent);margin:0 2px}
+.top .btn-sm{background:var(--accent);color:#fff;text-decoration:none;font-weight:800;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;padding:8px 12px;border-radius:2px}
+
+/* Bottom tab bar */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(14,14,14,.97);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabs .wrap{display:grid;grid-template-columns:repeat(4,1fr);height:var(--tabh);padding:0 4px}
+.tabs button{background:none;border:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:.7rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);cursor:pointer;position:relative}
+.tabs svg{width:24px;height:24px}
+.tabs button[aria-selected="true"]{color:var(--text)}
+.tabs button[aria-selected="true"] svg{color:var(--accent)}
+.tabs button[aria-selected="true"]::before{content:"";position:absolute;top:0;left:22%;right:22%;height:3px;background:var(--accent)}
+
+main section{padding:22px 0 36px}
+.eyebrow{color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem}
+.intro{color:var(--muted);margin-bottom:18px}
+.panel{background:var(--card);border:1px solid var(--line);padding:16px;margin-bottom:14px}
+.note{color:var(--muted);font-size:.85rem}
+.block{margin-bottom:22px}
+
+/* Segmented control */
+.seg{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:16px;-webkit-overflow-scrolling:touch}
+.seg::-webkit-scrollbar{display:none}
+.seg button{flex:0 0 auto;background:var(--card);border:1px solid var(--line);padding:9px 14px;font-weight:700;font-size:.85rem;cursor:pointer;border-radius:2px;white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent)}
+.seg.sm button{padding:7px 11px;font-size:.78rem}
+
+/* Forms */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+label,.lbl{display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px}
+input[type=number],input[type=text],select{width:100%;background:var(--bg);border:1px solid #3a3a3a;border-radius:2px;padding:11px 12px;font-size:1.05rem;font-weight:700;outline:none}
+input:focus,select:focus{border-color:var(--accent)}
+input.big{font-family:Anton,sans-serif;font-size:2rem;font-weight:400;padding:6px 12px}
+input[type=range]{width:100%;accent-color:var(--accent);margin-top:12px}
+output{display:block;font-weight:800;font-size:1.05rem;padding:11px 0}
+.unit{color:var(--muted);font-weight:600}
+.inline{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.inline input{width:96px;padding:8px 10px;font-size:.95rem}
+.inline button,.ghost{background:transparent;border:1px solid var(--text);padding:8px 12px;font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;border-radius:2px}
+
+/* Zones list */
+.zones{display:grid;gap:6px}
+.z{display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--zc,var(--accent));padding:10px 12px}
+.z b{font-family:Anton,sans-serif;font-weight:400;font-size:1.25rem;color:var(--zc)}
+.z .zn{font-weight:700;line-height:1.2}
+.z .zn small{display:block;color:var(--muted);font-weight:500;font-size:.78rem}
+.z .zv{text-align:right;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.z .zv small{display:block;color:var(--muted);font-weight:500;font-size:.75rem}
+
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th,td{padding:9px 6px;text-align:left;border-bottom:1px solid var(--line);font-size:.92rem}
+th{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+td:not(:first-child),th:not(:first-child){text-align:right}
+.result{margin-top:14px;padding:12px 14px;background:var(--bg);border-left:4px solid var(--accent);font-weight:600}
+.result strong{color:var(--accent2)}
+
+/* Position */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:var(--card);border:1px solid var(--line);padding:14px}
+.kpi .lbl{margin-bottom:2px}
+.big-num{font-size:2rem;line-height:1.1}
+.big-num small{font-family:Inter,sans-serif;font-size:.85rem;color:var(--muted);text-transform:none}
+.kpi p{color:var(--muted);font-size:.8rem;margin-top:4px}
+.kpi.hl{border-color:var(--accent)}
+.check{display:grid;gap:8px}
+.ck{display:grid;grid-template-columns:1fr 92px;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);padding:10px 12px}
+.ck .t{font-weight:700;line-height:1.25}
+.ck .t small{display:block;color:var(--muted);font-weight:500;font-size:.78rem}
+.ck input{padding:8px 10px;text-align:center}
+.ck .v{grid-column:1/-1;font-size:.85rem;font-weight:600;display:none}
+.ck .v.on{display:block}
+.v.ok{color:var(--ok)} .v.lo,.v.hi{color:var(--warn)}
+.bike-svg{width:100%;height:auto;display:block;background:var(--card);border:1px solid var(--line);margin-bottom:14px}
+
+/* Offers */
+.offer{background:var(--card);border:1px solid var(--line);padding:20px;margin-bottom:18px;position:relative}
+.offer.featured{border:2px solid var(--accent);box-shadow:0 0 40px rgba(255,59,31,.18)}
+.tag{position:absolute;top:-11px;left:18px;background:var(--accent);color:#fff;font-weight:800;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;padding:3px 9px}
+.tag.dark{background:#fff;color:#000}
+.price{font-size:2.4rem;line-height:1.1;margin:4px 0}
+.price small{font-family:Inter,sans-serif;font-size:.95rem;color:var(--muted);text-transform:none}
+.pitch{color:#d4d4d4}
+.pitch strong{color:var(--accent2)}
+.offer ul{list-style:none;margin:12px 0 16px}
+.offer li{padding:8px 0;border-bottom:1px solid var(--line);color:#d4d4d4;font-size:.95rem}
+.offer li::before{content:"→ ";color:var(--accent);font-weight:800}
+.btn{display:block;text-align:center;background:var(--accent);color:#fff;text-decoration:none;font-weight:800;text-transform:uppercase;letter-spacing:.05em;font-size:.9rem;padding:14px 18px;border-radius:2px;border:2px solid var(--accent)}
+.btn.ghost{background:transparent;border-color:var(--text)}
+.steps{list-style:none;counter-reset:s;display:grid;gap:12px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:10px}
+.steps li::before{content:counter(s,decimal-leading-zero);font:1.8rem/1 Anton,sans-serif;color:var(--accent)}
+.steps span{color:var(--muted);display:block;font-size:.92rem}
+
+/* Testimonials */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
+.stat{background:var(--card);border:1px solid var(--line);padding:12px 8px;text-align:center}
+.stat b{display:block;font:1.7rem/1.1 Anton,sans-serif;color:var(--accent)}
+.stat span{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.tm{background:var(--card);border:1px solid var(--line);padding:18px;margin-bottom:12px}
+.tm blockquote{font-size:1.02rem;line-height:1.55;position:relative;padding-left:4px}
+.tm blockquote::before{content:"“";font:3.2rem/0 Anton,sans-serif;color:var(--accent);display:block;height:22px;margin-top:14px}
+.tm .who{display:flex;align-items:center;gap:12px;margin-top:14px}
+.av{width:42px;height:42px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font:1.05rem Anton,sans-serif;flex:0 0 auto}
+.who b{display:block;line-height:1.2}
+.who small{color:var(--muted)}
+.res{display:inline-block;margin-top:10px;background:rgba(255,59,31,.14);color:var(--accent2);font-weight:800;font-size:.78rem;padding:4px 9px;text-transform:uppercase;letter-spacing:.05em}
+.ph{border:1px dashed #555;color:#ccc;font-size:.8rem;padding:8px 10px;margin-bottom:16px}
+
+.cta-band{background:linear-gradient(180deg,var(--bg2),#2a0802);border:1px solid var(--line);padding:22px 18px;text-align:center;margin-top:8px}
+.cta-band h3{font-size:1.5rem}
+.cta-band p{color:#d4d4d4;margin-bottom:14px}
+.cta-band .btn+.btn{margin-top:10px}
+footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20px}
+.install{display:none;margin:0 0 14px;background:var(--card2);border:1px solid var(--line);padding:12px 14px;font-size:.88rem}
+.install.on{display:flex;gap:10px;align-items:center;justify-content:space-between}
+.install button{background:var(--accent);border:0;padding:8px 12px;font-weight:800;font-size:.75rem;text-transform:uppercase;cursor:pointer}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a href="#zones" class="logo" data-go="zones">PM<span>/</span>TRAINING</a>
+    <a class="btn-sm" href="https://www.instagram.com/pm.training_/" target="_blank" rel="noopener">Me contacter</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ ZONES ============ -->
+<section id="zones" role="tabpanel" aria-labelledby="t-zones"><div class="wrap">
+  <div class="install" id="install"><span>Installe l'app sur ton téléphone.</span><button type="button" id="installBtn">Installer</button></div>
+  <p class="eyebrow">Calculateur</p>
+  <h2>Tes zones<span>.</span></h2>
+  <p class="intro">Entre tes chiffres de test : l'app calcule tes allures, tes zones cardiaques et tes zones de puissance. Tout est gardé sur ton téléphone.</p>
+
+  <div class="seg" id="zSport" role="group" aria-label="Sport">
+    <button type="button" aria-pressed="true" data-s="run">Course à pied</button>
+    <button type="button" aria-pressed="false" data-s="hr">Cardio</button>
+    <button type="button" aria-pressed="false" data-s="bike">Vélo</button>
+    <button type="button" aria-pressed="false" data-s="swim">Natation</button>
+  </div>
+
+  <!-- RUN -->
+  <div data-sport="run">
+    <div class="panel">
+      <label for="vma">Ta VMA</label>
+      <div style="display:flex;align-items:center;gap:10px"><input class="big" id="vma" type="number" inputmode="decimal" min="8" max="25" step="0.1" value="15"><span class="unit">km/h</span></div>
+      <input id="vmaR" type="range" min="8" max="24" step="0.1" value="15" aria-label="Ajuster la VMA">
+      <p class="note" style="margin-top:10px">Pas de VMA ? Calcule-la depuis une course récente en bas de page.</p>
+    </div>
+    <div class="block"><h3>Allures par zone</h3><div class="zones" id="runZones"></div></div>
+    <div class="block"><h3>Mon fractionné</h3>
+      <div class="panel">
+        <div class="grid2">
+          <div><label for="fd">Distance (m)</label><input id="fd" type="number" inputmode="numeric" value="400" min="50" step="50"></div>
+          <div><label for="fp">% de VMA</label><input id="fp" type="number" inputmode="numeric" value="100" min="50" max="120"></div>
+        </div>
+        <div class="result" id="fres"></div>
+      </div>
+    </div>
+    <div class="block"><h3>Objectifs course (estimation)</h3>
+      <div class="panel" style="padding:6px 12px"><table id="pred"></table></div>
+      <p class="note">Estimation à partir de % de VMA usuels. L'endurance de chacun fait varier ces chiffres.</p>
+    </div>
+    <div class="block"><h3>Retrouver ma VMA</h3>
+      <div class="panel">
+        <div class="grid2">
+          <div><label for="rD">Course</label><select id="rD"><option value="5">5 km</option><option value="10" selected>10 km</option><option value="21.0975">Semi</option><option value="42.195">Marathon</option></select></div>
+          <div><label for="rT">Chrono</label><input id="rT" type="text" inputmode="numeric" value="50:00" placeholder="h:mm:ss"></div>
+        </div>
+        <div class="result" id="rRes"></div>
+        <div class="inline"><button type="button" id="rUse">Utiliser cette VMA</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HR -->
+  <div data-sport="hr" hidden>
+    <div class="seg sm" id="hrM" role="group" aria-label="Méthode">
+      <button type="button" aria-pressed="true" data-m="max">% FC max</button>
+      <button type="button" aria-pressed="false" data-m="karv">Karvonen (réserve)</button>
+      <button type="button" aria-pressed="false" data-m="lthr">FC seuil</button>
+    </div>
+    <div class="panel">
+      <div class="grid2">
+        <div data-need="max karv"><label for="hrMax">FC max</label><input id="hrMax" type="number" inputmode="numeric" min="120" max="230" value="190"></div>
+        <div data-need="karv"><label for="hrRest">FC repos</label><input id="hrRest" type="number" inputmode="numeric" min="30" max="110" value="55"></div>
+        <div data-need="lthr" hidden><label for="lthr">FC au seuil</label><input id="lthr" type="number" inputmode="numeric" min="100" max="210" value="170"></div>
+      </div>
+      <p class="note" id="hrHelp" style="margin-top:10px"></p>
+      <div class="inline" data-need="max karv"><label for="age" style="margin:0">Pas de FC max ? Ton âge</label><input id="age" type="number" inputmode="numeric" min="12" max="90" placeholder="âge"><button type="button" id="ageBtn">Estimer</button></div>
+    </div>
+    <div class="block"><h3>Tes zones cardiaques</h3><div class="zones" id="hrZones"></div></div>
+  </div>
+
+  <!-- BIKE -->
+  <div data-sport="bike" hidden>
+    <div class="panel">
+      <div class="grid2">
+        <div><label for="ftp">FTP (watts)</label><input class="big" id="ftp" type="number" inputmode="numeric" min="60" max="550" value="230"></div>
+        <div><label for="kg">Poids (kg)</label><input id="kg" type="number" inputmode="decimal" min="30" max="150" step="0.5" placeholder="facultatif"></div>
+      </div>
+      <div class="result" id="wkg" hidden></div>
+      <div class="inline"><label for="p20" style="margin:0">Test 20 min : puissance moyenne</label><input id="p20" type="number" inputmode="numeric" placeholder="W"><button type="button" id="p20Btn">Calculer FTP</button></div>
+      <p class="note" style="margin-top:8px">FTP ≈ 95 % de ta puissance moyenne sur 20 min à fond, après un bon échauffement.</p>
+    </div>
+    <div class="block"><h3>Tes zones de puissance</h3><div class="zones" id="bikeZones"></div><p class="note" style="margin-top:8px">Zones de Coggan, en % de FTP.</p></div>
+  </div>
+
+  <!-- SWIM -->
+  <div data-sport="swim" hidden>
+    <div class="panel">
+      <div class="grid2">
+        <div><label for="s400">Temps 400 m</label><input id="s400" type="text" inputmode="numeric" value="7:00" placeholder="m:ss"></div>
+        <div><label for="s200">Temps 200 m</label><input id="s200" type="text" inputmode="numeric" value="3:20" placeholder="m:ss"></div>
+      </div>
+      <div class="result" id="css"></div>
+      <p class="note" style="margin-top:10px">Test CSS : 400 m à fond, récupération complète, puis 200 m à fond.</p>
+    </div>
+    <div class="block"><h3>Tes allures au 100 m</h3><div class="zones" id="swimZones"></div></div>
+  </div>
+</div></section>
+
+<!-- ============ POSITION ============ -->
+<section id="position" role="tabpanel" aria-labelledby="t-position" hidden><div class="wrap">
+  <p class="eyebrow">Calculateur</p>
+  <h2>Ta position vélo<span>.</span></h2>
+  <p class="intro">Quelques mesures et tu obtiens un point de départ pour régler ton vélo. Ensuite, une photo de profil sur home-trainer permet de vérifier tes angles.</p>
+
+  <div class="seg" id="bType" role="group" aria-label="Pratique">
+    <button type="button" aria-pressed="true" data-t="route">Route</button>
+    <button type="button" aria-pressed="false" data-t="tri">Triathlon / CLM</button>
+    <button type="button" aria-pressed="false" data-t="gravel">Gravel</button>
+    <button type="button" aria-pressed="false" data-t="vtt">VTT</button>
+  </div>
+
+  <div class="panel">
+    <div class="grid2">
+      <div><label for="inseam">Entrejambe (cm)</label><input id="inseam" type="number" inputmode="decimal" min="60" max="105" step="0.5" value="84"></div>
+      <div><label for="height">Taille (cm)</label><input id="height" type="number" inputmode="numeric" min="140" max="210" value="178"></div>
+      <div><label for="flex">Souplesse</label><select id="flex"><option value="0">Raide</option><option value="1" selected>Moyenne</option><option value="2">Souple</option></select></div>
+      <div><label for="curH">Hauteur de selle actuelle</label><input id="curH" type="number" inputmode="decimal" step="0.1" placeholder="cm (facultatif)"></div>
+    </div>
+    <p class="note" style="margin-top:10px">Entrejambe : pieds nus, dos au mur, un livre bien calé entre les jambes comme une selle. Mesure du sol au haut du livre.</p>
+  </div>
+
+  <svg class="bike-svg" viewBox="0 0 360 200" role="img" aria-label="Schéma des mesures sur le vélo">
+    <g fill="none" stroke="#555" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="80" cy="140" r="48"/><circle cx="280" cy="140" r="48"/>
+      <path d="M80 140 L160 145 L130 62 M160 145 L250 70 L132 70 M250 70 L280 140 M250 70 L246 52"/>
+      <path d="M232 46 h30 q8 0 8 10" />
+    </g>
+    <path d="M114 58 h36" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    <g stroke="var(--accent)" stroke-width="2" fill="none" stroke-dasharray="4 4">
+      <path d="M160 145 L132 62"/>
+      <path d="M150 58 L262 50"/>
+      <path d="M300 58 V44 M300 58 h-12 M300 44 h-12"/>
+    </g>
+    <circle cx="160" cy="145" r="5" fill="var(--accent)"/>
+    <g fill="#fff" font-family="Inter,sans-serif" font-size="11" font-weight="700">
+      <text x="98" y="112">A</text><text x="200" y="44">B</text><text x="308" y="55">C</text>
+    </g>
+    <g fill="#a3a3a3" font-family="Inter,sans-serif" font-size="10">
+      <text x="12" y="196">A hauteur de selle · B distance selle-cintre · C drop</text>
+    </g>
+  </svg>
+
+  <div class="kpis" id="fitOut"></div>
+  <div class="result" id="fitCmp" hidden></div>
+
+  <div class="block" style="margin-top:22px"><h3>Vérifie tes angles</h3>
+    <p class="note" style="margin-bottom:12px">Filme-toi de profil sur home-trainer, à ton allure d'endurance. Mesure les angles sur une image avec une appli de rapporteur et entre-les ici.</p>
+    <div class="check" id="angles"></div>
+  </div>
+
+  <div class="cta-band">
+    <h3>Une douleur, une gêne ?</h3>
+    <p>Ces calculs donnent un point de départ. Si tu as mal aux genoux, au dos ou aux cervicales, on regarde ta position ensemble.</p>
+    <a class="btn" href="https://www.instagram.com/pm.training_/" target="_blank" rel="noopener">Envoie-moi ta vidéo</a>
+  </div>
+</div></section>
+
+<!-- ============ OFFRES ============ -->
+<section id="offres" role="tabpanel" aria-labelledby="t-offres" hidden><div class="wrap">
+  <p class="eyebrow">Coaching</p>
+  <h2>Les offres<span>.</span></h2>
+  <p class="intro">Course, trail, triathlon, vélo et Hyrox. Sans engagement : tu restes parce que ça marche.</p>
+  <p class="ph">Prix et contenus provisoires, à valider par Paul.</p>
+
+  <article class="offer">
+    <h3>Prépa course</h3>
+    <p class="price">29 € <small>une fois</small></p>
+    <p class="pitch">Un objectif, une date. Ton plan sur ta montre dès ce soir.</p>
+    <ul><li>Plan 8 à 12 semaines : 10 km, semi, marathon, trail, Hyrox, triathlon S/M</li><li>Calé sur ton niveau et ton nombre de séances</li><li>Séances structurées dans Nolio, synchronisées montre</li><li>Allures et zones personnalisées</li></ul>
+    <a class="btn ghost" data-offer="Prépa course" href="#">Je prends mon plan</a>
+  </article>
+
+  <article class="offer featured">
+    <span class="tag">Le plus choisi</span>
+    <h3>Team PM</h3>
+    <p class="price">39 € <small>/ mois</small></p>
+    <p class="pitch">Le coaching au prix d'un abonnement de salle. <strong>1er mois à 19 €.</strong></p>
+    <ul><li>Plan par objectif et par niveau, mis à jour chaque mois</li><li>Bilan mensuel de tes données</li><li>Groupe privé PM Training</li><li>Live mensuel avec Paul : technique, nutrition, stratégie</li></ul>
+    <a class="btn" data-offer="Team PM" href="#">Je rejoins la Team</a>
+  </article>
+
+  <article class="offer">
+    <span class="tag dark">Places limitées</span>
+    <h3>Coaching 1:1</h3>
+    <p class="price">89 € <small>/ mois</small></p>
+    <p class="pitch">Paul construit et ajuste ton plan, à toi seul.</p>
+    <ul><li>Plan 100 % personnalisé, ajusté chaque semaine</li><li>Analyse de chaque séance</li><li>Échanges illimités avec ton coach</li><li>Option Performance à 139 €/mois : tests, nutrition, stratégie de course</li></ul>
+    <a class="btn ghost" data-offer="Coaching 1:1" href="#">Je postule</a>
+  </article>
+
+  <div class="block"><h3>Comment ça marche</h3>
+    <ol class="steps">
+      <li><div><strong>Bilan</strong><span>Ton niveau, ton historique, ton objectif et tes heures dispo.</span></div></li>
+      <li><div><strong>Plan sur mesure</strong><span>Tes séances dans Nolio, envoyées sur ta montre ou ton compteur.</span></div></li>
+      <li><div><strong>Analyse et ajustements</strong><span>Je regarde ce que tu as fait et j'adapte la suite.</span></div></li>
+      <li><div><strong>Le jour J</strong><span>Affûtage, nutrition, stratégie : tu exécutes ta course.</span></div></li>
+    </ol>
+  </div>
+</div></section>
+
+<!-- ============ AVIS ============ -->
+<section id="avis" role="tabpanel" aria-labelledby="t-avis" hidden><div class="wrap">
+  <p class="eyebrow">Ils l'ont fait</p>
+  <h2>Retours d'athlètes<span>.</span></h2>
+  <p class="intro">Ce que disent les athlètes coachés par PM Training.</p>
+  <p class="ph">Témoignages d'exemple : à remplacer par les vrais retours (prénom, discipline, résultat, avec leur accord).</p>
+
+  <div class="stats">
+    <div class="stat"><b>[XX]</b><span>athlètes</span></div>
+    <div class="stat"><b>[XX]</b><span>finishers</span></div>
+    <div class="stat"><b>[X,X]/5</b><span>note</span></div>
+  </div>
+
+  <div class="seg sm" id="tFilter" role="group" aria-label="Discipline">
+    <button type="button" aria-pressed="true" data-f="all">Tous</button>
+    <button type="button" aria-pressed="false" data-f="course">Course</button>
+    <button type="button" aria-pressed="false" data-f="tri">Triathlon</button>
+    <button type="button" aria-pressed="false" data-f="velo">Vélo</button>
+    <button type="button" aria-pressed="false" data-f="hyrox">Hyrox</button>
+  </div>
+  <div id="tList"></div>
+
+  <div class="cta-band">
+    <h3>Ton tour<span style="color:var(--accent)">.</span></h3>
+    <p>Écris-moi ton objectif et ton niveau, je te réponds personnellement.</p>
+    <a class="btn" href="https://www.instagram.com/pm.training_/" target="_blank" rel="noopener">Écris-moi sur Instagram</a>
+    <a class="btn ghost" href="https://pmtraining.fr" target="_blank" rel="noopener">pmtraining.fr</a>
+  </div>
+</div></section>
+
+</main>
+
+<footer>© <span id="y">2026</span> PM Training · Les calculs sont des repères, pas un avis médical.</footer>
+
+<nav class="tabs" aria-label="Sections">
+  <div class="wrap" role="tablist">
+    <button role="tab" id="t-zones" aria-controls="zones" aria-selected="true" data-go="zones"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Zones</button>
+    <button role="tab" id="t-position" aria-controls="position" aria-selected="false" data-go="position"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17" r="3.5"/><circle cx="18.5" cy="17" r="3.5"/><path d="M5.5 17l4-8h6l3 8M9.5 9L12 17h2M14 5h2l1.5 4"/></svg>Position</button>
+    <button role="tab" id="t-offres" aria-controls="offres" aria-selected="false" data-go="offres"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7L12 17.6 5.8 21l1.4-7L2 9.3l7-.8z"/></svg>Offres</button>
+    <button role="tab" id="t-avis" aria-controls="avis" aria-selected="false" data-go="avis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 10.5h7M8.5 14h4"/></svg>Avis</button>
+  </div>
+</nav>
+
+<script>
+/* ---------- Contenus à personnaliser ---------- */
+const CONTACT = 'https://www.instagram.com/pm.training_/';
+const TESTIMONIALS = [
+  {f:'course', name:'[Prénom N.]', info:'Course à pied · coaché depuis [X] mois', res:'10 km : 52 min → 46 min', txt:"[Exemple] Je courais toujours à la même allure. Avec des séances qui ont un vrai but, j'ai pris 6 minutes sur 10 km en une saison, sans me blesser."},
+  {f:'tri', name:'[Prénom N.]', info:'Triathlon · Ironman 70.3', res:'Premier 70.3 terminé', txt:"[Exemple] Boulot, enfants, trois sports : le plan s'adaptait chaque semaine à ma vraie vie. Je suis arrivé frais sur la ligne de départ."},
+  {f:'hyrox', name:'[Prénom N.]', info:'Hyrox · catégorie Open', res:'Hyrox : -9 min', txt:"[Exemple] Le travail de course après les ateliers a tout changé. Je ne m'effondre plus sur les derniers kilomètres."},
+  {f:'velo', name:'[Prénom N.]', info:'Vélo · cyclosportive', res:'FTP +25 W en 4 mois', txt:"[Exemple] Des zones de puissance claires, des séances courtes et efficaces. Mes sorties longues ne sont plus du remplissage."},
+  {f:'course', name:'[Prénom N.]', info:'Trail · 40 km', res:'Premier trail long', txt:"[Exemple] Paul lit mes données et me dit la vérité. Quand je voulais en faire trop, il m'a freiné, et c'est pour ça que j'ai fini."}
+];
+
+/* ---------- Outils ---------- */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const store={get(k,d){try{const v=localStorage.getItem('pm.'+k);return v===null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem('pm.'+k,v)}catch(e){}}};
+const num=(el,d)=>{const v=parseFloat(String(el.value).replace(',','.'));return isFinite(v)?v:d};
+const pace=kmh=>{if(!(kmh>0))return'–';let s=Math.round(3600/kmh);return Math.floor(s/60)+"'"+String(s%60).padStart(2,'0')+'"'};
+const hms=s=>{s=Math.round(s);const h=Math.floor(s/3600),m=Math.floor(s%3600/60),r=s%60;return(h?h+'h'+String(m).padStart(2,'0'):m)+"'"+String(r).padStart(2,'0')+'"'};
+const parseT=t=>{const p=String(t).trim().split(/[:'"h\s]+/).filter(Boolean).map(Number);if(!p.length||p.some(isNaN))return NaN;return p.reduce((a,b)=>a*60+b,0)};
+const mmss=s=>{s=Math.round(s);return Math.floor(s/60)+"'"+String(s%60).padStart(2,'0')+'"'};
+const zrow=(k,c,name,sub,val,vsub)=>`<div class="z" style="--zc:var(--${c})"><b>${k}</b><div class="zn">${name}<small>${sub}</small></div><div class="zv">${val}${vsub?`<small>${vsub}</small>`:''}</div></div>`;
+function seg(id,cb){const g=$(id);g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;g.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));cb(b)});}
+function setSeg(id,attr,val){const b=$(id).querySelector(`[data-${attr}="${val}"]`);if(b)b.click();}
+function persist(ids,fn){ids.forEach(id=>{const el=$('#'+id);const v=store.get(id,null);if(v!==null&&v!=='')el.value=v;el.addEventListener('input',()=>{store.set(id,el.value);fn()});});}
+
+/* ---------- Onglets ---------- */
+const TABS=['zones','position','offres','avis'];
+function go(t,push){if(!TABS.includes(t))t='zones';TABS.forEach(x=>{$('#'+x).hidden=x!==t;$('#t-'+x).setAttribute('aria-selected',x===t)});window.scrollTo(0,0);if(push)history.replaceState(null,'','#'+t);store.set('tab',t);}
+$$('[data-go]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();go(b.dataset.go,true)}));
+go((location.hash||'').slice(1)||store.get('tab','zones'));
+
+/* ---------- Course à pied ---------- */
+const RUNZ=[['Z1','z1','Récupération','Footing très facile',.60,.68],['Z2','z2','Endurance fondamentale','Sorties longues, base',.68,.76],['Z3','z3','Allure active','Tempo, allure marathon',.76,.85],['Z4','z4','Seuil','Allure 10 km à semi',.85,.92],['Z5','z5','VMA','Fractionné court',.95,1.05],['Z6','z6','Vitesse','Sprints, côtes courtes',1.05,1.20]];
+const PRED=[['5 km',5,.94],['10 km',10,.89],['Semi',21.0975,.82],['Marathon',42.195,.76]];
+function runCalc(){
+  const v=num($('#vma'),15);$('#vmaR').value=v;
+  $('#runZones').innerHTML=RUNZ.map(([k,c,n,s,a,b])=>zrow(k,c,n,s+' · '+Math.round(a*100)+'-'+Math.round(b*100)+' %',pace(v*b)+' – '+pace(v*a),'/km')).join('');
+  const d=num($('#fd'),400),p=num($('#fp'),100)/100,sp=v*p;
+  $('#fres').innerHTML=`Temps cible sur ${d} m : <strong>${hms(d/1000/sp*3600)}</strong> · allure ${pace(sp)}/km · ${sp.toFixed(1)} km/h`;
+  $('#pred').innerHTML='<tr><th>Course</th><th>% VMA</th><th>Allure</th><th>Temps</th></tr>'+PRED.map(([n,km,f])=>`<tr><td>${n}</td><td>${Math.round(f*100)} %</td><td>${pace(v*f)}</td><td><b>${hms(km/(v*f)*3600)}</b></td></tr>`).join('');
+  const rd=parseFloat($('#rD').value),rt=parseT($('#rT').value);
+  const f=(PRED.find(x=>Math.abs(x[1]-rd)<.01)||[0,0,.89])[2];
+  if(rt>0){const est=rd/(rt/3600)/f;$('#rRes').innerHTML=`Allure ${pace(rd/(rt/3600))}/km · VMA estimée : <strong>${est.toFixed(1)} km/h</strong>`;$('#rUse').dataset.v=est.toFixed(1);}
+  else $('#rRes').textContent='Entre un chrono au format h:mm:ss ou mm:ss.';
+}
+$('#vmaR').addEventListener('input',()=>{$('#vma').value=$('#vmaR').value;store.set('vma',$('#vma').value);runCalc()});
+$('#rD').addEventListener('change',runCalc);
+$('#rUse').addEventListener('click',e=>{if(e.target.dataset.v){$('#vma').value=e.target.dataset.v;store.set('vma',e.target.dataset.v);runCalc();window.scrollTo({top:0,behavior:'smooth'})}});
+persist(['vma','fd','fp','rT'],runCalc);
+
+/* ---------- Cardio ---------- */
+const HRZ={
+  max:[[.50,.60],[.60,.70],[.70,.80],[.80,.90],[.90,1]],
+  karv:[[.50,.60],[.60,.70],[.70,.80],[.80,.90],[.90,1]],
+  lthr:[[0,.85],[.85,.90],[.90,.95],[.95,1],[1,1.06]]};
+const HRN=[['Récupération','Très facile, on parle sans effort'],['Endurance','Aisance respiratoire, base du volume'],['Tempo','Soutenu, phrases courtes'],['Seuil','Dur mais tenable 30 à 60 min'],['Max','Fractionné, quelques mots seulement']];
+let hrMode=store.get('hrM','max');
+function hrCalc(){
+  const mx=num($('#hrMax'),190),rs=num($('#hrRest'),55),lt=num($('#lthr'),170);
+  $$('[data-need]').forEach(el=>el.hidden=!el.dataset.need.split(' ').includes(hrMode));
+  const help={max:'Zones en % de ta FC max. Simple, mais ne tient pas compte de ta forme.',karv:`FC de réserve = FC max − FC repos = ${mx-rs} bpm. Zones plus justes pour les sportifs entraînés. Prends ta FC de repos le matin au réveil.`,lthr:'FC moyenne des 20 dernières minutes d\'un test de 30 min à fond en course à pied. La méthode la plus précise.'};
+  $('#hrHelp').textContent=help[hrMode];
+  $('#hrZones').innerHTML=HRZ[hrMode].map(([a,b],i)=>{
+    const f=x=>Math.round(hrMode==='max'?mx*x:hrMode==='karv'?rs+(mx-rs)*x:lt*x);
+    const lo=hrMode==='lthr'&&i===0?'<':f(a)+' – ';
+    const pc=hrMode==='lthr'?(i===0?'< 85 % FC seuil':Math.round(a*100)+'-'+Math.round(b*100)+' % FC seuil'):Math.round(a*100)+'-'+Math.round(b*100)+(hrMode==='max'?' % FC max':' % réserve');
+    return zrow('Z'+(i+1),'z'+(i+1),HRN[i][0],HRN[i][1]+' · '+pc,(hrMode==='lthr'&&i===0?'< ':f(a)+' – ')+f(b),'bpm');
+  }).join('');
+}
+seg('#hrM',b=>{hrMode=b.dataset.m;store.set('hrM',hrMode);hrCalc()});
+$('#ageBtn').addEventListener('click',()=>{const a=num($('#age'),0);if(a>10){$('#hrMax').value=Math.round(208-.7*a);store.set('hrMax',$('#hrMax').value);hrCalc()}});
+persist(['hrMax','hrRest','lthr'],hrCalc);
+
+/* ---------- Vélo ---------- */
+const BKZ=[['Z1','z1','Récupération','Tourner les jambes',0,.55],['Z2','z2','Endurance','Sorties longues',.56,.75],['Z3','z3','Tempo','Rythme soutenu',.76,.90],['Z4','z4','Seuil','Effort de 20 à 60 min',.91,1.05],['Z5','z5','PMA / VO2max','Intervalles 3 à 8 min',1.06,1.20],['Z6','z6','Anaérobie','Efforts de 30 s à 2 min',1.21,1.50],['Z7','z7','Sprint','Puissance max',1.51,null]];
+function bikeCalc(){
+  const f=num($('#ftp'),230),kg=num($('#kg'),0);
+  $('#bikeZones').innerHTML=BKZ.map(([k,c,n,s,a,b])=>zrow(k,c,n,s+' · '+(b?(a?Math.round(a*100)+'-':'< ')+Math.round(b*100)+' %':'> 150 %'),b?(a?Math.round(f*a)+' – ':'< ')+Math.round(f*b):'> '+Math.round(f*a),'watts')).join('');
+  const w=$('#wkg');if(kg>0){w.hidden=false;w.innerHTML=`Rapport poids-puissance : <strong>${(f/kg).toFixed(2)} W/kg</strong>`}else w.hidden=true;
+}
+$('#p20Btn').addEventListener('click',()=>{const p=num($('#p20'),0);if(p>0){$('#ftp').value=Math.round(p*.95);store.set('ftp',$('#ftp').value);bikeCalc()}});
+persist(['ftp','kg'],bikeCalc);
+
+/* ---------- Natation ---------- */
+const SWZ=[['Z1','z1','Récupération','Éducatifs, nage relâchée',15,20],['Z2','z2','Endurance','Séries longues',8,12],['Z3','z3','Tempo','Allure course longue',3,6],['Z4','z4','Seuil (CSS)','Séries 100-400 m',-2,2],['Z5','z5','Vitesse','Séries courtes 25-100 m',-8,-3]];
+function swimCalc(){
+  const a=parseT($('#s400').value),b=parseT($('#s200').value);
+  if(!(a>b&&b>0)){$('#css').textContent='Entre deux temps valides (le 400 m doit être plus long que le 200 m).';$('#swimZones').innerHTML='';return}
+  const c=(a-b)/2;
+  $('#css').innerHTML=`Ton CSS : <strong>${mmss(c)} / 100 m</strong> · ${(200/(a-b)).toFixed(2)} m/s`;
+  $('#swimZones').innerHTML=SWZ.map(([k,cl,n,s,lo,hi])=>zrow(k,cl,n,s,mmss(c+lo)+' – '+mmss(c+hi),'/100 m')).join('');
+}
+persist(['s400','s200'],swimCalc);
+
+let sport=store.get('sport','run');
+seg('#zSport',b=>{sport=b.dataset.s;store.set('sport',sport);$$('[data-sport]').forEach(el=>el.hidden=el.dataset.sport!==sport)});
+
+/* ---------- Position vélo ---------- */
+const FIT={
+  route:{n:'Route',reach:[.53,.57],drop:[[0,4],[4,7],[7,10]],trunk:[40,50],elbow:[150,165],setback:'5 à 8 cm derrière l\'axe du pédalier',frame:.665},
+  tri:{n:'Triathlon',reach:[.50,.55],drop:[[2,6],[6,9],[9,12]],trunk:[15,25],elbow:[90,105],setback:'0 à 3 cm, selle avancée (angle de tube de selle 76 à 80°)',frame:.665},
+  gravel:{n:'Gravel',reach:[.51,.55],drop:[[-2,2],[1,5],[4,7]],trunk:[45,55],elbow:[150,165],setback:'5 à 8 cm derrière l\'axe du pédalier',frame:.65},
+  vtt:{n:'VTT',reach:[.55,.60],drop:[[-4,0],[-1,3],[2,5]],trunk:[45,60],elbow:[150,165],setback:'4 à 7 cm derrière l\'axe du pédalier',frame:.573}};
+let bType=store.get('bType','route');
+const crank=i=>i<74?165:i<80?167.5:i<86?170:i<93?172.5:175;
+const ANG=[
+  {id:'knee',t:'Genou en bas du coup de pédale',s:'Angle hanche-genou-cheville, pédale à 6 h',r:()=>[140,150],lo:'Genou trop fléchi : remonte ta selle de 3 à 5 mm et revérifie.',hi:'Jambe trop tendue : descends ta selle de 3 à 5 mm et revérifie.'},
+  {id:'kneeTop',t:'Genou en haut du coup de pédale',s:'Pédale à 12 h',r:()=>[68,80],lo:'Genou très fermé : selle trop basse ou manivelles trop longues.',hi:'Angle ouvert : rien à corriger côté genou.'},
+  {id:'trunk',t:'Inclinaison du dos',s:'Angle dos-horizontale, mains en position habituelle',r:()=>FIT[bType].trunk,lo:'Très allongé : vérifie que tu tiens la position sans douleur au dos ou au cou.',hi:'Assez redressé : confortable, moins aéro. On peut baisser le cintre si tu es à l\'aise.'},
+  {id:'elbow',t:'Angle du coude',s:'Bras-avant-bras',r:()=>FIT[bType].elbow,lo:'Coudes très fléchis : cockpit peut-être trop court.',hi:'Bras trop tendus : cockpit peut-être trop long ou cintre trop bas.'}];
+function fitCalc(){
+  const i=num($('#inseam'),84),h=num($('#height'),178),fx=parseInt($('#flex').value),F=FIT[bType],cur=num($('#curH'),0);
+  const sh=i*.883, up=h-i; /* buste + tête : base de l'estimation du cockpit */
+  const r1=Math.round(up*F.reach[0]),r2=Math.round(up*F.reach[1]);
+  const dr=F.drop[fx];
+  const fr=bType==='vtt'?(i*.226).toFixed(1)+'"':Math.round(i*F.frame)+' cm';
+  $('#fitOut').innerHTML=`
+   <div class="kpi hl"><span class="lbl">A · Hauteur de selle</span><div class="big-num">${sh.toFixed(1)} <small>cm</small></div><p>Axe du pédalier → haut de la selle, dans l'axe du tube (entrejambe × 0,883). Plage ${(sh-.5).toFixed(1)} à ${(sh+.5).toFixed(1)} cm.</p></div>
+   <div class="kpi"><span class="lbl">B · Selle → cintre</span><div class="big-num">${r1}–${r2} <small>cm</small></div><p>Bec de selle → centre du cintre${bType==='tri'?' (aux prolongateurs, coudes sous les épaules)':''}. Estimation à partir de ta taille.</p></div>
+   <div class="kpi"><span class="lbl">C · Drop selle / cintre</span><div class="big-num">${dr[0]}–${dr[1]} <small>cm</small></div><p>Hauteur de selle moins hauteur du cintre${bType==='tri'?' (des repose-coudes)':''}, selon ta souplesse.</p></div>
+   <div class="kpi"><span class="lbl">Recul de selle</span><div style="font-weight:800;font-size:1rem;line-height:1.35;padding:6px 0">${F.setback}</div><p>Bec de selle par rapport à l'axe du pédalier.</p></div>
+   <div class="kpi"><span class="lbl">Taille de cadre</span><div class="big-num">${fr}</div><p>${bType==='vtt'?'Entrejambe × 0,226 (en pouces).':'Tube de selle, centre-haut. Vérifie surtout le stack et le reach du cadre.'}</p></div>
+   <div class="kpi"><span class="lbl">Manivelles</span><div class="big-num">${crank(i)} <small>mm</small></div><p>${bType==='tri'?'En triathlon, 2,5 à 5 mm plus court aide à ouvrir la hanche.':'Repère selon l\'entrejambe.'}</p></div>`;
+  const c=$('#fitCmp');
+  if(cur>0){const d=cur-sh;c.hidden=false;c.innerHTML=Math.abs(d)<=.5?`Ta selle est dans la plage (<strong>${d>0?'+':''}${d.toFixed(1)} cm</strong>). Vérifie l'angle du genou ci-dessous.`:`Ta selle est <strong>${Math.abs(d).toFixed(1)} cm trop ${d>0?'haute':'basse'}</strong> par rapport au calcul. Corrige par étapes de 3 à 5 mm, puis vérifie l'angle du genou.`}else c.hidden=true;
+  angCalc();
+}
+function angRender(){
+  $('#angles').innerHTML=ANG.map(a=>{const [lo,hi]=a.r();return `<div class="ck"><div class="t">${a.t}<small>${a.s} · cible ${lo} à ${hi}°</small></div><input type="number" inputmode="numeric" id="a-${a.id}" placeholder="°" aria-label="${a.t} en degrés"><div class="v" id="v-${a.id}"></div></div>`}).join('');
+  ANG.forEach(a=>{const el=$('#a-'+a.id);const v=store.get('a-'+a.id,'');if(v)el.value=v;el.addEventListener('input',()=>{store.set('a-'+a.id,el.value);angCalc()})});
+}
+function angCalc(){
+  ANG.forEach(a=>{const el=$('#a-'+a.id),out=$('#v-'+a.id);if(!el)return;const [lo,hi]=a.r();
+    el.closest('.ck').querySelector('small').textContent=`${a.s} · cible ${lo} à ${hi}°`;
+    const v=num(el,NaN);if(!isFinite(v)){out.className='v';return}
+    if(v<lo){out.className='v on lo';out.textContent='▼ '+a.lo}else if(v>hi){out.className='v on hi';out.textContent='▲ '+a.hi}else{out.className='v on ok';out.textContent='✓ Dans la cible.'}});
+}
+angRender();
+seg('#bType',b=>{bType=b.dataset.t;store.set('bType',bType);fitCalc()});
+['flex'].forEach(id=>{const el=$('#'+id);const v=store.get(id,null);if(v!==null)el.value=v;el.addEventListener('change',()=>{store.set(id,el.value);fitCalc()})});
+persist(['inseam','height','curH'],fitCalc);
+
+/* ---------- Témoignages ---------- */
+const ini=n=>n.replace(/[\[\]]/g,'').split(/\s+/).map(x=>x[0]||'').join('').slice(0,2).toUpperCase()||'PM';
+function tRender(f){$('#tList').innerHTML=TESTIMONIALS.filter(t=>f==='all'||t.f===f).map(t=>`<article class="tm"><blockquote>${t.txt}</blockquote>${t.res?`<span class="res">${t.res}</span>`:''}<div class="who"><span class="av">${ini(t.name)}</span><div><b>${t.name}</b><small>${t.info}</small></div></div></article>`).join('')||'<p class="note">Pas encore de retour dans cette discipline.</p>';}
+seg('#tFilter',b=>tRender(b.dataset.f));
+
+/* ---------- Offres : boutons vers le contact ---------- */
+$$('[data-offer]').forEach(a=>{a.href=CONTACT;a.target='_blank';a.rel='noopener'});
+
+/* ---------- Démarrage ---------- */
+setSeg('#zSport','s',sport);setSeg('#hrM','m',hrMode);setSeg('#bType','t',bType);
+runCalc();hrCalc();bikeCalc();swimCalc();fitCalc();tRender('all');
+$('#y').textContent=new Date().getFullYear();
+
+/* ---------- PWA ---------- */
+let deferred;addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;$('#install').classList.add('on')});
+$('#installBtn').addEventListener('click',async()=>{if(!deferred)return;deferred.prompt();await deferred.userChoice;deferred=null;$('#install').classList.remove('on')});
+if('serviceWorker' in navigator&&location.protocol.startsWith('http')){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
+</script>
+</body>
+</html>
