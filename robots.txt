@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://menardpa-design.github.io/pm-training-app/sitemap.xml
+Sitemap: https://pm-training.fr/sitemap.xml
