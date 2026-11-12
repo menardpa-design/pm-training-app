@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>PM Training App</title>
 <meta name="description" content="L'app PM Training : zones d'entraînement, position vélo, offres de coaching et retours d'athlètes.">
-<meta name="theme-color" content="#0a0a0a">
+<meta name="theme-color" content="#0f1213">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,12 +15,14 @@
 <link rel="icon" type="image/png" href="favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0a0a0a;--bg2:#121212;--card:#1a1a1a;--card2:#222;--text:#fff;--muted:#a3a3a3;--line:#2b2b2b;
-  --accent:#ff3b1f;--accent2:#ff6a3d;--ok:#3ecf6e;--warn:#ffb020;
-  --z1:#5b8def;--z2:#3ecf6e;--z3:#ffd23f;--z4:#ff8a1f;--z5:#ff3b1f;--z6:#d61f69;--z7:#8e2de2;
+  /* Charte PM Training : noir du logo, bitume et brume des photos, rouge des cadres et maillots */
+  --bg:#0f1213;--bg2:#151a1b;--card:#1b2021;--card2:#232a2b;--text:#f2eff0;--muted:#a9a5a0;--line:#2c3334;
+  --logo:#272727;--accent:#e23b22;--accent2:#ff5a3c;--ok:#3ecf6e;--warn:#ffb020;
+  --z1:#5b8def;--z2:#3ecf6e;--z3:#ffd23f;--z4:#ff8a1f;--z5:#e23b22;--z6:#d61f69;--z7:#8e2de2;
+  --display:Montserrat,'Arial Black',system-ui,sans-serif;
   --tabh:64px;color-scheme:dark;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -29,21 +31,22 @@ body{color:var(--text);font:16px/1.5 Inter,system-ui,sans-serif;padding-bottom:c
 a{color:inherit}
 button,input,select{font:inherit;color:inherit}
 [hidden]{display:none!important}
-h1,h2,h3,.logo,.big-num,.price{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em}
-h2{font-size:2.1rem;line-height:1;margin:6px 0 6px}
+h1,h2,h3,.logo,.big-num,.price{font-family:var(--display);font-weight:900;text-transform:uppercase;letter-spacing:-.01em}
+h2{font-size:1.9rem;line-height:1.05;margin:6px 0 6px}
 h2 span{color:var(--accent)}
 h3{font-size:1.2rem;line-height:1.1;margin-bottom:12px}
 .wrap{max-width:720px;margin:0 auto;padding:0 16px}
 
 /* Header */
-.top{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.top{position:sticky;top:0;z-index:20;background:rgba(15,18,19,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
 .top-in{display:flex;align-items:center;justify-content:space-between;height:56px}
-.logo{font-size:1.45rem;text-decoration:none}
-.logo span{color:var(--accent);margin:0 2px}
+.logo{display:flex;align-items:center;gap:10px;font-size:1.05rem;text-decoration:none;letter-spacing:.02em}
+.logo img{width:44px;height:44px;display:block}
+.logo span{color:var(--accent)}
 .top .btn-sm{background:var(--accent);color:#fff;text-decoration:none;font-weight:800;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;padding:8px 12px;border-radius:2px}
 
 /* Bottom tab bar */
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(14,14,14,.97);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(15,18,19,.97);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
 .tabs .wrap{display:grid;grid-template-columns:repeat(4,1fr);height:var(--tabh);padding:0 4px}
 .tabs button{background:none;border:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:.7rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);cursor:pointer;position:relative}
 .tabs svg{width:24px;height:24px}
@@ -51,7 +54,15 @@ h3{font-size:1.2rem;line-height:1.1;margin-bottom:12px}
 .tabs button[aria-selected="true"] svg{color:var(--accent)}
 .tabs button[aria-selected="true"]::before{content:"";position:absolute;top:0;left:22%;right:22%;height:3px;background:var(--accent)}
 
-main section{padding:22px 0 36px}
+main section{padding:0 0 36px}
+.hero{position:relative;margin:0 calc(50% - 50vw) 18px;min-height:230px;display:flex;align-items:flex-end;background:linear-gradient(180deg,rgba(15,18,19,.05) 0%,rgba(15,18,19,.35) 50%,var(--bg) 100%),var(--img) center/cover no-repeat,var(--card)}
+.hero-in{width:100%;max-width:720px;margin:0 auto;padding:0 16px 6px}
+.hero h2{font-size:2.2rem;text-shadow:0 2px 18px rgba(0,0,0,.55)}
+.hero .eyebrow{text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.coach{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);padding:14px;margin-bottom:22px}
+.coach img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+.coach p{color:var(--muted);font-size:.9rem}
+.coach h3{margin-bottom:6px}
 .eyebrow{color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem}
 .intro{color:var(--muted);margin-bottom:18px}
 .panel{background:var(--card);border:1px solid var(--line);padding:16px;margin-bottom:14px}
@@ -70,7 +81,7 @@ main section{padding:22px 0 36px}
 label,.lbl{display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px}
 input[type=number],input[type=text],select{width:100%;background:var(--bg);border:1px solid #3a3a3a;border-radius:2px;padding:11px 12px;font-size:1.05rem;font-weight:700;outline:none}
 input:focus,select:focus{border-color:var(--accent)}
-input.big{font-family:Anton,sans-serif;font-size:2rem;font-weight:400;padding:6px 12px}
+input.big{font-family:var(--display);font-weight:900;font-size:2rem;font-weight:400;padding:6px 12px}
 input[type=range]{width:100%;accent-color:var(--accent);margin-top:12px}
 output{display:block;font-weight:800;font-size:1.05rem;padding:11px 0}
 .unit{color:var(--muted);font-weight:600}
@@ -81,7 +92,7 @@ output{display:block;font-weight:800;font-size:1.05rem;padding:11px 0}
 /* Zones list */
 .zones{display:grid;gap:6px}
 .z{display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--zc,var(--accent));padding:10px 12px}
-.z b{font-family:Anton,sans-serif;font-weight:400;font-size:1.25rem;color:var(--zc)}
+.z b{font-family:var(--display);font-weight:900;font-size:1.25rem;color:var(--zc)}
 .z .zn{font-weight:700;line-height:1.2}
 .z .zn small{display:block;color:var(--muted);font-weight:500;font-size:.78rem}
 .z .zv{text-align:right;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -114,7 +125,7 @@ td:not(:first-child),th:not(:first-child){text-align:right}
 
 /* Offers */
 .offer{background:var(--card);border:1px solid var(--line);padding:20px;margin-bottom:18px;position:relative}
-.offer.featured{border:2px solid var(--accent);box-shadow:0 0 40px rgba(255,59,31,.18)}
+.offer.featured{border:2px solid var(--accent);box-shadow:0 0 40px rgba(226,59,34,.18)}
 .tag{position:absolute;top:-11px;left:18px;background:var(--accent);color:#fff;font-weight:800;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;padding:3px 9px}
 .tag.dark{background:#fff;color:#000}
 .price{font-size:2.4rem;line-height:1.1;margin:4px 0}
@@ -128,25 +139,25 @@ td:not(:first-child),th:not(:first-child){text-align:right}
 .btn.ghost{background:transparent;border-color:var(--text)}
 .steps{list-style:none;counter-reset:s;display:grid;gap:12px}
 .steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:10px}
-.steps li::before{content:counter(s,decimal-leading-zero);font:1.8rem/1 Anton,sans-serif;color:var(--accent)}
+.steps li::before{content:counter(s,decimal-leading-zero);font:900 1.8rem/1 var(--display);color:var(--accent)}
 .steps span{color:var(--muted);display:block;font-size:.92rem}
 
 /* Testimonials */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
 .stat{background:var(--card);border:1px solid var(--line);padding:12px 8px;text-align:center}
-.stat b{display:block;font:1.7rem/1.1 Anton,sans-serif;color:var(--accent)}
+.stat b{display:block;font:900 1.7rem/1.1 var(--display);color:var(--accent)}
 .stat span{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
 .tm{background:var(--card);border:1px solid var(--line);padding:18px;margin-bottom:12px}
 .tm blockquote{font-size:1.02rem;line-height:1.55;position:relative;padding-left:4px}
-.tm blockquote::before{content:"“";font:3.2rem/0 Anton,sans-serif;color:var(--accent);display:block;height:22px;margin-top:14px}
+.tm blockquote::before{content:"“";font:900 3.2rem/0 var(--display);color:var(--accent);display:block;height:22px;margin-top:14px}
 .tm .who{display:flex;align-items:center;gap:12px;margin-top:14px}
-.av{width:42px;height:42px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font:1.05rem Anton,sans-serif;flex:0 0 auto}
+.av{width:42px;height:42px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font:900 1.05rem var(--display);flex:0 0 auto}
 .who b{display:block;line-height:1.2}
 .who small{color:var(--muted)}
-.res{display:inline-block;margin-top:10px;background:rgba(255,59,31,.14);color:var(--accent2);font-weight:800;font-size:.78rem;padding:4px 9px;text-transform:uppercase;letter-spacing:.05em}
+.res{display:inline-block;margin-top:10px;background:rgba(226,59,34,.14);color:var(--accent2);font-weight:800;font-size:.78rem;padding:4px 9px;text-transform:uppercase;letter-spacing:.05em}
 .ph{border:1px dashed #555;color:#ccc;font-size:.8rem;padding:8px 10px;margin-bottom:16px}
 
-.cta-band{background:linear-gradient(180deg,var(--bg2),#2a0802);border:1px solid var(--line);padding:22px 18px;text-align:center;margin-top:8px}
+.cta-band{background:linear-gradient(180deg,var(--bg2),#2a0a05);border:1px solid var(--line);padding:22px 18px;text-align:center;margin-top:8px}
 .cta-band h3{font-size:1.5rem}
 .cta-band p{color:#d4d4d4;margin-bottom:14px}
 .cta-band .btn+.btn{margin-top:10px}
@@ -160,7 +171,7 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
 
 <header class="top">
   <div class="wrap top-in">
-    <a href="#zones" class="logo" data-go="zones">PM<span>/</span>TRAINING</a>
+    <a href="#zones" class="logo" data-go="zones"><img src="img/logo-160.png" alt="">PM<span>·</span>Training</a>
     <a class="btn-sm" href="https://www.instagram.com/pm.training_/" target="_blank" rel="noopener">Me contacter</a>
   </div>
 </header>
@@ -169,9 +180,8 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
 
 <!-- ============ ZONES ============ -->
 <section id="zones" role="tabpanel" aria-labelledby="t-zones"><div class="wrap">
+  <div class="hero" style="--img:url(img/zones.jpg)"><div class="hero-in"><p class="eyebrow">Calculateur</p><h2>Tes zones<span>.</span></h2></div></div>
   <div class="install" id="install"><span>Installe l'app sur ton téléphone.</span><button type="button" id="installBtn">Installer</button></div>
-  <p class="eyebrow">Calculateur</p>
-  <h2>Tes zones<span>.</span></h2>
   <p class="intro">Entre tes chiffres de test : l'app calcule tes allures, tes zones cardiaques et tes zones de puissance. Tout est gardé sur ton téléphone.</p>
 
   <div class="seg" id="zSport" role="group" aria-label="Sport">
@@ -264,8 +274,7 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
 
 <!-- ============ POSITION ============ -->
 <section id="position" role="tabpanel" aria-labelledby="t-position" hidden><div class="wrap">
-  <p class="eyebrow">Calculateur</p>
-  <h2>Ta position vélo<span>.</span></h2>
+  <div class="hero" style="--img:url(img/position.jpg);background-position:center,center 15%"><div class="hero-in"><p class="eyebrow">Calculateur</p><h2>Ta position vélo<span>.</span></h2></div></div>
   <p class="intro">Quelques mesures et tu obtiens un point de départ pour régler ton vélo. Ensuite, une photo de profil sur home-trainer permet de vérifier tes angles.</p>
 
   <div class="seg" id="bType" role="group" aria-label="Pratique">
@@ -323,8 +332,7 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
 
 <!-- ============ OFFRES ============ -->
 <section id="offres" role="tabpanel" aria-labelledby="t-offres" hidden><div class="wrap">
-  <p class="eyebrow">Coaching</p>
-  <h2>Les offres<span>.</span></h2>
+  <div class="hero" style="--img:url(img/offres.jpg)"><div class="hero-in"><p class="eyebrow">Coaching</p><h2>Les offres<span>.</span></h2></div></div>
   <p class="intro">Course, trail, triathlon, vélo et Hyrox. Sans engagement : tu restes parce que ça marche.</p>
   <p class="ph">Prix et contenus provisoires, à valider par Paul.</p>
 
@@ -354,6 +362,8 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
     <a class="btn ghost" data-offer="Coaching 1:1" href="#">Je postule</a>
   </article>
 
+  <div class="coach"><img src="img/coach.jpg" alt="Paul Ménard en course cyclosportive" loading="lazy"><div><h3>Ton coach : Paul Ménard</h3><p>[Ton parcours en 2 phrases : diplômes, années de coaching, courses marquantes.]</p></div></div>
+
   <div class="block"><h3>Comment ça marche</h3>
     <ol class="steps">
       <li><div><strong>Bilan</strong><span>Ton niveau, ton historique, ton objectif et tes heures dispo.</span></div></li>
@@ -366,8 +376,7 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
 
 <!-- ============ AVIS ============ -->
 <section id="avis" role="tabpanel" aria-labelledby="t-avis" hidden><div class="wrap">
-  <p class="eyebrow">Ils l'ont fait</p>
-  <h2>Retours d'athlètes<span>.</span></h2>
+  <div class="hero" style="--img:url(img/avis.jpg)"><div class="hero-in"><p class="eyebrow">Ils l'ont fait</p><h2>Retours d'athlètes<span>.</span></h2></div></div>
   <p class="intro">Ce que disent les athlètes coachés par PM Training.</p>
   <p class="ph">Témoignages d'exemple : à remplacer par les vrais retours (prénom, discipline, résultat, avec leur accord).</p>
 
