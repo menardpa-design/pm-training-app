@@ -484,8 +484,8 @@ h2.two span{display:block;color:var(--muted)}
   </section>
 
   <section class="sec">
-    <h2 class="two">Sur la route.<span>Avec mes athlètes.</span></h2>
-    <div class="gal"><img src="img/g1.webp" alt="Sortie avec les athlètes, vue depuis le guidon" loading="lazy" width="1200" height="1500"><img src="img/g2.webp" alt="Groupe d’athlètes à l’entraînement" loading="lazy" width="1200" height="1500"><img src="img/g3.webp" alt="Ascension en cyclosportive" loading="lazy" width="1200" height="1500"><img src="img/g4.webp" alt="Portrait casque sur la tête avant le départ" loading="lazy" width="1200" height="1500"><img src="img/g5.webp" alt="Deux cyclistes à l’entraînement sous un ciel d’orage" loading="lazy" width="1200" height="1500"><img src="img/g6.webp" alt="Cyclosportive dans les Alpes" loading="lazy" width="1200" height="1500"><img src="img/g7.webp" alt="Sortie vélo en forêt" loading="lazy" width="1200" height="1500"><img src="img/g8.webp" alt="Contre-la-montre en vélo de triathlon" loading="lazy" width="1200" height="1500"></div>
+    <h2 class="two">Sur le terrain.<span>Avec mes athlètes.</span></h2>
+    <div class="gal"><img src="img/p1.webp" alt="Séance de course à pied sur piste avec des athlètes" loading="lazy" width="800" height="1000"><img src="img/p2.webp" alt="Course à pied en triathlon, dossard 325" loading="lazy" width="800" height="1000"><img src="img/p3.webp" alt="Bassin de natation au lever du jour" loading="lazy" width="800" height="1000"><img src="img/p4.webp" alt="Ascension en cyclosportive" loading="lazy" width="800" height="1000"><img src="img/p5.webp" alt="Mesure du lactate pendant un test" loading="lazy" width="800" height="1000"><img src="img/p6.webp" alt="Course à pied en triathlon avec une athlète" loading="lazy" width="800" height="1000"><img src="img/p7.webp" alt="Course de VTT en forêt" loading="lazy" width="800" height="1000"><img src="img/p8.webp" alt="Chronos de séance sur la piste" loading="lazy" width="800" height="1000"><img src="img/p9.webp" alt="Groupe d’athlètes à l’entraînement" loading="lazy" width="800" height="1000"><img src="img/p10.webp" alt="Test d’effort sur home-trainer" loading="lazy" width="800" height="1000"><img src="img/g4.webp" alt="Portrait casque sur la tête avant le départ" loading="lazy" width="1200" height="1500"><img src="img/g8.webp" alt="Contre-la-montre en vélo de triathlon" loading="lazy" width="1200" height="1500"></div>
   </section>
 
   <section class="sec">
@@ -1138,7 +1138,7 @@ $('#installBtn').addEventListener('click',async()=>{if(!deferred)return;deferred
 if('serviceWorker' in navigator&&location.protocol.startsWith('http')){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 </script>
 <script>
-(()=>{const P=['avis','offres','position','zones','b5','b6','b7','b8'].map(n=>`img/${n}.webp`);
+(()=>{const P=['avis','offres','position','zones','r1','b5','r3','b6','r2','b7','b8'].map(n=>`img/${n}.webp`);
 const H=[...document.querySelectorAll('.home-hero,.hero')];const st=[];
 const ld=d=>{if(!d.dataset.ok){d.style.setProperty('--u',`url(${d.dataset.u})`);d.dataset.ok=1}};
 H.forEach((h,k)=>{const L=P.map(u=>{const d=document.createElement('div');d.className='sl';d.dataset.u=u;h.prepend(d);return d});const i=k%P.length;st.push({L,i});ld(L[i]);L[i].classList.add('on')});
