@@ -165,16 +165,24 @@ td:not(:first-child),th:not(:first-child){text-align:right}
 /* Testimonials */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
 .stat{background:var(--card);border:1px solid var(--line);padding:12px 8px;text-align:center}
-.stat b{display:block;font:900 1.7rem/1.1 var(--display);color:var(--accent)}
+.stat b{display:block;font:900 1.5rem/1.1 var(--display);color:var(--accent)}
 .stat span{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
-.tm{background:var(--card);border:1px solid var(--line);padding:18px;margin-bottom:12px}
-.tm blockquote{font-size:1.02rem;line-height:1.55;position:relative;padding-left:4px}
-.tm blockquote::before{content:"“";font:900 3.2rem/0 var(--display);color:var(--accent);display:block;height:22px;margin-top:14px}
-.tm .who{display:flex;align-items:center;gap:12px;margin-top:14px}
-.av{width:42px;height:42px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font:900 1.05rem var(--display);flex:0 0 auto;color:#fff}
-.who b{display:block;line-height:1.2}
-.who small{color:var(--muted)}
-.res{display:inline-block;margin-top:10px;background:rgba(216,52,28,.1);color:var(--accent2);font-weight:800;font-size:.78rem;padding:4px 9px;text-transform:uppercase;letter-spacing:.05em}
+.tm{background:var(--card);border:1px solid var(--line);margin-bottom:14px;overflow:hidden}
+.tm-ph{position:relative}
+.tm-ph img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.tm-k{position:absolute;left:12px;bottom:12px;background:var(--accent);color:#fff;font-weight:800;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;padding:4px 9px}
+.tm-b{padding:14px 16px 16px}
+.tm .who b{display:block;font:900 1.15rem/1.15 var(--display);text-transform:uppercase}
+.who small{color:var(--muted);font-size:.85rem}
+.res-l{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.res{display:inline-block;background:rgba(216,52,28,.1);color:var(--accent2);font-weight:800;font-size:.74rem;padding:4px 9px;text-transform:uppercase;letter-spacing:.04em}
+.tm blockquote{font-size:1rem;line-height:1.55;margin-top:10px;padding-left:12px;border-left:3px solid var(--accent)}
+.tm details{margin-top:8px}
+.tm summary{cursor:pointer;color:var(--accent2);font-weight:700;font-size:.85rem}
+.tm details p{margin-top:6px;color:var(--muted);font-size:.95rem}
+.tm-l,.tm-c{margin-top:10px;font-size:.93rem;color:var(--muted)}
+.tm-l b,.tm-c b{color:var(--text)}
+.tm-ig{display:inline-block;margin-top:12px;font-size:.8rem;font-weight:700;color:var(--muted);text-decoration:none}
 .ph{border:1px dashed var(--fieldline);color:var(--muted);font-size:.8rem;padding:8px 10px;margin-bottom:16px}
 
 .cta-band{background:var(--logo);color:#fff;border:0;padding:22px 18px;text-align:center;margin-top:8px}
@@ -203,21 +211,18 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
 <section id="avis" role="tabpanel" aria-labelledby="t-avis"><div class="wrap">
   <div class="hero" style="--img:url(img/avis.jpg)"><div class="hero-in"><p class="eyebrow">Ils l'ont fait</p><h2>Retours d'athlètes<span>.</span></h2></div></div>
   <div class="install" id="install"><span>Installe l'app sur ton téléphone.</span><button type="button" id="installBtn">Installer</button></div>
-  <p class="intro">Ce que disent les athlètes coachés par PM Training.</p>
-  <p class="ph">Témoignages d'exemple : à remplacer par les vrais retours (prénom, discipline, résultat, avec leur accord).</p>
+  <p class="intro">Débutants ou confirmés, en triathlon ou à vélo : leurs projets, leurs résultats et ce qu’ils en disent.</p>
 
   <div class="stats">
-    <div class="stat"><b>[XX]</b><span>athlètes</span></div>
-    <div class="stat"><b>[XX]</b><span>finishers</span></div>
+    <div class="stat"><b>11h17</b><span>1er Ironman en 9 mois</span></div>
+    <div class="stat"><b>81e</b><span>1er Xterra Suisse</span></div>
     <div class="stat"><b>5/5</b><span>sur Nolio</span></div>
   </div>
 
   <div class="seg sm" id="tFilter" role="group" aria-label="Discipline">
     <button type="button" aria-pressed="true" data-f="all">Tous</button>
-    <button type="button" aria-pressed="false" data-f="course">Course</button>
     <button type="button" aria-pressed="false" data-f="tri">Triathlon</button>
     <button type="button" aria-pressed="false" data-f="velo">Vélo</button>
-    <button type="button" aria-pressed="false" data-f="hyrox">Hyrox</button>
   </div>
   <div id="tList"></div>
 
@@ -442,11 +447,134 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
 const CONTACT = 'https://www.instagram.com/pm.training_/';
 const NOLIO = 'https://www.nolio.io/marketplace/coach/Paul_M%C3%A9nard/';
 const TESTIMONIALS = [
-  {f:'course', name:'[Prénom N.]', info:'Course à pied · coaché depuis [X] mois', res:'10 km : 52 min → 46 min', txt:"[Exemple] Je courais toujours à la même allure. Avec des séances qui ont un vrai but, j'ai pris 6 minutes sur 10 km en une saison, sans me blesser."},
-  {f:'tri', name:'[Prénom N.]', info:'Triathlon · Ironman 70.3', res:'Premier 70.3 terminé', txt:"[Exemple] Boulot, enfants, trois sports : le plan s'adaptait chaque semaine à ma vraie vie. Je suis arrivé frais sur la ligne de départ."},
-  {f:'hyrox', name:'[Prénom N.]', info:'Hyrox · catégorie Open', res:'Hyrox : -9 min', txt:"[Exemple] Le travail de course après les ateliers a tout changé. Je ne m'effondre plus sur les derniers kilomètres."},
-  {f:'velo', name:'[Prénom N.]', info:'Vélo · cyclosportive', res:'FTP +25 W en 4 mois', txt:"[Exemple] Des zones de puissance claires, des séances courtes et efficaces. Mes sorties longues ne sont plus du remplissage."},
-  {f:'course', name:'[Prénom N.]', info:'Trail · 40 km', res:'Premier trail long', txt:"[Exemple] Paul lit mes données et me dit la vérité. Quand je voulais en faire trop, il m'a freiné, et c'est pour ça que j'ai fini."}
+{
+"f": "tri",
+"kind": "avis",
+"name": "Mathieu O.",
+"info": "Triathlon · parti de zéro",
+"img": "mathieu",
+"pos": "50% 40%",
+"res": [
+"Premier Half Ironman en moins de 6 mois",
+"Premier Ironman en 11h17"
+],
+"quote": "Je n’avais jamais couru plus de 10 km, je n’arrivais pas à nager 200 mètres sans pause, et je n’avais même pas de vélo au départ. En seulement 9 mois de préparation, il m’a permis de terminer mon premier Ironman en 11h17.",
+"more": "Son accompagnement sur mesure, sa disponibilité et sa pédagogie ont été exemplaires. Il a su adapter chaque séance à mon niveau et à mon emploi du temps, tout en me faisant progresser régulièrement et sans blessure.",
+"url": "https://www.instagram.com/p/DT2O5fTjrB1/"
+},
+{
+"f": "velo",
+"kind": "avis",
+"name": "Benjamin",
+"info": "Vélo · objectif Mont Ventoux",
+"img": "benjamin",
+"pos": "50% 70%",
+"res": [
+"Objectif : refaire le Ventoux, 4 ans après"
+],
+"quote": "En trois mois, tout a changé : une structure HY-PER claire et progressive, des séances adaptées à mes contraintes entre vie de famille et travail avec des retours précis et encourageants.",
+"more": "Avant, je pédalais fort, parfois trop, sans toujours comprendre la logique derrière. Aujourd’hui, j’allie progression et plaisir. Si tu cherches un coach qui sait allier rigueur et adaptabilité, je ne peux que te le recommander !",
+"url": "https://www.instagram.com/p/DUOTsv_jnVd/"
+},
+{
+"f": "tri",
+"kind": "result",
+"name": "Adrien",
+"info": "Triathlon · suivi depuis 2 ans",
+"img": "adrien",
+"pos": "50% 22%",
+"res": [
+"Xterra Suisse : 81e en 3h34",
+"Objectifs : Embrunman et sub 3h au marathon"
+],
+"quote": "Novice en VTT en ce début d’année, il boucle son tout premier Xterra Full Distance moins de deux mois après la naissance de son petit garçon.",
+"coach": "Sa capacité à s’engager à fond malgré un emploi du temps chargé, et surtout à garder le plaisir au centre du projet.",
+"url": "https://www.instagram.com/p/DLm5HOIsmnb/"
+},
+{
+"f": "velo",
+"kind": "projet",
+"name": "Nelly Robin",
+"info": "Vélo · GranFondo",
+"img": "nelly",
+"pos": "50% 55%",
+"res": [
+"Retour après 2 ans d’arrêt et 3 opérations",
+"Objectif : GranFondo de Coimbra, sélectif pour les Mondiaux UCI"
+],
+"quote": "Découvrir le cyclisme après 50 ans, 8 années de courses et de podiums, puis l’arrêt brutal. Un programme sur-mesure pensé comme un journal de bord : aujourd’hui, les sensations reviennent, le plaisir de rouler aussi.",
+"url": "https://www.instagram.com/p/DTXVVkiDWdm/"
+},
+{
+"f": "tri",
+"kind": "projet",
+"name": "Jérôme Rey",
+"info": "Triathlon · Ironman 2026",
+"img": "jerome",
+"pos": "15% 70%",
+"res": [
+"Objectif : retour sur Ironman en 2026"
+],
+"work": "Reprendre une routine d’entraînement compatible avec sa vie pro et perso, équilibrer son profil physique.",
+"coach": "Son envie de s’entraîner sérieusement malgré un emploi du temps très chargé !",
+"url": "https://www.instagram.com/p/DTxFViTFYh1/"
+},
+{
+"f": "tri",
+"kind": "projet",
+"name": "Théo Belbezier",
+"info": "Xterra · VTT marathon",
+"img": "theo",
+"pos": "50% 35%",
+"res": [
+"Objectif : premier triathlon, un Xterra"
+],
+"work": "Répartir l’entraînement entre les 3 sports (débutant en natation), apprendre à gérer l’effort et l’enchaînement des disciplines.",
+"coach": "Sa détermination à sortir de sa zone de confort et à s’engager pleinement dans ce défi !",
+"url": "https://www.instagram.com/p/DTmyGo3jXVC/"
+},
+{
+"f": "tri",
+"kind": "projet",
+"name": "Olivier Dubois",
+"info": "Triathlon · premier Half Ironman",
+"img": "olivier",
+"pos": "50% 60%",
+"res": [
+"Objectif : premier Half Ironman en 6h à 6h30"
+],
+"work": "Construire une base solide en endurance, gagner en régularité, gérer l’effort et l’enchaînement des disciplines.",
+"coach": "Son envie de se lancer un vrai défi et d’aller au bout de l’aventure.",
+"url": "https://www.instagram.com/p/DTNyPbED0Rt/"
+},
+{
+"f": "velo",
+"kind": "projet",
+"name": "Rebecca",
+"info": "Vélo · Étape du Tour femmes",
+"img": "rebecca",
+"pos": "50% 50%",
+"res": [
+"Objectifs : L’Étape du Tour femmes et une cyclo de la région"
+],
+"work": "La technique de pédalage et le premier seuil pour l’endurance.",
+"coach": "Sa curiosité, son envie de progresser et son souci de bien faire chaque séance.",
+"url": "https://www.instagram.com/p/DTA2z9XjZIf/"
+},
+{
+"f": "velo",
+"kind": "projet",
+"name": "Lucas Butez",
+"info": "Vélo · U23",
+"img": "lucas",
+"pos": "60% 40%",
+"res": [
+"Objectif : passer un cap pour performer en U23"
+],
+"work": "Le premier seuil (LT1), la base aérobie, le lactate shuttle et l’efficacité métabolique.",
+"coach": "Sa détermination : partir en Guadeloupe à 19 ans pour se confronter aux meilleurs et progresser !",
+"url": "https://www.instagram.com/p/DTHxuUGjWLL/"
+}
 ];
 
 /* ---------- Outils ---------- */
@@ -579,8 +707,16 @@ angRender();
 persist(['inseam','height','curH'],fitCalc);
 
 /* ---------- Témoignages ---------- */
-const ini=n=>n.replace(/[\[\]]/g,'').split(/\s+/).map(x=>x[0]||'').join('').slice(0,2).toUpperCase()||'PM';
-function tRender(f){$('#tList').innerHTML=TESTIMONIALS.filter(t=>f==='all'||t.f===f).map(t=>`<article class="tm"><blockquote>${t.txt}</blockquote>${t.res?`<span class="res">${t.res}</span>`:''}<div class="who"><span class="av">${ini(t.name)}</span><div><b>${t.name}</b><small>${t.info}</small></div></div></article>`).join('')||'<p class="note">Pas encore de retour dans cette discipline.</p>';}
+const KIND={avis:'Parole d’athlète',result:'Résultat',projet:'Athlète PM Training'};
+function tRender(f){$('#tList').innerHTML=TESTIMONIALS.filter(t=>f==='all'||t.f===f).map(t=>`<article class="tm">
+<div class="tm-ph"><img src="img/avis/${t.img}.jpg" alt="${t.name}" loading="lazy" style="object-position:${t.pos}"><span class="tm-k">${KIND[t.kind]}</span></div>
+<div class="tm-b"><div class="who"><div><b>${t.name}</b><small>${t.info}</small></div></div>
+<div class="res-l">${t.res.map(r=>`<span class="res">${r}</span>`).join('')}</div>
+${t.quote?`<blockquote>${t.quote}</blockquote>`:''}
+${t.more?`<details><summary>Lire la suite</summary><p>${t.more}</p></details>`:''}
+${t.work?`<p class="tm-l"><b>Ce qu’on travaille :</b> ${t.work}</p>`:''}
+${t.coach?`<p class="tm-c"><b>Ce que j’admire chez ${t.name.split(' ')[0]} :</b> ${t.coach}</p>`:''}
+<a class="tm-ig" href="${t.url}" target="_blank" rel="noopener">Voir le post Instagram →</a></div></article>`).join('');}
 seg('#tFilter',b=>tRender(b.dataset.f));
 
 /* ---------- Offres : boutons vers le contact ---------- */
