@@ -271,6 +271,78 @@ input[type=number],input[type=text],select{border-radius:10px;font-weight:600}
 .tm summary{color:var(--text);font-size:.82rem;text-decoration:underline;text-underline-offset:3px;list-style:none}
 .tm summary::-webkit-details-marker{display:none}
 .tm-ig{color:var(--muted);font-weight:600;font-size:.78rem;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:block}
+
+/* ===== Inspiration Laptic : épuré, Inter, titres en deux tons, boutons pilule ===== */
+:root{--display:Inter,system-ui,sans-serif;--bg:#fafaf8;--card:#fff;--text:#121212;--muted:#77736d;--line:#ebe8e3;--r:16px;--shadow:none}
+body{font-size:15px;line-height:1.55}
+h1,h2,h3,.logo,.big-num,.price{font-family:Inter,system-ui,sans-serif;font-weight:600;text-transform:none;letter-spacing:-.025em}
+h2{font-size:1.75rem;line-height:1.12}
+.hero h2{font-size:2rem;font-weight:600;letter-spacing:-.03em}
+.hero .eyebrow{letter-spacing:.14em;font-weight:600}
+h3{font-weight:600}
+.panel,.kpi,.z,.offer,.tm,.coach,.ck,.bike-fig,.cred,.install,.promise div,.stats{box-shadow:none}
+.logo .lt b{font-family:Montserrat,Inter,sans-serif;font-weight:800}
+.top .btn-sm{background:var(--text);color:#fff;border-color:var(--text)}
+.btn{background:var(--text);border-color:var(--text);border-radius:999px;text-transform:none;letter-spacing:0;font-weight:600;font-size:.95rem}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.offer.featured .btn{background:var(--accent);border-color:var(--accent)}
+.offer.featured{box-shadow:none}
+.cta-band{background:var(--text);border-radius:var(--r);text-align:center;padding:32px 22px}
+.cta-band h3{font-size:1.4rem;font-weight:600;letter-spacing:-.02em}
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:999px;padding:12px 20px;font-weight:600;font-size:.92rem;text-decoration:none;border:1px solid transparent;white-space:nowrap}
+.pill.light{background:#fff;color:#121212}
+.pill.outline{border-color:rgba(255,255,255,.55);color:#fff}
+.pill.dark{background:var(--text);color:#fff}
+.pill.sm{padding:9px 16px;font-size:.85rem}
+.home-hero{margin:0 calc(50% - 50vw) 0;min-height:560px;display:flex;align-items:flex-end;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.25) 40%,rgba(0,0,0,.78) 100%),var(--img) center 30%/cover no-repeat,#222;color:#fff;text-align:center}
+.home-in{max-width:620px;margin:0 auto;padding:0 20px 34px}
+.home-hero h1{font-size:2.2rem;line-height:1.08;letter-spacing:-.035em;font-weight:600;color:#fff;text-wrap:balance}
+.home-hero h1 span{display:block;color:rgba(255,255,255,.62)}
+.home-hero p{margin:16px auto 0;font-size:.98rem;color:rgba(255,255,255,.82);max-width:30em}
+.home-hero p b{color:#fff;font-weight:600}
+.home-cta{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px}
+.home-hero small{display:block;margin-top:12px;font-size:.75rem;color:rgba(255,255,255,.6)}
+.compat{text-align:center;padding:26px 0 18px}
+.compat span{display:block;font-size:.72rem;color:var(--muted);margin-bottom:10px}
+.compat div{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 26px}
+.compat b{font:700 .9rem Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#a7a39d}
+.stats{margin-bottom:8px}
+.stat b{font-weight:600;letter-spacing:-.03em}
+.sec{padding:44px 0 0}
+h2.two{font-size:1.65rem;line-height:1.12;letter-spacing:-.03em;margin-bottom:22px;text-wrap:balance}
+h2.two span{display:block;color:var(--muted)}
+.steps3{display:grid;gap:10px}
+.steps3 article{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.steps3 .n{display:block;font-size:1.6rem;font-weight:300;color:var(--muted);letter-spacing:-.02em;margin-bottom:22px}
+.steps3 h3{font-size:1.05rem;margin-bottom:6px}
+.steps3 p{color:var(--muted);font-size:.9rem}
+.coach2{display:grid;grid-template-columns:130px 1fr;gap:18px;align-items:start}
+.coach2 img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:14px}
+.coach2 .cn{display:block;font-size:1.05rem;font-weight:600}
+.coach2 .cr{display:block;font-size:.78rem;color:var(--muted);margin:2px 0 10px}
+.coach2 p{font-size:.9rem;color:var(--muted);margin-bottom:10px}
+.faq2 details{border-bottom:1px solid var(--line);padding:16px 0}
+.faq2 details:first-child{border-top:1px solid var(--line)}
+.faq2 summary{list-style:none;cursor:pointer;font-weight:500;display:flex;justify-content:space-between;gap:12px}
+.faq2 summary::-webkit-details-marker{display:none}
+.faq2 summary::after{content:"+";color:var(--muted);font-size:1.2rem;line-height:1}
+.faq2 details[open] summary::after{content:"−"}
+.faq2 p{color:var(--muted);font-size:.92rem;margin-top:10px}
+.cta-band{margin-top:44px}
+.seg button[aria-pressed="true"]{background:var(--text);border-color:var(--text);color:#fff}
+.tm{border-radius:var(--r)}
+.tm-head b{font-family:Inter,sans-serif;font-weight:600}
+.tm blockquote::before{font-family:Georgia,serif;font-weight:400}
+.tm-k{color:var(--muted)}
+.res::before{background-color:var(--text)}
+.promise b{font-family:Inter,sans-serif;font-weight:600}
+.promise b::before{background-color:var(--text)}
+.cred strong{font-family:Inter,sans-serif;font-weight:600;letter-spacing:-.02em}
+.price{font-weight:600;letter-spacing:-.03em}
+.z b{font-family:Inter,sans-serif;font-weight:600}
+.big-num{font-weight:600}
+.stat b{color:var(--text)}
+@media (min-width:640px){.steps3{grid-template-columns:repeat(3,1fr)}.home-hero h1{font-size:3rem}.coach2{grid-template-columns:200px 1fr}h2.two{font-size:2rem}}
 </style>
 </head>
 <body>
@@ -286,9 +358,17 @@ input[type=number],input[type=text],select{border-radius:10px;font-weight:600}
 
 <!-- ============ AVIS ============ -->
 <section id="avis" role="tabpanel" aria-labelledby="t-avis"><div class="wrap">
-  <div class="hero" style="--img:url(img/avis.jpg)"><div class="hero-in"><p class="eyebrow">Ils l'ont fait</p><h2>Retours d'athlètes<span>.</span></h2></div></div>
+  <div class="home-hero" style="--img:url(img/avis.jpg)">
+    <div class="home-in">
+      <h1>Progresse en triathlon,<span>semaine après semaine.</span></h1>
+      <p>Un plan <b>individualisé</b> dans Nolio, construit et ajusté chaque semaine par un <b>entraîneur diplômé d’État</b>. Un groupe restreint d’athlètes, pour un vrai suivi.</p>
+      <div class="home-cta"><a class="pill light" href="#offres" data-go="offres">Voir les formules</a><a class="pill outline" href="https://www.instagram.com/pm.training_/" target="_blank" rel="noopener">Me contacter</a></div>
+      <small>Premier échange gratuit et sans engagement.</small>
+    </div>
+  </div>
   <div class="install" id="install"><span>Installe l'app sur ton téléphone.</span><button type="button" id="installBtn">Installer</button></div>
-  <p class="intro">Débutants ou confirmés, en triathlon ou à vélo : un suivi très individualisé, avec un groupe restreint d’athlètes. Voici leurs projets, leurs résultats et ce qu’ils en disent.</p>
+
+  <div class="compat"><span>Tes séances synchronisées avec</span><div><b>Garmin</b><b>Suunto</b><b>Coros</b><b>Polar</b></div></div>
 
   <div class="stats">
     <div class="stat"><b>40+</b><span>athlètes accompagnés vers leurs objectifs</span></div>
@@ -296,24 +376,60 @@ input[type=number],input[type=text],select{border-radius:10px;font-weight:600}
     <div class="stat"><b>5/5</b><span>sur Nolio</span></div>
   </div>
 
-  <div class="seg sm" id="tFilter" role="group" aria-label="Discipline">
-    <button type="button" aria-pressed="true" data-f="all">Tous</button>
-    <button type="button" aria-pressed="false" data-f="tri">Triathlon</button>
-    <button type="button" aria-pressed="false" data-f="velo">Vélo</button>
-  </div>
-  <div id="tList"></div>
+  <section class="sec">
+    <h2 class="two">Un coach qui construit ta saison.<span>Une semaine à la fois.</span></h2>
+    <div class="steps3">
+      <article><span class="n">01</span><h3>Un premier échange</h3><p>Ton niveau, ton historique, ton objectif et le temps que tu as vraiment. Gratuit et sans engagement.</p></article>
+      <article><span class="n">02</span><h3>Ton plan dans Nolio</h3><p>Des séances structurées, envoyées sur ta montre ou ton compteur, placées les jours où tu peux t’entraîner.</p></article>
+      <article><span class="n">03</span><h3>Tu t’entraînes, j’ajuste</h3><p>J’analyse ce que tu as vraiment fait et j’adapte la suite. Une séance ratée ne ruine pas ta prépa.</p></article>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2 class="two">Derrière PM Training,<span>un vrai entraîneur.</span></h2>
+    <div class="coach2">
+      <img src="img/coach.jpg" alt="Paul Ménard en course cyclosportive" loading="lazy">
+      <div>
+        <b class="cn">Paul Ménard</b>
+        <span class="cr">Entraîneur diplômé d’État · DEJEPS Triathlon</span>
+        <p>Coach au Pôle Espoir féminin de Chambéry, ancien cycliste de 1<sup>re</sup> catégorie, deux fois finisher de l’Embrunman, plus de 15 Half Ironman et 2h50 au marathon.</p>
+        <p>Chaque plan est écrit et ajusté par lui, à partir de tes données : puissance, fréquence cardiaque et VFC.</p>
+        <a class="pill dark sm" href="#offres" data-go="offres">Découvrir les formules →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2 class="two">Ils l’ont fait.<span>À leur rythme.</span></h2>
+    <div class="seg sm" id="tFilter" role="group" aria-label="Discipline">
+      <button type="button" aria-pressed="true" data-f="all">Tous</button>
+      <button type="button" aria-pressed="false" data-f="tri">Triathlon</button>
+      <button type="button" aria-pressed="false" data-f="velo">Vélo</button>
+    </div>
+    <div id="tList"></div>
+  </section>
+
+  <section class="sec">
+    <h2 class="two">Questions<span>fréquentes.</span></h2>
+    <div class="faq2">
+      <details><summary>Comment se passe le coaching ?</summary><p>Tout se fait en ligne sur Nolio. On commence par un premier échange gratuit, puis je construis ton plan. Tes séances arrivent sur ta montre, tu t’entraînes, j’analyse et j’ajuste.</p></details>
+      <details><summary>De quoi ai-je besoin pour commencer ?</summary><p>D’une montre ou d’un compteur Garmin, Suunto, Coros ou Polar : tes séances s’y synchronisent automatiquement. Pour la formule Cyclisme, un capteur de puissance permet le test d’évaluation.</p></details>
+      <details><summary>Je débute, est-ce pour moi ?</summary><p>Oui. Mathieu n’avait jamais couru plus de 10 km ni nagé 200 m sans pause : il a terminé son premier Ironman en 11h17 après 9 mois de préparation.</p></details>
+      <details><summary>Combien d’athlètes suis-tu ?</summary><p>Un groupe restreint, volontairement. C’est ce qui me permet un suivi très individualisé et des réponses rapides.</p></details>
+      <details><summary>Combien ça coûte ?</summary><p>De 70 € à 150 € par mois selon la formule (course à pied, cyclisme ou triathlon). Le premier échange est gratuit et sans engagement.</p></details>
+    </div>
+  </section>
 
   <div class="cta-band">
     <h3>Prêt à passer un cap ?</h3>
     <p>Écris-moi ton objectif et ton niveau, je te réponds personnellement.</p>
-    <a class="btn" href="https://www.instagram.com/pm.training_/" target="_blank" rel="noopener">Écris-moi sur Instagram</a>
-    <a class="btn ghost" href="https://pmtraining.fr" target="_blank" rel="noopener">pmtraining.fr</a>
+    <a class="pill light" href="https://www.instagram.com/pm.training_/" target="_blank" rel="noopener">Écris-moi sur Instagram</a>
   </div>
 </div></section>
 
 <!-- ============ OFFRES ============ -->
 <section id="offres" role="tabpanel" aria-labelledby="t-offres" hidden><div class="wrap">
-  <div class="hero" style="--img:url(img/offres.jpg)"><div class="hero-in"><p class="eyebrow">Coaching</p><h2>Les offres<span>.</span></h2></div></div>
+  <div class="hero" style="--img:url(img/offres.jpg)"><div class="hero-in"><p class="eyebrow">Coaching</p><h2>Les offres</h2></div></div>
   <p class="intro">Course à pied, vélo ou triathlon : un plan personnalisé dans Nolio, synchronisé sur ta montre (Garmin, Suunto, Coros, Polar).</p>
   <div class="cred">
     <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="19" r="14" fill="var(--accent)"/><path d="M15 30l-5 14 7-3 4 6 3-9M33 30l5 14-7-3-4 6-3-9" fill="var(--accent)"/><path d="M18 19l4 4 8-8" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -349,21 +465,12 @@ input[type=number],input[type=text],select{border-radius:10px;font-weight:600}
   </article>
   <p class="note" style="margin:-4px 0 22px">Inscription et paiement sur Nolio. Le premier échange est gratuit et sans engagement.</p>
 
-  <div class="coach"><img src="img/coach.jpg" alt="Paul Ménard en course cyclosportive" loading="lazy"><div><h3>Ton coach : Paul Ménard</h3><span class="badge">DEJEPS Triathlon</span><p>Diplômé d'État DEJEPS Triathlon, coach au Pôle Espoir féminin de Chambéry. Ancien cycliste 1<sup>re</sup> catégorie, 2 Embrunman, plus de 15 Half Ironman, 2h50 au marathon. Puissance, VFC et fréquence cardiaque au service de ta progression.</p></div></div>
 
-  <div class="block"><h3>Comment ça marche</h3>
-    <ol class="steps">
-      <li><div><strong>Bilan</strong><span>Ton niveau, ton historique, ton objectif et tes heures dispo.</span></div></li>
-      <li><div><strong>Plan sur mesure</strong><span>Tes séances dans Nolio, envoyées sur ta montre ou ton compteur.</span></div></li>
-      <li><div><strong>Analyse et ajustements</strong><span>Je regarde ce que tu as fait et j'adapte la suite.</span></div></li>
-      <li><div><strong>Le jour J</strong><span>Affûtage, nutrition, stratégie : tu exécutes ta course.</span></div></li>
-    </ol>
-  </div>
 </div></section>
 
 <!-- ============ POSITION ============ -->
 <section id="position" role="tabpanel" aria-labelledby="t-position" hidden><div class="wrap">
-  <div class="hero" style="--img:url(img/position.jpg);background-position:center,center 15%"><div class="hero-in"><p class="eyebrow">Calculateur</p><h2>Ta position vélo<span>.</span></h2></div></div>
+  <div class="hero" style="--img:url(img/position.jpg);background-position:center,center 15%"><div class="hero-in"><p class="eyebrow">Calculateur</p><h2>Ta position vélo</h2></div></div>
   <p class="intro">Quelques mesures et tu obtiens un point de départ pour régler ton vélo. Ensuite, une photo de profil sur home-trainer permet de vérifier tes angles.</p>
 
 
@@ -419,7 +526,7 @@ input[type=number],input[type=text],select{border-radius:10px;font-weight:600}
 
 <!-- ============ ZONES ============ -->
 <section id="zones" role="tabpanel" aria-labelledby="t-zones" hidden><div class="wrap">
-  <div class="hero" style="--img:url(img/zones.jpg)"><div class="hero-in"><p class="eyebrow">Calculateur</p><h2>Tes zones<span>.</span></h2></div></div>
+  <div class="hero" style="--img:url(img/zones.jpg)"><div class="hero-in"><p class="eyebrow">Calculateur</p><h2>Tes zones</h2></div></div>
   <p class="intro">Entre tes chiffres de test : l'app calcule tes allures, tes zones cardiaques et tes zones de puissance. Tout est gardé sur ton téléphone.</p>
 
   <div class="seg" id="zSport" role="group" aria-label="Sport">
@@ -516,7 +623,7 @@ input[type=number],input[type=text],select{border-radius:10px;font-weight:600}
 
 <nav class="tabs" aria-label="Sections">
   <div class="wrap" role="tablist">
-    <button role="tab" id="t-avis" aria-controls="avis" aria-selected="true" data-go="avis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 10.5h7M8.5 14h4"/></svg>Avis</button>
+    <button role="tab" id="t-avis" aria-controls="avis" aria-selected="true" data-go="avis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</button>
     <button role="tab" id="t-offres" aria-controls="offres" aria-selected="false" data-go="offres"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7L12 17.6 5.8 21l1.4-7L2 9.3l7-.8z"/></svg>Offres</button>
     <button role="tab" id="t-position" aria-controls="position" aria-selected="false" data-go="position"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17" r="3.5"/><circle cx="18.5" cy="17" r="3.5"/><path d="M5.5 17l4-8h6l3 8M9.5 9L12 17h2M14 5h2l1.5 4"/></svg>Position</button>
     <button role="tab" id="t-zones" aria-controls="zones" aria-selected="false" data-go="zones"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Zones</button>
