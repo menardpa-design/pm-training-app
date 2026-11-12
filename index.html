@@ -336,36 +336,34 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
 <!-- ============ OFFRES ============ -->
 <section id="offres" role="tabpanel" aria-labelledby="t-offres" hidden><div class="wrap">
   <div class="hero" style="--img:url(img/offres.jpg)"><div class="hero-in"><p class="eyebrow">Coaching</p><h2>Les offres<span>.</span></h2></div></div>
-  <p class="intro">Course, trail, triathlon, vélo et Hyrox. Sans engagement : tu restes parce que ça marche.</p>
-  <p class="ph">Prix et contenus provisoires, à valider par Paul.</p>
+  <p class="intro">Course à pied, vélo ou triathlon : un plan personnalisé dans Nolio, synchronisé sur ta montre (Garmin, Suunto, Coros, Polar).</p>
+  <article class="offer">
+    <h3>Formule Course à pied</h3>
+    <p class="price">70 € <small>/ mois</small></p>
+    <p class="pitch">Structure et optimise ton entraînement selon ton profil, du 10 km au marathon.</p>
+    <ul><li>Planification de tes objectifs</li><li>Test d'évaluation</li><li>Plan personnalisé avec échanges réguliers</li><li>Analyse de tes séances</li><li>Séances de renforcement</li><li>Conseils nutrition et récupération</li></ul>
+    <a class="btn ghost" data-offer href="#">Choisir cette formule</a>
+  </article>
 
   <article class="offer">
-    <h3>Prépa course</h3>
-    <p class="price">29 € <small>une fois</small></p>
-    <p class="pitch">Un objectif, une date. Ton plan sur ta montre dès ce soir.</p>
-    <ul><li>Plan 8 à 12 semaines : 10 km, semi, marathon, trail, Hyrox, triathlon S/M</li><li>Calé sur ton niveau et ton nombre de séances</li><li>Séances structurées dans Nolio, synchronisées montre</li><li>Allures et zones personnalisées</li></ul>
-    <a class="btn ghost" data-offer="Prépa course" href="#">Je prends mon plan</a>
+    <h3>Formule Cyclisme</h3>
+    <p class="price">120 € <small>/ mois</small></p>
+    <p class="pitch">Ton entraînement vélo piloté par la puissance.</p>
+    <ul><li>Planification de tes objectifs</li><li>Test d'évaluation avec capteur de puissance</li><li>Plan personnalisé avec échanges réguliers</li><li>Analyse de tes séances</li><li>Séances de renforcement</li><li>Conseils nutrition et récupération</li></ul>
+    <a class="btn ghost" data-offer href="#">Choisir cette formule</a>
   </article>
 
   <article class="offer featured">
-    <span class="tag">Le plus choisi</span>
-    <h3>Team PM</h3>
-    <p class="price">39 € <small>/ mois</small></p>
-    <p class="pitch">Le coaching au prix d'un abonnement de salle. <strong>1er mois à 19 €.</strong></p>
-    <ul><li>Plan par objectif et par niveau, mis à jour chaque mois</li><li>Bilan mensuel de tes données</li><li>Groupe privé PM Training</li><li>Live mensuel avec Paul : technique, nutrition, stratégie</li></ul>
-    <a class="btn" data-offer="Team PM" href="#">Je rejoins la Team</a>
+    <span class="tag">La plus complète</span>
+    <h3>Formule Triathlon</h3>
+    <p class="price">150 € <small>/ mois</small></p>
+    <p class="pitch">Pour les athlètes perfectionnistes, quel que soit leur niveau, qui veulent soigner chaque détail.</p>
+    <ul><li>Natation, vélo et course planifiés ensemble</li><li>Analyse de tes séances</li><li>Séances de renforcement</li><li>Conseils nutrition et récupération</li><li><strong>Échanges illimités avec ton coach</strong></li></ul>
+    <a class="btn" data-offer href="#">Choisir cette formule</a>
   </article>
+  <p class="note" style="margin:-4px 0 22px">Inscription et paiement sur Nolio. Le premier échange est gratuit et sans engagement.</p>
 
-  <article class="offer">
-    <span class="tag dark">Places limitées</span>
-    <h3>Coaching 1:1</h3>
-    <p class="price">89 € <small>/ mois</small></p>
-    <p class="pitch">Paul construit et ajuste ton plan, à toi seul.</p>
-    <ul><li>Plan 100 % personnalisé, ajusté chaque semaine</li><li>Analyse de chaque séance</li><li>Échanges illimités avec ton coach</li><li>Option Performance à 139 €/mois : tests, nutrition, stratégie de course</li></ul>
-    <a class="btn ghost" data-offer="Coaching 1:1" href="#">Je postule</a>
-  </article>
-
-  <div class="coach"><img src="img/coach.jpg" alt="Paul Ménard en course cyclosportive" loading="lazy"><div><h3>Ton coach : Paul Ménard</h3><p>[Ton parcours en 2 phrases : diplômes, années de coaching, courses marquantes.]</p></div></div>
+  <div class="coach"><img src="img/coach.jpg" alt="Paul Ménard en course cyclosportive" loading="lazy"><div><h3>Ton coach : Paul Ménard</h3><p>Coach triathlon au Pôle Espoir féminin de Chambéry. Ancien cycliste 1<sup>re</sup> catégorie, 2 Embrunman, plus de 15 Half Ironman, 2h50 au marathon. Puissance, VFC et fréquence cardiaque au service de ta progression.</p></div></div>
 
   <div class="block"><h3>Comment ça marche</h3>
     <ol class="steps">
@@ -422,6 +420,7 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
 <script>
 /* ---------- Contenus à personnaliser ---------- */
 const CONTACT = 'https://www.instagram.com/pm.training_/';
+const NOLIO = 'https://www.nolio.io/marketplace/coach/Paul_M%C3%A9nard/';
 const TESTIMONIALS = [
   {f:'course', name:'[Prénom N.]', info:'Course à pied · coaché depuis [X] mois', res:'10 km : 52 min → 46 min', txt:"[Exemple] Je courais toujours à la même allure. Avec des séances qui ont un vrai but, j'ai pris 6 minutes sur 10 km en une saison, sans me blesser."},
   {f:'tri', name:'[Prénom N.]', info:'Triathlon · Ironman 70.3', res:'Premier 70.3 terminé', txt:"[Exemple] Boulot, enfants, trois sports : le plan s'adaptait chaque semaine à ma vraie vie. Je suis arrivé frais sur la ligne de départ."},
@@ -566,7 +565,7 @@ function tRender(f){$('#tList').innerHTML=TESTIMONIALS.filter(t=>f==='all'||t.f=
 seg('#tFilter',b=>tRender(b.dataset.f));
 
 /* ---------- Offres : boutons vers le contact ---------- */
-$$('[data-offer]').forEach(a=>{a.href=CONTACT;a.target='_blank';a.rel='noopener'});
+$$('[data-offer]').forEach(a=>{a.href=NOLIO;a.target='_blank';a.rel='noopener'});
 
 /* ---------- Démarrage ---------- */
 setSeg('#zSport','s',sport);setSeg('#hrM','m',hrMode);setSeg('#bType','t',bType);
