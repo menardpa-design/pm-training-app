@@ -423,6 +423,8 @@ h2.two span{display:block;color:var(--muted)}
 .sz-tab table{width:100%;border-collapse:collapse;font-size:.88rem}.sz-tab th{text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:6px 8px}.sz-tab td{padding:8px;border-top:1px solid var(--line);text-align:left}.sz-tab tr.on td{background:#fdecea;font-weight:700}.sz-tab tr.on td:first-child{border-radius:8px 0 0 8px}.sz-tab tr.on td:last-child{border-radius:0 8px 8px 0}
 .szs .gbody ul{margin:6px 0 10px 18px}.szs .gbody li{margin-bottom:6px}
 .sz-cta{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}.sz-cta p{margin:0 0 12px}
+.possub{margin-top:4px}.possub button{flex:1 1 0;text-align:center}
+#posSub{position:sticky;top:calc(56px + env(safe-area-inset-top,0px));z-index:5;background:var(--bg,#f3f1ee);padding:8px 0;margin-bottom:10px}
 </style>
 </head>
 <body>
@@ -562,6 +564,12 @@ h2.two span{display:block;color:var(--muted)}
   <p class="intro">Quelques mesures et tu obtiens un point de départ pour régler ton vélo. Ensuite, une photo de profil sur home-trainer permet de vérifier tes angles.</p>
 
 
+  <div class="seg possub" id="posSub" role="group" aria-label="Partie">
+    <button type="button" aria-pressed="true" data-p="taille">Taille et mesures</button>
+    <button type="button" aria-pressed="false" data-p="reglage">Réglage et analyse</button>
+  </div>
+
+<div data-pos="taille">
   <div class="panel">
     <div class="grid2">
       <div><label for="inseam">Entrejambe (cm)</label><input id="inseam" type="number" inputmode="decimal" min="60" max="105" step="0.5" value="84"></div>
@@ -572,6 +580,26 @@ h2.two span{display:block;color:var(--muted)}
     <p class="note" style="margin-top:10px">Entrejambe : pieds nus, dos au mur, un livre bien calé entre les jambes comme une selle. Mesure du sol au haut du livre.</p>
   </div>
 
+  <div class="sizeg" id="sizeg">
+    <h2 class="two" style="margin-top:8px">Choisis ton vélo<span>à la bonne taille.</span></h2>
+    <p class="note" style="margin:-10px 0 14px">Calculé à partir de ta taille et de ton entrejambe, entrés plus haut.</p>
+    <div class="kpi hl sz-res" id="szRes"></div>
+    <div class="panel sz-tab"><table id="szTab"></table><p class="note" style="margin:8px 0 0">Repères pour un vélo de route. Les tailles changent d’une marque à l’autre : compare toujours la géométrie.</p></div>
+    <details class="gstep szs"><summary><span class="gn">1</span><b>Regarde le stack et le reach</b></summary><div class="gbody">
+      <p>La taille écrite sur le cadre ne suffit pas : un 54 d’une marque peut correspondre à un 56 chez une autre. Dans la fiche géométrie du vélo, regarde deux chiffres.</p>
+      <ul><li>Le stack : la hauteur du cadre, de l’axe du pédalier jusqu’au haut de la douille de direction. Plus il est grand, plus ta position est relevée.</li><li>Le reach : la longueur du cadre, mesurée à l’horizontale entre ces deux mêmes points. Plus il est grand, plus tu es allongé.</li></ul>
+      <p>Pour comparer deux vélos, compare leur stack et leur reach, pas leur taille.</p></div></details>
+    <details class="gstep szs"><summary><span class="gn">2</span><b>Entre deux tailles, choisis selon ton profil</b></summary><div class="gbody">
+      <p>Prends la plus petite si tu as les jambes longues pour ta taille, si tu es souple et que tu cherches une position sportive. La tige de selle compense la hauteur.</p>
+      <p>Prends la plus grande si tu as le buste long, peu de souplesse, ou si tu fais surtout de longues sorties et que tu cherches du confort.</p></div></details>
+    <details class="gstep szs"><summary><span class="gn">3</span><b>Vérifie que le vélo se règle sur toi</b></summary><div class="gbody">
+      <ul><li>Ta hauteur de selle (valeur A) est atteignable sans dépasser la marque maximum de la tige de selle.</li><li>Ta distance selle → cintre (valeur B) s’obtient avec une potence de 90 à 120 mm. S’il te faut moins de 80 mm ou plus de 130 mm, le cadre n’est pas à la bonne taille.</li><li>Debout au-dessus du vélo, pieds à plat, il reste quelques centimètres entre le tube horizontal et toi.</li></ul>
+      <p>Si possible, essaie le vélo avant de l’acheter, avec la selle réglée à ta hauteur.</p></div></details>
+    <div class="cta-in sz-cta"><p>Un doute entre deux tailles ? Envoie-moi tes mesures et le lien du vélo, je te dis lequel prendre.</p>
+    <a class="btn" id="szWa" href="https://wa.me/33621349226" target="_blank" rel="noopener">Envoyer mes mesures sur WhatsApp</a></div>
+  </div>
+
+  <h2 class="two" style="margin-top:34px">Les mesures de ton vélo.<span>Ton point de départ.</span></h2>
   <figure class="bike-fig">
   <svg class="bike-svg" id="bikeSvg" viewBox="30 290 720 480" role="img" aria-label="Photo du vélo de Paul avec les mesures de position : A hauteur de selle, B selle-cintre, C drop, D recul">
     <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#d8341c"/></marker></defs>
@@ -600,26 +628,9 @@ h2.two span{display:block;color:var(--muted)}
   <div class="kpis" id="fitOut"></div>
   <div class="result" id="fitCmp" hidden></div>
 
-  <div class="sizeg" id="sizeg">
-    <h2 class="two">Choisis ton vélo<span>à la bonne taille.</span></h2>
-    <p class="note" style="margin:-10px 0 14px">Calculé à partir de ta taille et de ton entrejambe, entrés plus haut.</p>
-    <div class="kpi hl sz-res" id="szRes"></div>
-    <div class="panel sz-tab"><table id="szTab"></table><p class="note" style="margin:8px 0 0">Repères pour un vélo de route. Les tailles changent d’une marque à l’autre : compare toujours la géométrie.</p></div>
-    <details class="gstep szs"><summary><span class="gn">1</span><b>Regarde le stack et le reach</b></summary><div class="gbody">
-      <p>La taille écrite sur le cadre ne suffit pas : un 54 d’une marque peut correspondre à un 56 chez une autre. Dans la fiche géométrie du vélo, regarde deux chiffres.</p>
-      <ul><li>Le stack : la hauteur du cadre, de l’axe du pédalier jusqu’au haut de la douille de direction. Plus il est grand, plus ta position est relevée.</li><li>Le reach : la longueur du cadre, mesurée à l’horizontale entre ces deux mêmes points. Plus il est grand, plus tu es allongé.</li></ul>
-      <p>Pour comparer deux vélos, compare leur stack et leur reach, pas leur taille.</p></div></details>
-    <details class="gstep szs"><summary><span class="gn">2</span><b>Entre deux tailles, choisis selon ton profil</b></summary><div class="gbody">
-      <p>Prends la plus petite si tu as les jambes longues pour ta taille, si tu es souple et que tu cherches une position sportive. La tige de selle compense la hauteur.</p>
-      <p>Prends la plus grande si tu as le buste long, peu de souplesse, ou si tu fais surtout de longues sorties et que tu cherches du confort.</p></div></details>
-    <details class="gstep szs"><summary><span class="gn">3</span><b>Vérifie que le vélo se règle sur toi</b></summary><div class="gbody">
-      <ul><li>Ta hauteur de selle (valeur A) est atteignable sans dépasser la marque maximum de la tige de selle.</li><li>Ta distance selle → cintre (valeur B) s’obtient avec une potence de 90 à 120 mm. S’il te faut moins de 80 mm ou plus de 130 mm, le cadre n’est pas à la bonne taille.</li><li>Debout au-dessus du vélo, pieds à plat, il reste quelques centimètres entre le tube horizontal et toi.</li></ul>
-      <p>Si possible, essaie le vélo avant de l’acheter, avec la selle réglée à ta hauteur.</p></div></details>
-    <div class="cta-in sz-cta"><p>Un doute entre deux tailles ? Envoie-moi tes mesures et le lien du vélo, je te dis lequel prendre.</p>
-    <a class="btn" id="szWa" href="https://wa.me/33621349226" target="_blank" rel="noopener">Envoyer mes mesures sur WhatsApp</a></div>
-  </div>
-
-  <div class="guide" id="guide">
+</div>
+<div data-pos="reglage" hidden>
+  <div class="guide" id="guide" style="margin-top:8px">
     <h2 class="two">Règle ton vélo<span>étape par étape.</span></h2>
     <div class="gprog"><span id="gBar"></span></div><div class="ghead"><p class="note" id="gTxt"></p><button type="button" class="greset" id="gReset" hidden>↺ Recommencer</button></div>
     <details class="gstep" data-i="0" open><summary><span class="gn">1</span><b>Prépare ton vélo</b><span class="gok">✓</span></summary>
@@ -653,14 +664,14 @@ h2.two span{display:block;color:var(--muted)}
 <circle cx="348" cy="660" r="9" fill="#d8341c" stroke="#fff" stroke-width="3"/>
 <circle cx="230" cy="500" r="24" fill="#d8341c"/><text x="230" y="510" text-anchor="middle" font-size="28" font-weight="800" fill="#fff" font-family="Inter,sans-serif">A</text>
 <g font-family="Inter,sans-serif" font-weight="700" font-size="24" fill="#d8341c" paint-order="stroke" stroke="#fff" stroke-width="6">
-<text x="300" y="306">haut de la selle</text><text x="372" y="700">axe du pédalier</text><text x="104" y="560"><tspan class="gA">—</tspan> cm</text></g></svg></figure><p>Mesure du centre de l’axe du pédalier jusqu’au haut de la selle, en suivant le tube de selle. Règle-la sur <span class="gA">—</span> cm (valeur A calculée plus haut).</p>
+<text x="300" y="306">haut de la selle</text><text x="372" y="700">axe du pédalier</text><text x="104" y="560"><tspan class="gA">—</tspan> cm</text></g></svg></figure><p>Mesure du centre de l’axe du pédalier jusqu’au haut de la selle, en suivant le tube de selle. Règle-la sur <span class="gA">—</span> cm (valeur A de l’onglet Taille et mesures).</p>
 <p>Vérifie au talon : manivelle en bas (6 h), pose le talon sur la pédale. La jambe doit être tendue, sans que le bassin bascule. En pédalant normalement, le genou reste alors légèrement fléchi en bas du coup de pédale.</p>
 <ul><li>Bassin qui bascule ou jambe qui ne touche pas : selle trop haute.</li><li>Genou encore bien plié talon sur la pédale : selle trop basse.</li></ul>
 <p>Corrige par 2 à 3 mm à la fois.</p><button type="button" class="pill dark sm gdone">C’est fait, étape suivante</button></div></details>
     <details class="gstep" data-i="4"><summary><span class="gn">5</span><b>Recontrôle le recul</b><span class="gok">✓</span></summary>
       <div class="gbody"><p>Monter ou descendre la selle déplace légèrement ton genou. Refais le fil à plomb de l’étape 3, et ajuste le recul si besoin. Puis revérifie la hauteur : deux allers-retours suffisent en général.</p><button type="button" class="pill dark sm gdone">C’est fait, étape suivante</button></div></details>
     <details class="gstep" data-i="5"><summary><span class="gn">6</span><b>Règle le cintre</b><span class="gok">✓</span></summary>
-      <div class="gbody"><p>Une fois la selle réglée, ne la touche plus. Ajuste la distance selle → cintre (B) avec la longueur de potence et le drop (C) avec les bagues sous la potence, selon les valeurs calculées plus haut.</p>
+      <div class="gbody"><p>Une fois la selle réglée, ne la touche plus. Ajuste la distance selle → cintre (B) avec la longueur de potence et le drop (C) avec les bagues sous la potence, selon les valeurs de l’onglet Taille et mesures.</p>
 <p>Termine en te filmant de profil et en vérifiant tes angles juste en dessous.</p><button type="button" class="pill dark sm gdone">C’est fait, étape suivante</button></div></details>
   </div>
 
@@ -691,6 +702,7 @@ h2.two span{display:block;color:var(--muted)}
     <p>Ces calculs donnent un point de départ. Envoie-moi ta vidéo et on affine ta position ensemble. En cas de douleur, consulte d’abord un médecin ou un kinésithérapeute.</p>
     <a class="btn" href="https://wa.me/33621349226?text=Bonjour%20Paul%2C%20voici%20ma%20vid%C3%A9o%20de%20position%20%C3%A0%20v%C3%A9lo." target="_blank" rel="noopener">Envoie-moi ta vidéo sur WhatsApp</a>
   </div>
+</div>
 </div></section>
 
 <!-- ============ ZONES ============ -->
@@ -1108,6 +1120,9 @@ ${t.work?`<p class="tm-l"><b>Ce qu’on travaille :</b> ${t.work}</p>`:''}
 ${t.coach?`<p class="tm-c"><b>Le mot du coach :</b> ${t.coach}</p>`:''}
 <a class="tm-ig" href="${t.url}" target="_blank" rel="noopener">Voir sur Instagram</a></article>`).join('');}
 seg('#tFilter',b=>tRender(b.dataset.f));
+(()=>{const show=v=>{$$('[data-pos]').forEach(el=>el.hidden=el.dataset.pos!==v);$$('#posSub button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.p===v))};
+seg('#posSub',b=>{store.set('posSub',b.dataset.p);show(b.dataset.p);const y=$('[data-pos="'+b.dataset.p+'"]').getBoundingClientRect().top+scrollY-130;if(scrollY>y)window.scrollTo({top:y})});
+show(store.get('posSub','taille'));})();
 
 /* ---------- Offres : boutons vers le contact ---------- */
 $$('[data-offer]').forEach(a=>{const o=a.closest('.offer'),t=o&&o.querySelector('h3')?o.querySelector('h3').textContent.trim().replace(/^Formule\s*/i,''):'';a.href='https://wa.me/33621349226?text='+encodeURIComponent('Bonjour Paul, je suis intéressé(e) par la formule '+t+'. Peut-on en parler ?');a.target='_blank';a.rel='noopener'});

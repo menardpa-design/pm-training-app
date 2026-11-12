@@ -1,5 +1,5 @@
 // Service worker : l'app s'ouvre même sans réseau.
-const CACHE='pm-training-v60';
+const CACHE='pm-training-v61';
 const SHELL=['./','index.html','manifest.webmanifest','icon-192.png','icon-512.png','apple-touch-icon.png','favicon-32.png','icon-maskable.png','img/logo-160.png','img/zones.webp','img/position.webp','img/offres.webp','img/avis.webp','img/coach.webp','img/velo.jpg'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
