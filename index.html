@@ -192,17 +192,148 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
 
 <header class="top">
   <div class="wrap top-in">
-    <a href="#zones" class="logo" data-go="zones"><img src="img/logo-160.png" alt="">PM<span>·</span>Training</a>
+    <a href="#avis" class="logo" data-go="avis"><img src="img/logo-160.png" alt="">PM<span>·</span>Training</a>
     <a class="btn-sm" href="https://www.instagram.com/pm.training_/" target="_blank" rel="noopener">Me contacter</a>
   </div>
 </header>
 
 <main>
 
-<!-- ============ ZONES ============ -->
-<section id="zones" role="tabpanel" aria-labelledby="t-zones"><div class="wrap">
-  <div class="hero" style="--img:url(img/zones.jpg)"><div class="hero-in"><p class="eyebrow">Calculateur</p><h2>Tes zones<span>.</span></h2></div></div>
+<!-- ============ AVIS ============ -->
+<section id="avis" role="tabpanel" aria-labelledby="t-avis"><div class="wrap">
+  <div class="hero" style="--img:url(img/avis.jpg)"><div class="hero-in"><p class="eyebrow">Ils l'ont fait</p><h2>Retours d'athlètes<span>.</span></h2></div></div>
   <div class="install" id="install"><span>Installe l'app sur ton téléphone.</span><button type="button" id="installBtn">Installer</button></div>
+  <p class="intro">Ce que disent les athlètes coachés par PM Training.</p>
+  <p class="ph">Témoignages d'exemple : à remplacer par les vrais retours (prénom, discipline, résultat, avec leur accord).</p>
+
+  <div class="stats">
+    <div class="stat"><b>[XX]</b><span>athlètes</span></div>
+    <div class="stat"><b>[XX]</b><span>finishers</span></div>
+    <div class="stat"><b>5/5</b><span>sur Nolio</span></div>
+  </div>
+
+  <div class="seg sm" id="tFilter" role="group" aria-label="Discipline">
+    <button type="button" aria-pressed="true" data-f="all">Tous</button>
+    <button type="button" aria-pressed="false" data-f="course">Course</button>
+    <button type="button" aria-pressed="false" data-f="tri">Triathlon</button>
+    <button type="button" aria-pressed="false" data-f="velo">Vélo</button>
+    <button type="button" aria-pressed="false" data-f="hyrox">Hyrox</button>
+  </div>
+  <div id="tList"></div>
+
+  <div class="cta-band">
+    <h3>Ton tour<span style="color:var(--accent)">.</span></h3>
+    <p>Écris-moi ton objectif et ton niveau, je te réponds personnellement.</p>
+    <a class="btn" href="https://www.instagram.com/pm.training_/" target="_blank" rel="noopener">Écris-moi sur Instagram</a>
+    <a class="btn ghost" href="https://pmtraining.fr" target="_blank" rel="noopener">pmtraining.fr</a>
+  </div>
+</div></section>
+
+<!-- ============ OFFRES ============ -->
+<section id="offres" role="tabpanel" aria-labelledby="t-offres" hidden><div class="wrap">
+  <div class="hero" style="--img:url(img/offres.jpg)"><div class="hero-in"><p class="eyebrow">Coaching</p><h2>Les offres<span>.</span></h2></div></div>
+  <p class="intro">Course à pied, vélo ou triathlon : un plan personnalisé dans Nolio, synchronisé sur ta montre (Garmin, Suunto, Coros, Polar).</p>
+  <div class="cred">
+    <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="19" r="14" fill="var(--accent)"/><path d="M15 30l-5 14 7-3 4 6 3-9M33 30l5 14-7-3-4 6-3-9" fill="var(--accent)"/><path d="M18 19l4 4 8-8" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div><span class="cred-k">Coach diplômé d'État</span><strong>DEJEPS Triathlon</strong><p>Le diplôme d'État de référence pour entraîner en triathlon. Un coaching construit sur une vraie formation, pas sur des recettes trouvées sur internet.</p></div>
+  </div>
+  <article class="offer">
+    <h3>Formule Course à pied</h3>
+    <p class="price">70 € <small>/ mois</small></p>
+    <p class="pitch">Structure et optimise ton entraînement selon ton profil, du 10 km au marathon.</p>
+    <ul><li>Planification de tes objectifs</li><li>Test d'évaluation</li><li>Plan personnalisé avec échanges réguliers</li><li>Analyse de tes séances</li><li>Séances de renforcement</li><li>Conseils nutrition et récupération</li></ul>
+    <a class="btn ghost" data-offer href="#">Choisir cette formule</a>
+  </article>
+
+  <article class="offer">
+    <h3>Formule Cyclisme</h3>
+    <p class="price">120 € <small>/ mois</small></p>
+    <p class="pitch">Ton entraînement vélo piloté par la puissance.</p>
+    <ul><li>Planification de tes objectifs</li><li>Test d'évaluation avec capteur de puissance</li><li>Plan personnalisé avec échanges réguliers</li><li>Analyse de tes séances</li><li>Séances de renforcement</li><li>Conseils nutrition et récupération</li></ul>
+    <a class="btn ghost" data-offer href="#">Choisir cette formule</a>
+  </article>
+
+  <article class="offer featured">
+    <span class="tag">La plus complète</span>
+    <h3>Formule Triathlon</h3>
+    <p class="price">150 € <small>/ mois</small></p>
+    <p class="pitch">Pour les athlètes perfectionnistes, quel que soit leur niveau, qui veulent soigner chaque détail.</p>
+    <ul><li>Natation, vélo et course planifiés ensemble</li><li>Analyse de tes séances</li><li>Séances de renforcement</li><li>Conseils nutrition et récupération</li><li><strong>Échanges illimités avec ton coach</strong></li></ul>
+    <a class="btn" data-offer href="#">Choisir cette formule</a>
+  </article>
+  <p class="note" style="margin:-4px 0 22px">Inscription et paiement sur Nolio. Le premier échange est gratuit et sans engagement.</p>
+
+  <div class="coach"><img src="img/coach.jpg" alt="Paul Ménard en course cyclosportive" loading="lazy"><div><h3>Ton coach : Paul Ménard</h3><span class="badge">DEJEPS Triathlon</span><p>Diplômé d'État DEJEPS Triathlon, coach au Pôle Espoir féminin de Chambéry. Ancien cycliste 1<sup>re</sup> catégorie, 2 Embrunman, plus de 15 Half Ironman, 2h50 au marathon. Puissance, VFC et fréquence cardiaque au service de ta progression.</p></div></div>
+
+  <div class="block"><h3>Comment ça marche</h3>
+    <ol class="steps">
+      <li><div><strong>Bilan</strong><span>Ton niveau, ton historique, ton objectif et tes heures dispo.</span></div></li>
+      <li><div><strong>Plan sur mesure</strong><span>Tes séances dans Nolio, envoyées sur ta montre ou ton compteur.</span></div></li>
+      <li><div><strong>Analyse et ajustements</strong><span>Je regarde ce que tu as fait et j'adapte la suite.</span></div></li>
+      <li><div><strong>Le jour J</strong><span>Affûtage, nutrition, stratégie : tu exécutes ta course.</span></div></li>
+    </ol>
+  </div>
+</div></section>
+
+<!-- ============ POSITION ============ -->
+<section id="position" role="tabpanel" aria-labelledby="t-position" hidden><div class="wrap">
+  <div class="hero" style="--img:url(img/position.jpg);background-position:center,center 15%"><div class="hero-in"><p class="eyebrow">Calculateur</p><h2>Ta position vélo<span>.</span></h2></div></div>
+  <p class="intro">Quelques mesures et tu obtiens un point de départ pour régler ton vélo. Ensuite, une photo de profil sur home-trainer permet de vérifier tes angles.</p>
+
+
+  <div class="panel">
+    <div class="grid2">
+      <div><label for="inseam">Entrejambe (cm)</label><input id="inseam" type="number" inputmode="decimal" min="60" max="105" step="0.5" value="84"></div>
+      <div><label for="height">Taille (cm)</label><input id="height" type="number" inputmode="numeric" min="140" max="210" value="178"></div>
+      <div><label for="flex">Souplesse</label><select id="flex"><option value="0">Raide</option><option value="1" selected>Moyenne</option><option value="2">Souple</option></select></div>
+      <div><label for="curH">Selle actuelle (cm)</label><input id="curH" type="number" inputmode="decimal" step="0.1" placeholder="facultatif"></div>
+    </div>
+    <p class="note" style="margin-top:10px">Entrejambe : pieds nus, dos au mur, un livre bien calé entre les jambes comme une selle. Mesure du sol au haut du livre.</p>
+  </div>
+
+  <figure class="bike-fig">
+  <svg class="bike-svg" id="bikeSvg" viewBox="30 290 720 480" role="img" aria-label="Photo du vélo de Paul avec les mesures de position : A hauteur de selle, B selle-cintre, C drop, D recul">
+    <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#d8341c"/></marker></defs>
+    <image href="img/velo.jpg" x="30" y="290" width="720" height="480"/>
+    <g stroke="#d8341c" fill="none" stroke-linecap="round">
+      <line x1="348" y1="646" x2="258" y2="334" stroke-width="4" stroke-dasharray="10 7" marker-start="url(#ar)" marker-end="url(#ar)"/>
+      <line x1="321" y1="336" x2="574" y2="401" stroke-width="4" marker-start="url(#ar)" marker-end="url(#ar)"/>
+      <line x1="348" y1="646" x2="348" y2="300" stroke-width="2" stroke-dasharray="3 6"/>
+      <line x1="317" y1="314" x2="348" y2="314" stroke-width="4" marker-start="url(#ar)" marker-end="url(#ar)"/>
+      <line x1="317" y1="336" x2="317" y2="308" stroke-width="2" stroke-dasharray="3 5"/>
+      <line x1="327" y1="334" x2="725" y2="334" stroke-width="2" stroke-dasharray="3 6"/>
+      <line x1="586" y1="401" x2="725" y2="401" stroke-width="2" stroke-dasharray="3 6"/>
+      <line x1="712" y1="337" x2="712" y2="398" stroke-width="4" marker-start="url(#ar)" marker-end="url(#ar)"/>
+    </g>
+    <circle cx="348" cy="646" r="7" fill="#d8341c" stroke="#fff" stroke-width="2"/>
+    <g font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="22" text-anchor="middle" fill="#fff">
+      <circle cx="281" cy="500" r="17" fill="#d8341c"/><text x="281" y="508">A</text>
+      <circle cx="450" cy="345" r="17" fill="#d8341c"/><text x="450" y="353">B</text>
+      <circle cx="712" cy="434" r="17" fill="#d8341c"/><text x="712" y="442">C</text>
+      <circle cx="372" cy="314" r="17" fill="#d8341c"/><text x="372" y="322">D</text>
+    </g>
+  </svg>
+  <figcaption>A hauteur de selle · B selle → cintre · C drop · D recul de selle</figcaption>
+  </figure>
+
+  <div class="kpis" id="fitOut"></div>
+  <div class="result" id="fitCmp" hidden></div>
+
+  <div class="block" style="margin-top:22px"><h3>Vérifie tes angles</h3>
+    <p class="note" style="margin-bottom:12px">Filme-toi de profil sur home-trainer, à ton allure d'endurance. Mesure les angles sur une image avec une appli de rapporteur et entre-les ici.</p>
+    <div class="check" id="angles"></div>
+  </div>
+
+  <div class="cta-band">
+    <h3>Une douleur, une gêne ?</h3>
+    <p>Ces calculs donnent un point de départ. Si tu as mal aux genoux, au dos ou aux cervicales, on regarde ta position ensemble.</p>
+    <a class="btn" href="https://www.instagram.com/pm.training_/" target="_blank" rel="noopener">Envoie-moi ta vidéo</a>
+  </div>
+</div></section>
+
+<!-- ============ ZONES ============ -->
+<section id="zones" role="tabpanel" aria-labelledby="t-zones" hidden><div class="wrap">
+  <div class="hero" style="--img:url(img/zones.jpg)"><div class="hero-in"><p class="eyebrow">Calculateur</p><h2>Tes zones<span>.</span></h2></div></div>
   <p class="intro">Entre tes chiffres de test : l'app calcule tes allures, tes zones cardiaques et tes zones de puissance. Tout est gardé sur ton téléphone.</p>
 
   <div class="seg" id="zSport" role="group" aria-label="Sport">
@@ -293,147 +424,16 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
   </div>
 </div></section>
 
-<!-- ============ POSITION ============ -->
-<section id="position" role="tabpanel" aria-labelledby="t-position" hidden><div class="wrap">
-  <div class="hero" style="--img:url(img/position.jpg);background-position:center,center 15%"><div class="hero-in"><p class="eyebrow">Calculateur</p><h2>Ta position vélo<span>.</span></h2></div></div>
-  <p class="intro">Quelques mesures et tu obtiens un point de départ pour régler ton vélo. Ensuite, une photo de profil sur home-trainer permet de vérifier tes angles.</p>
-
-
-  <div class="panel">
-    <div class="grid2">
-      <div><label for="inseam">Entrejambe (cm)</label><input id="inseam" type="number" inputmode="decimal" min="60" max="105" step="0.5" value="84"></div>
-      <div><label for="height">Taille (cm)</label><input id="height" type="number" inputmode="numeric" min="140" max="210" value="178"></div>
-      <div><label for="flex">Souplesse</label><select id="flex"><option value="0">Raide</option><option value="1" selected>Moyenne</option><option value="2">Souple</option></select></div>
-      <div><label for="curH">Selle actuelle (cm)</label><input id="curH" type="number" inputmode="decimal" step="0.1" placeholder="facultatif"></div>
-    </div>
-    <p class="note" style="margin-top:10px">Entrejambe : pieds nus, dos au mur, un livre bien calé entre les jambes comme une selle. Mesure du sol au haut du livre.</p>
-  </div>
-
-  <figure class="bike-fig">
-  <svg class="bike-svg" id="bikeSvg" viewBox="30 290 720 480" role="img" aria-label="Photo du vélo de Paul avec les mesures de position : A hauteur de selle, B selle-cintre, C drop, D recul">
-    <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#d8341c"/></marker></defs>
-    <image href="img/velo.jpg" x="30" y="290" width="720" height="480"/>
-    <g stroke="#d8341c" fill="none" stroke-linecap="round">
-      <line x1="348" y1="646" x2="258" y2="334" stroke-width="4" stroke-dasharray="10 7" marker-start="url(#ar)" marker-end="url(#ar)"/>
-      <line x1="321" y1="336" x2="574" y2="401" stroke-width="4" marker-start="url(#ar)" marker-end="url(#ar)"/>
-      <line x1="348" y1="646" x2="348" y2="300" stroke-width="2" stroke-dasharray="3 6"/>
-      <line x1="317" y1="314" x2="348" y2="314" stroke-width="4" marker-start="url(#ar)" marker-end="url(#ar)"/>
-      <line x1="317" y1="336" x2="317" y2="308" stroke-width="2" stroke-dasharray="3 5"/>
-      <line x1="327" y1="334" x2="725" y2="334" stroke-width="2" stroke-dasharray="3 6"/>
-      <line x1="586" y1="401" x2="725" y2="401" stroke-width="2" stroke-dasharray="3 6"/>
-      <line x1="712" y1="337" x2="712" y2="398" stroke-width="4" marker-start="url(#ar)" marker-end="url(#ar)"/>
-    </g>
-    <circle cx="348" cy="646" r="7" fill="#d8341c" stroke="#fff" stroke-width="2"/>
-    <g font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="22" text-anchor="middle" fill="#fff">
-      <circle cx="281" cy="500" r="17" fill="#d8341c"/><text x="281" y="508">A</text>
-      <circle cx="450" cy="345" r="17" fill="#d8341c"/><text x="450" y="353">B</text>
-      <circle cx="712" cy="434" r="17" fill="#d8341c"/><text x="712" y="442">C</text>
-      <circle cx="372" cy="314" r="17" fill="#d8341c"/><text x="372" y="322">D</text>
-    </g>
-  </svg>
-  <figcaption>A hauteur de selle · B selle → cintre · C drop · D recul de selle</figcaption>
-  </figure>
-
-  <div class="kpis" id="fitOut"></div>
-  <div class="result" id="fitCmp" hidden></div>
-
-  <div class="block" style="margin-top:22px"><h3>Vérifie tes angles</h3>
-    <p class="note" style="margin-bottom:12px">Filme-toi de profil sur home-trainer, à ton allure d'endurance. Mesure les angles sur une image avec une appli de rapporteur et entre-les ici.</p>
-    <div class="check" id="angles"></div>
-  </div>
-
-  <div class="cta-band">
-    <h3>Une douleur, une gêne ?</h3>
-    <p>Ces calculs donnent un point de départ. Si tu as mal aux genoux, au dos ou aux cervicales, on regarde ta position ensemble.</p>
-    <a class="btn" href="https://www.instagram.com/pm.training_/" target="_blank" rel="noopener">Envoie-moi ta vidéo</a>
-  </div>
-</div></section>
-
-<!-- ============ OFFRES ============ -->
-<section id="offres" role="tabpanel" aria-labelledby="t-offres" hidden><div class="wrap">
-  <div class="hero" style="--img:url(img/offres.jpg)"><div class="hero-in"><p class="eyebrow">Coaching</p><h2>Les offres<span>.</span></h2></div></div>
-  <p class="intro">Course à pied, vélo ou triathlon : un plan personnalisé dans Nolio, synchronisé sur ta montre (Garmin, Suunto, Coros, Polar).</p>
-  <div class="cred">
-    <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="19" r="14" fill="var(--accent)"/><path d="M15 30l-5 14 7-3 4 6 3-9M33 30l5 14-7-3-4 6-3-9" fill="var(--accent)"/><path d="M18 19l4 4 8-8" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <div><span class="cred-k">Coach diplômé d'État</span><strong>DEJEPS Triathlon</strong><p>Le diplôme d'État de référence pour entraîner en triathlon. Un coaching construit sur une vraie formation, pas sur des recettes trouvées sur internet.</p></div>
-  </div>
-  <article class="offer">
-    <h3>Formule Course à pied</h3>
-    <p class="price">70 € <small>/ mois</small></p>
-    <p class="pitch">Structure et optimise ton entraînement selon ton profil, du 10 km au marathon.</p>
-    <ul><li>Planification de tes objectifs</li><li>Test d'évaluation</li><li>Plan personnalisé avec échanges réguliers</li><li>Analyse de tes séances</li><li>Séances de renforcement</li><li>Conseils nutrition et récupération</li></ul>
-    <a class="btn ghost" data-offer href="#">Choisir cette formule</a>
-  </article>
-
-  <article class="offer">
-    <h3>Formule Cyclisme</h3>
-    <p class="price">120 € <small>/ mois</small></p>
-    <p class="pitch">Ton entraînement vélo piloté par la puissance.</p>
-    <ul><li>Planification de tes objectifs</li><li>Test d'évaluation avec capteur de puissance</li><li>Plan personnalisé avec échanges réguliers</li><li>Analyse de tes séances</li><li>Séances de renforcement</li><li>Conseils nutrition et récupération</li></ul>
-    <a class="btn ghost" data-offer href="#">Choisir cette formule</a>
-  </article>
-
-  <article class="offer featured">
-    <span class="tag">La plus complète</span>
-    <h3>Formule Triathlon</h3>
-    <p class="price">150 € <small>/ mois</small></p>
-    <p class="pitch">Pour les athlètes perfectionnistes, quel que soit leur niveau, qui veulent soigner chaque détail.</p>
-    <ul><li>Natation, vélo et course planifiés ensemble</li><li>Analyse de tes séances</li><li>Séances de renforcement</li><li>Conseils nutrition et récupération</li><li><strong>Échanges illimités avec ton coach</strong></li></ul>
-    <a class="btn" data-offer href="#">Choisir cette formule</a>
-  </article>
-  <p class="note" style="margin:-4px 0 22px">Inscription et paiement sur Nolio. Le premier échange est gratuit et sans engagement.</p>
-
-  <div class="coach"><img src="img/coach.jpg" alt="Paul Ménard en course cyclosportive" loading="lazy"><div><h3>Ton coach : Paul Ménard</h3><span class="badge">DEJEPS Triathlon</span><p>Diplômé d'État DEJEPS Triathlon, coach au Pôle Espoir féminin de Chambéry. Ancien cycliste 1<sup>re</sup> catégorie, 2 Embrunman, plus de 15 Half Ironman, 2h50 au marathon. Puissance, VFC et fréquence cardiaque au service de ta progression.</p></div></div>
-
-  <div class="block"><h3>Comment ça marche</h3>
-    <ol class="steps">
-      <li><div><strong>Bilan</strong><span>Ton niveau, ton historique, ton objectif et tes heures dispo.</span></div></li>
-      <li><div><strong>Plan sur mesure</strong><span>Tes séances dans Nolio, envoyées sur ta montre ou ton compteur.</span></div></li>
-      <li><div><strong>Analyse et ajustements</strong><span>Je regarde ce que tu as fait et j'adapte la suite.</span></div></li>
-      <li><div><strong>Le jour J</strong><span>Affûtage, nutrition, stratégie : tu exécutes ta course.</span></div></li>
-    </ol>
-  </div>
-</div></section>
-
-<!-- ============ AVIS ============ -->
-<section id="avis" role="tabpanel" aria-labelledby="t-avis" hidden><div class="wrap">
-  <div class="hero" style="--img:url(img/avis.jpg)"><div class="hero-in"><p class="eyebrow">Ils l'ont fait</p><h2>Retours d'athlètes<span>.</span></h2></div></div>
-  <p class="intro">Ce que disent les athlètes coachés par PM Training.</p>
-  <p class="ph">Témoignages d'exemple : à remplacer par les vrais retours (prénom, discipline, résultat, avec leur accord).</p>
-
-  <div class="stats">
-    <div class="stat"><b>[XX]</b><span>athlètes</span></div>
-    <div class="stat"><b>[XX]</b><span>finishers</span></div>
-    <div class="stat"><b>5/5</b><span>sur Nolio</span></div>
-  </div>
-
-  <div class="seg sm" id="tFilter" role="group" aria-label="Discipline">
-    <button type="button" aria-pressed="true" data-f="all">Tous</button>
-    <button type="button" aria-pressed="false" data-f="course">Course</button>
-    <button type="button" aria-pressed="false" data-f="tri">Triathlon</button>
-    <button type="button" aria-pressed="false" data-f="velo">Vélo</button>
-    <button type="button" aria-pressed="false" data-f="hyrox">Hyrox</button>
-  </div>
-  <div id="tList"></div>
-
-  <div class="cta-band">
-    <h3>Ton tour<span style="color:var(--accent)">.</span></h3>
-    <p>Écris-moi ton objectif et ton niveau, je te réponds personnellement.</p>
-    <a class="btn" href="https://www.instagram.com/pm.training_/" target="_blank" rel="noopener">Écris-moi sur Instagram</a>
-    <a class="btn ghost" href="https://pmtraining.fr" target="_blank" rel="noopener">pmtraining.fr</a>
-  </div>
-</div></section>
-
 </main>
 
 <footer>© <span id="y">2026</span> PM Training · Les calculs sont des repères, pas un avis médical.</footer>
 
 <nav class="tabs" aria-label="Sections">
   <div class="wrap" role="tablist">
-    <button role="tab" id="t-zones" aria-controls="zones" aria-selected="true" data-go="zones"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Zones</button>
-    <button role="tab" id="t-position" aria-controls="position" aria-selected="false" data-go="position"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17" r="3.5"/><circle cx="18.5" cy="17" r="3.5"/><path d="M5.5 17l4-8h6l3 8M9.5 9L12 17h2M14 5h2l1.5 4"/></svg>Position</button>
+    <button role="tab" id="t-avis" aria-controls="avis" aria-selected="true" data-go="avis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 10.5h7M8.5 14h4"/></svg>Avis</button>
     <button role="tab" id="t-offres" aria-controls="offres" aria-selected="false" data-go="offres"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7L12 17.6 5.8 21l1.4-7L2 9.3l7-.8z"/></svg>Offres</button>
-    <button role="tab" id="t-avis" aria-controls="avis" aria-selected="false" data-go="avis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 10.5h7M8.5 14h4"/></svg>Avis</button>
+    <button role="tab" id="t-position" aria-controls="position" aria-selected="false" data-go="position"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17" r="3.5"/><circle cx="18.5" cy="17" r="3.5"/><path d="M5.5 17l4-8h6l3 8M9.5 9L12 17h2M14 5h2l1.5 4"/></svg>Position</button>
+    <button role="tab" id="t-zones" aria-controls="zones" aria-selected="false" data-go="zones"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Zones</button>
   </div>
 </nav>
 
@@ -463,10 +463,10 @@ function setSeg(id,attr,val){const b=$(id).querySelector(`[data-${attr}="${val}"
 function persist(ids,fn){ids.forEach(id=>{const el=$('#'+id);const v=store.get(id,null);if(v!==null&&v!=='')el.value=v;el.addEventListener('input',()=>{store.set(id,el.value);fn()});});}
 
 /* ---------- Onglets ---------- */
-const TABS=['zones','position','offres','avis'];
-function go(t,push){if(!TABS.includes(t))t='zones';TABS.forEach(x=>{$('#'+x).hidden=x!==t;$('#t-'+x).setAttribute('aria-selected',x===t)});window.scrollTo(0,0);if(push)history.replaceState(null,'','#'+t);store.set('tab',t);}
+const TABS=['avis','offres','position','zones'];
+function go(t,push){if(!TABS.includes(t))t='avis';TABS.forEach(x=>{$('#'+x).hidden=x!==t;$('#t-'+x).setAttribute('aria-selected',x===t)});window.scrollTo(0,0);if(push)history.replaceState(null,'','#'+t);store.set('tab',t);}
 $$('[data-go]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();go(b.dataset.go,true)}));
-go((location.hash||'').slice(1)||store.get('tab','zones'));
+go((location.hash||'').slice(1)||'avis');
 
 /* ---------- Course à pied ---------- */
 const RUNZ=[['Z1','z1','Récupération','Footing très facile',.60,.68],['Z2','z2','Endurance fondamentale','Sorties longues, base',.68,.76],['Z3','z3','Allure active','Tempo, allure marathon',.76,.85],['Z4','z4','Seuil','Allure 10 km à semi',.85,.92],['Z5','z5','VMA','Fractionné court',.95,1.05],['Z6','z6','Vitesse','Sprints, côtes courtes',1.05,1.20]];
