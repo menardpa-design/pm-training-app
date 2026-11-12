@@ -516,7 +516,7 @@ h2.two span{display:block;color:var(--muted)}
     <p class="price">70 € <small>/ mois</small></p>
     <p class="pitch">Structure et optimise ton entraînement selon ton profil, du 10 km au marathon.</p>
     <ul><li>Planification de tes objectifs</li><li>Test d'évaluation</li><li>Plan personnalisé avec échanges réguliers</li><li>Analyse de tes séances</li><li>Séances de renforcement</li><li>Conseils nutrition et récupération</li></ul>
-    <a class="btn ghost" data-offer href="#">Choisir cette formule</a>
+    <a class="btn ghost" data-offer href="https://wa.me/33621349226">Choisir cette formule · WhatsApp</a>
   </article>
 
   <article class="offer">
@@ -524,7 +524,7 @@ h2.two span{display:block;color:var(--muted)}
     <p class="price">120 € <small>/ mois</small></p>
     <p class="pitch">Ton entraînement vélo piloté par la puissance.</p>
     <ul><li>Planification de tes objectifs</li><li>Test d'évaluation avec capteur de puissance</li><li>Plan personnalisé avec échanges réguliers</li><li>Analyse de tes séances</li><li>Séances de renforcement</li><li>Conseils nutrition et récupération</li></ul>
-    <a class="btn ghost" data-offer href="#">Choisir cette formule</a>
+    <a class="btn ghost" data-offer href="https://wa.me/33621349226">Choisir cette formule · WhatsApp</a>
   </article>
 
   <article class="offer featured">
@@ -533,9 +533,9 @@ h2.two span{display:block;color:var(--muted)}
     <p class="price">150 € <small>/ mois</small></p>
     <p class="pitch">Pour les athlètes perfectionnistes, quel que soit leur niveau, qui veulent soigner chaque détail.</p>
     <ul><li>Natation, vélo et course planifiés ensemble</li><li>Analyse de tes séances</li><li>Séances de renforcement</li><li>Conseils nutrition et récupération</li><li><strong>Échanges illimités avec ton coach</strong></li></ul>
-    <a class="btn" data-offer href="#">Choisir cette formule</a>
+    <a class="btn" data-offer href="https://wa.me/33621349226">Choisir cette formule · WhatsApp</a>
   </article>
-  <p class="note" style="margin:-4px 0 22px">Inscription et paiement sur Nolio. Le premier échange est gratuit et sans engagement.</p>
+  <p class="note" style="margin:-4px 0 22px">Choisis ta formule et écris-moi sur WhatsApp au <a href="https://wa.me/33621349226" target="_blank" rel="noopener">06 21 34 92 26</a> : le premier échange est gratuit et sans engagement. Le suivi se fait ensuite sur Nolio.</p>
 
 
 </div></section>
@@ -1043,7 +1043,7 @@ ${t.coach?`<p class="tm-c"><b>Le mot du coach :</b> ${t.coach}</p>`:''}
 seg('#tFilter',b=>tRender(b.dataset.f));
 
 /* ---------- Offres : boutons vers le contact ---------- */
-$$('[data-offer]').forEach(a=>{a.href=NOLIO;a.target='_blank';a.rel='noopener'});
+$$('[data-offer]').forEach(a=>{const o=a.closest('.offer'),t=o&&o.querySelector('h3')?o.querySelector('h3').textContent.trim().replace(/^Formule\s*/i,''):'';a.href='https://wa.me/33621349226?text='+encodeURIComponent('Bonjour Paul, je suis intéressé(e) par la formule '+t+'. Peut-on en parler ?');a.target='_blank';a.rel='noopener'});
 
 /* ---------- Démarrage ---------- */
 setSeg('#zSport','s',sport);setSeg('#hrM','m',hrMode);
