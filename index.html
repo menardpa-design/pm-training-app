@@ -402,6 +402,8 @@ h2.two span{display:block;color:var(--muted)}
 .pres{background:var(--card2);border-radius:12px;padding:12px 14px;margin:8px 0 10px;font-size:.92rem}
 .pres ul{list-style:none;margin:6px 0 10px}.pres li{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--line)}
 .pres .pill{border:0;cursor:pointer}
+.stats{grid-template-columns:repeat(2,1fr)}.stat+.stat{border-left:0}.stat:nth-child(2n){border-left:1px solid var(--line)}.stat:nth-child(n+3){border-top:1px solid var(--line)}
+@media (min-width:640px){.stats{grid-template-columns:repeat(4,1fr)}.stat:nth-child(n){border-left:1px solid var(--line);border-top:0}.stat:first-child{border-left:0}}
 </style>
 </head>
 <body>
@@ -432,6 +434,7 @@ h2.two span{display:block;color:var(--muted)}
 
   <div class="stats">
     <div class="stat"><b>40+</b><span>athlètes accompagnés vers leurs objectifs</span></div>
+    <div class="stat"><b>20 max</b><span>athlètes suivis sur l’année</span></div>
     <div class="stat"><b>11h17</b><span>1er Ironman en 9 mois</span></div>
     <div class="stat"><b>5/5</b><span>sur Nolio</span></div>
   </div>
