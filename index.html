@@ -418,6 +418,7 @@ h2.two span{display:block;color:var(--muted)}
 .ml-in p{margin:0 0 8px}
 .ml-in a{color:inherit}
 .ml-x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:0;background:#f3f1ee;font-size:1rem;cursor:pointer;color:inherit}
+.ghead{display:flex;align-items:center;justify-content:space-between;gap:12px}.ghead .note{margin:0}.greset{background:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font:inherit;font-size:.8rem;font-weight:600;color:inherit;cursor:pointer;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -597,7 +598,7 @@ h2.two span{display:block;color:var(--muted)}
 
   <div class="guide" id="guide">
     <h2 class="two">Règle ton vélo<span>étape par étape.</span></h2>
-    <div class="gprog"><span id="gBar"></span></div><p class="note" id="gTxt"></p>
+    <div class="gprog"><span id="gBar"></span></div><div class="ghead"><p class="note" id="gTxt"></p><button type="button" class="greset" id="gReset" hidden>↺ Recommencer</button></div>
     <details class="gstep" data-i="0" open><summary><span class="gn">1</span><b>Prépare ton vélo</b><span class="gok">✓</span></summary>
       <div class="gbody"><p>Installe ton vélo sur home-trainer et vérifie qu’il est de niveau : l’axe de la roue avant doit être à la même hauteur que l’axe de la roue arrière. Mesure du sol à chaque axe et cale la roue avant si besoin. Mets ton cuissard et tes chaussures de vélo.</p>
 <p>Prévois une clé Allen, un mètre, un niveau à bulle et un fil à plomb (une ficelle avec un écrou au bout suffit). Vérifie que tes cales sont bien réglées : l’axe du gros orteil doit tomber sur le milieu de la cale, qui est marqué dessus.</p><button type="button" class="pill dark sm gdone">C’est fait, étape suivante</button></div></details>
@@ -1094,7 +1095,8 @@ setTimeout(()=>st.forEach(o=>ld(o.L[(o.i+1)%P.length])),2500);})();
 </script>
 <script>
 (()=>{const S=[...document.querySelectorAll('.gstep')];let D;try{D=JSON.parse(localStorage.getItem('pm.guide')||'[]')}catch(e){D=[]}
-const up=()=>{S.forEach((s,i)=>s.classList.toggle('done',D.includes(i)));const n=D.length;document.getElementById('gBar').style.width=(n/S.length*100)+'%';document.getElementById('gTxt').textContent=n===S.length?'Ton vélo est réglé. Vérifie maintenant tes angles ci-dessous.':`${n} étape${n>1?'s':''} sur ${S.length}`;try{localStorage.setItem('pm.guide',JSON.stringify(D))}catch(e){}};
+const up=()=>{S.forEach((s,i)=>s.classList.toggle('done',D.includes(i)));const n=D.length;document.getElementById('gBar').style.width=(n/S.length*100)+'%';document.getElementById('gTxt').textContent=n===S.length?'Ton vélo est réglé. Vérifie maintenant tes angles ci-dessous.':`${n} étape${n>1?'s':''} sur ${S.length}`;document.getElementById('gReset').hidden=n===0;try{localStorage.setItem('pm.guide',JSON.stringify(D))}catch(e){}};
+document.getElementById('gReset').addEventListener('click',()=>{D=[];S.forEach((s,i)=>s.open=i===0);up();S[0].scrollIntoView({behavior:'smooth',block:'center'})});
 S.forEach((s,i)=>s.querySelector('.gdone').addEventListener('click',()=>{if(!D.includes(i))D.push(i);s.open=false;const nx=S[i+1];if(nx){nx.open=true;nx.scrollIntoView({behavior:'smooth',block:'start'})}up()}));
 const first=S.findIndex((s,i)=>!D.includes(i));if(first>0){S[0].open=false;S[first].open=true}up();})();
 </script>
