@@ -85,7 +85,13 @@ main section{padding:0 0 36px}
 .seg.sm button{padding:7px 11px;font-size:.78rem}
 
 /* Forms */
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;align-items:end}
+.grid2 label,.grid2 .lbl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+input[type=number],input[type=text],select{height:50px}
+input.big{height:50px;font-size:1.6rem;padding:4px 12px}
+.inline input{height:auto}
+.ck input{height:auto}
+.time input{height:50px}
 label,.lbl{display:block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px}
 input[type=number],input[type=text],select{width:100%;background:var(--field);border:1px solid var(--fieldline);border-radius:2px;padding:11px 12px;font-size:1.05rem;font-weight:700;outline:none}
 input:focus,select:focus{border-color:var(--accent)}
@@ -298,7 +304,7 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:4px 16px 20
       <div><label for="inseam">Entrejambe (cm)</label><input id="inseam" type="number" inputmode="decimal" min="60" max="105" step="0.5" value="84"></div>
       <div><label for="height">Taille (cm)</label><input id="height" type="number" inputmode="numeric" min="140" max="210" value="178"></div>
       <div><label for="flex">Souplesse</label><select id="flex"><option value="0">Raide</option><option value="1" selected>Moyenne</option><option value="2">Souple</option></select></div>
-      <div><label for="curH">Hauteur de selle actuelle</label><input id="curH" type="number" inputmode="decimal" step="0.1" placeholder="cm (facultatif)"></div>
+      <div><label for="curH">Selle actuelle (cm)</label><input id="curH" type="number" inputmode="decimal" step="0.1" placeholder="facultatif"></div>
     </div>
     <p class="note" style="margin-top:10px">Entrejambe : pieds nus, dos au mur, un livre bien calé entre les jambes comme une selle. Mesure du sol au haut du livre.</p>
   </div>
