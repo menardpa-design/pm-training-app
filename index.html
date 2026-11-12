@@ -390,6 +390,10 @@ h2.two span{display:block;color:var(--muted)}
 .pbar span{font:600 1.6rem Inter,sans-serif;letter-spacing:-.02em;margin-right:auto}
 .outline-d{background:transparent;border:1px solid var(--line);color:var(--text);cursor:pointer}
 .pbar .pill{border:0;cursor:pointer}.pbar .outline-d{border:1px solid var(--line)}
+.pvid video{display:block;width:100%;border-radius:10px;background:#111;margin-top:10px}
+.pvid input[type=range]{width:100%;margin:12px 0 8px;accent-color:var(--accent)}
+.pvc{display:flex;gap:8px;justify-content:space-between;margin-bottom:10px}.pvc .pill{flex:1;cursor:pointer}
+#pGrab{width:100%;border:0;cursor:pointer}#pBack{margin-top:10px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -611,14 +615,19 @@ h2.two span{display:block;color:var(--muted)}
   </div>
 
   <div class="block" style="margin-top:22px"><h3>Vérifie tes angles</h3>
-    <p class="note" style="margin-bottom:12px">Filme-toi de profil sur home-trainer, à ton allure d'endurance. Fais une capture de ta vidéo au bon moment, puis mesure tes angles directement ici, du bout du doigt. Tu peux aussi les entrer à la main.</p>
+    <p class="note" style="margin-bottom:12px">Filme-toi de profil sur home-trainer, à ton allure d'endurance. Choisis ta vidéo, arrête-la au bon moment et mesure tes angles directement ici, du bout du doigt. Tu peux aussi les entrer à la main.</p>
     <div class="protr" id="protr">
       <div class="seg sm" id="pSel" role="group" aria-label="Angle à mesurer">
         <button type="button" aria-pressed="true" data-a="knee">Genou en bas</button><button type="button" aria-pressed="false" data-a="kneeTop">Genou en haut</button><button type="button" aria-pressed="false" data-a="trunk">Dos</button><button type="button" aria-pressed="false" data-a="elbow">Coude</button>
       </div>
-      <label class="pill dark sm pfile">Choisir une photo<input type="file" id="pFile" accept="image/*" hidden></label>
-      <p class="note" id="pHelp">Choisis une photo de profil prise sur home-trainer. Elle reste sur ton téléphone.</p>
+      <label class="pill dark sm pfile">Choisir une vidéo ou une photo<input type="file" id="pFile" accept="video/*,image/*" hidden></label>
+      <p class="note" id="pHelp">Filme-toi de profil sur home-trainer, puis choisis la vidéo (ou une photo). Elle reste sur ton téléphone.</p>
+      <div class="pvid" id="pVid" hidden><video id="pVideo" playsinline muted preload="auto"></video>
+        <input type="range" id="pSeek" min="0" max="1000" value="0" aria-label="Position dans la vidéo">
+        <div class="pvc"><button type="button" class="pill sm outline-d" data-st="-1">◀ Image</button><button type="button" class="pill sm outline-d" id="pPlay">Lecture</button><button type="button" class="pill sm outline-d" data-st="1">Image ▶</button></div>
+        <button type="button" class="pill dark sm" id="pGrab">Mesurer sur cette image</button></div>
       <div class="pwrap" id="pWrap" hidden><canvas id="pCan"></canvas></div>
+      <button type="button" class="pill sm outline-d" id="pBack" hidden>← Revenir à la vidéo</button>
       <div class="pbar" id="pBar" hidden><span id="pVal">—</span><button type="button" class="pill sm outline-d" id="pReset">Recommencer</button><button type="button" class="pill dark sm" id="pUse">Utiliser cette valeur</button></div>
     </div>
     <div class="check" id="angles"></div>
@@ -1044,7 +1053,7 @@ const first=S.findIndex((s,i)=>!D.includes(i));if(first>0){S[0].open=false;S[fir
 <script>
 (()=>{const DEF={knee:{p:['la hanche','le genou','la cheville'],m:'3'},kneeTop:{p:['la hanche','le genou','la cheville'],m:'3'},trunk:{p:['la hanche','l’épaule'],m:'h'},elbow:{p:['l’épaule','le coude','le poignet'],m:'3'}};
 const $=q=>document.querySelector(q),can=$('#pCan'),ctx=can.getContext('2d');let img=null,cur='knee',pts=[],drag=-1,val=null;
-const help=()=>{const d=DEF[cur];$('#pHelp').textContent=!img?'Choisis une photo de profil prise sur home-trainer. Elle reste sur ton téléphone.':pts.length<d.p.length?`Touche ${d.p[pts.length]}.`:'Déplace les points du doigt pour ajuster, puis valide.'};
+const help=()=>{const d=DEF[cur];$('#pHelp').textContent=!img?'Filme-toi de profil sur home-trainer, puis choisis la vidéo (ou une photo). Elle reste sur ton téléphone.':pts.length<d.p.length?`Touche ${d.p[pts.length]}.`:'Déplace les points du doigt pour ajuster, puis valide.'};
 const ang=()=>{const d=DEF[cur];if(pts.length<d.p.length)return null;if(d.m==='h'){const[h,s]=pts;return Math.round(Math.abs(Math.atan2(h.y-s.y,Math.abs(s.x-h.x))*180/Math.PI))}
 const[a,b,c]=pts;const v1=[a.x-b.x,a.y-b.y],v2=[c.x-b.x,c.y-b.y];return Math.round(Math.acos((v1[0]*v2[0]+v1[1]*v2[1])/(Math.hypot(...v1)*Math.hypot(...v2)))*180/Math.PI)};
 const draw=()=>{if(!img)return;ctx.drawImage(img,0,0,can.width,can.height);const k=can.width/700,R=Math.max(10,14*k);ctx.lineWidth=Math.max(3,5*k);ctx.strokeStyle='#d8341c';ctx.fillStyle='#d8341c';
@@ -1056,7 +1065,18 @@ const pos=e=>{const r=can.getBoundingClientRect();return{x:(e.clientX-r.left)*ca
 can.addEventListener('pointerdown',e=>{if(!img)return;const p=pos(e),hit=can.width/14;const i=pts.findIndex(q=>Math.hypot(q.x-p.x,q.y-p.y)<hit);if(i>=0){drag=i}else if(pts.length<DEF[cur].p.length){pts.push(p);drag=pts.length-1}can.setPointerCapture(e.pointerId);draw();e.preventDefault()});
 can.addEventListener('pointermove',e=>{if(drag<0)return;pts[drag]=pos(e);draw()});
 ['pointerup','pointercancel'].forEach(t=>can.addEventListener(t,()=>drag=-1));
-$('#pFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const u=URL.createObjectURL(f);const im=new Image();im.onload=()=>{const sc=Math.min(1,1400/Math.max(im.width,im.height));can.width=Math.round(im.width*sc);can.height=Math.round(im.height*sc);img=im;pts=[];$('#pWrap').hidden=false;draw()};im.src=u});
+const V=$('#pVideo'),FR=1/30;let dur=0;
+const showImg=src=>{const w=src.videoWidth||src.width,h=src.videoHeight||src.height,sc=Math.min(1,1400/Math.max(w,h));const off=document.createElement('canvas');off.width=Math.round(w*sc);off.height=Math.round(h*sc);off.getContext('2d').drawImage(src,0,0,off.width,off.height);can.width=off.width;can.height=off.height;img=off;pts=[];$('#pWrap').hidden=false;draw()};
+$('#pFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const u=URL.createObjectURL(f);
+ if(f.type.startsWith('video')){img=null;$('#pWrap').hidden=true;$('#pBar').hidden=true;$('#pBack').hidden=true;$('#pVid').hidden=false;V.src=u;V.load();$('#pHelp').textContent='Fais défiler jusqu’au bon moment (par exemple pédale en bas), puis touche « Mesurer sur cette image ».'}
+ else{$('#pVid').hidden=true;$('#pBack').hidden=true;const im=new Image();im.onload=()=>showImg(im);im.src=u}});
+V.addEventListener('loadedmetadata',()=>{dur=V.duration||0;V.currentTime=Math.min(.05,dur/2)});
+V.addEventListener('timeupdate',()=>{if(dur)$('#pSeek').value=Math.round(V.currentTime/dur*1000)});
+$('#pSeek').addEventListener('input',e=>{if(!dur)return;V.pause();$('#pPlay').textContent='Lecture';V.currentTime=e.target.value/1000*dur});
+document.querySelectorAll('[data-st]').forEach(b=>b.addEventListener('click',()=>{V.pause();$('#pPlay').textContent='Lecture';V.currentTime=Math.max(0,Math.min(dur,V.currentTime+FR*b.dataset.st))}));
+$('#pPlay').addEventListener('click',()=>{if(V.paused){V.playbackRate=.5;V.play();$('#pPlay').textContent='Pause'}else{V.pause();$('#pPlay').textContent='Lecture'}});
+$('#pGrab').addEventListener('click',()=>{V.pause();$('#pPlay').textContent='Lecture';if(!V.videoWidth)return;showImg(V);$('#pVid').hidden=true;$('#pBack').hidden=false});
+$('#pBack').addEventListener('click',()=>{$('#pWrap').hidden=true;$('#pBar').hidden=true;$('#pBack').hidden=true;$('#pVid').hidden=false;img=null;help()});
 document.querySelectorAll('#pSel button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#pSel button').forEach(x=>x.setAttribute('aria-pressed',x===b));cur=b.dataset.a;pts=[];draw();help()}));
 $('#pReset').addEventListener('click',()=>{pts=[];draw()});
 $('#pUse').addEventListener('click',()=>{if(val===null)return;const el=document.getElementById('a-'+cur);if(!el)return;el.value=val;el.dispatchEvent(new Event('input',{bubbles:true}));el.scrollIntoView({behavior:'smooth',block:'center'})});
