@@ -425,6 +425,59 @@ h2.two span{display:block;color:var(--muted)}
 .sz-cta{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}.sz-cta p{margin:0 0 12px}
 .possub{margin-top:4px}.possub button{flex:1 1 0;text-align:center}
 #posSub{position:sticky;top:calc(56px + env(safe-area-inset-top,0px));z-index:5;background:var(--bg,#f3f1ee);padding:8px 0;margin-bottom:10px}
+/* ===== Muscu : carnet de charges ===== */
+.tabs .wrap{grid-template-columns:repeat(5,1fr)}
+#muscu input[type=text],#muscu input[type=date],#muscu select{height:48px;width:100%;background:var(--field);border:1px solid var(--fieldline);border-radius:10px;padding:10px 12px;font-size:1rem;font-weight:600;outline:none}
+#muscu input[type=date]{-webkit-appearance:none;appearance:none}
+.mu-addrow{display:flex;gap:8px}
+.mu-addrow input{flex:1 1 auto;min-width:0}
+.mu-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.mu-chips button{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.8rem;font-weight:600;cursor:pointer}
+.mu-x{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 14px 12px;margin-bottom:12px}
+.mu-xh{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.mu-xh h4{font-size:1.05rem;font-weight:700;line-height:1.2}
+.mu-del{background:none;border:0;color:var(--muted);font-size:1.3rem;line-height:1;padding:2px 6px;cursor:pointer}
+.mu-last{font-size:.8rem;color:var(--muted);margin:4px 0 10px}
+.mu-last b{color:var(--text);font-weight:600}
+.mu-sets{display:grid;gap:6px}
+.mu-set{display:grid;grid-template-columns:26px 1fr 14px 1fr 30px;align-items:center;gap:6px}
+.mu-set .n{font-size:.75rem;font-weight:700;color:var(--muted);text-align:center}
+.mu-set .by{text-align:center;color:var(--muted);font-weight:600}
+.mu-f{position:relative}
+.mu-f input{width:100%;height:44px;background:var(--field);border:1px solid var(--fieldline);border-radius:10px;padding:8px 34px 8px 12px;font-size:1.05rem;font-weight:700;outline:none;font-variant-numeric:tabular-nums}
+.mu-f input:focus{border-color:var(--accent)}
+.mu-f span{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:.72rem;font-weight:700;color:var(--muted);pointer-events:none}
+.mu-hd{display:grid;grid-template-columns:26px 1fr 14px 1fr 30px;gap:6px;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:2px}
+.mu-hd span:nth-child(2),.mu-hd span:nth-child(4){padding-left:4px}
+.mu-rm{background:none;border:0;color:var(--muted);font-size:1.1rem;cursor:pointer}
+.mu-plus{margin-top:8px;background:none;border:1px dashed var(--fieldline);border-radius:10px;width:100%;padding:8px;font-weight:600;font-size:.85rem;color:var(--muted);cursor:pointer}
+.mu-cmp{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.mu-tag{font-size:.76rem;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--card2);color:var(--muted);font-variant-numeric:tabular-nums}
+.mu-tag.up{background:#e6f4ea;color:var(--ok)}
+.mu-tag.down{background:#fbeae7;color:var(--accent2)}
+#muSave{width:100%;margin-top:4px}
+.mu-msg{text-align:center;margin-top:10px;font-weight:600;color:var(--ok)}
+.mu-empty{text-align:center;color:var(--muted);padding:26px 16px;background:var(--card);border:1px dashed var(--line);border-radius:var(--r);font-size:.9rem;margin-bottom:12px}
+.mu-chart{width:100%;height:auto;display:block}
+.mu-k{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.mu-k div{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.mu-k span{display:block;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.mu-k b{display:block;font-size:1.25rem;font-weight:700;font-variant-numeric:tabular-nums;margin-top:2px}
+.mu-k b.up{color:var(--ok)}
+.mu-row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:.88rem}
+.mu-row:last-child{border-bottom:0}
+.mu-row .d{color:var(--muted);white-space:nowrap}
+.mu-row .s{text-align:right;font-variant-numeric:tabular-nums}
+.mu-s{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:10px}
+.mu-sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.mu-sh b{font-weight:700}
+.mu-sh button{background:none;border:0;color:var(--muted);font-size:.78rem;text-decoration:underline;cursor:pointer}
+.mu-s ul{list-style:none}
+.mu-s li{display:flex;justify-content:space-between;gap:10px;font-size:.86rem;padding:3px 0}
+.mu-s li span:last-child{color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.mu-tools{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.mu-tools .pill{width:100%}
+.mu-imp{cursor:pointer}
 </style>
 </head>
 <body>
@@ -798,6 +851,46 @@ h2.two span{display:block;color:var(--muted)}
   </div>
 </div></section>
 
+<section id="muscu" role="tabpanel" aria-labelledby="t-muscu" hidden><div class="wrap">
+  <div class="hero" style="--img:url(img/p10.webp)"><div class="hero-in"><p class="eyebrow">Carnet de muscu</p><h2>Tes charges</h2></div></div>
+  <p class="intro">Après chaque séance, note tes charges. L’app te rappelle ce que tu as fait la dernière fois et te montre ta progression. Tout reste sur ton téléphone.</p>
+
+  <div class="seg" id="muSub" role="group" aria-label="Partie">
+    <button type="button" aria-pressed="true" data-m="new">Ma séance</button>
+    <button type="button" aria-pressed="false" data-m="prog">Progression</button>
+    <button type="button" aria-pressed="false" data-m="hist">Historique</button>
+  </div>
+
+  <div data-mu="new">
+    <div class="panel mu-head">
+      <div><label for="muDate">Date de la séance</label><input id="muDate" type="date"></div>
+    </div>
+    <div id="muEx"></div>
+    <div class="panel mu-add">
+      <label for="muName">Ajouter un exercice</label>
+      <div class="mu-addrow"><input id="muName" type="text" list="muList" placeholder="Ex. Squat" autocomplete="off" enterkeyhint="done"><button type="button" class="pill dark sm" id="muAddBtn">Ajouter</button></div>
+      <datalist id="muList"></datalist>
+      <div class="mu-chips" id="muChips"></div>
+    </div>
+    <button type="button" class="btn" id="muSave" hidden>Enregistrer la séance</button>
+    <p class="note mu-msg" id="muMsg" hidden></p>
+  </div>
+
+  <div data-mu="prog" hidden>
+    <div class="panel"><label for="muPick">Exercice</label><select id="muPick"></select></div>
+    <div id="muProg"></div>
+  </div>
+
+  <div data-mu="hist" hidden>
+    <div id="muHist"></div>
+    <div class="mu-tools">
+      <a class="pill dark sm" id="muWa" href="https://wa.me/33621349226" target="_blank" rel="noopener">Envoyer ma dernière séance au coach</a>
+      <button type="button" class="pill sm outline-d" id="muExport">Sauvegarder mon carnet</button>
+      <label class="pill sm outline-d mu-imp">Restaurer une sauvegarde<input type="file" id="muImport" accept="application/json,.json" hidden></label>
+    </div>
+  </div>
+</div></section>
+
 </main>
 
 <footer>© <span id="y">2026</span> PM Training · Les réglages et mesures proposés sont des repères d’entraînement. Ils ne remplacent pas un avis médical, ni une étude posturale réalisée par un professionnel de santé.<br><button type="button" class="ml-l" onclick="document.getElementById('ml').showModal()">Mentions légales</button></footer>
@@ -824,6 +917,7 @@ h2.two span{display:block;color:var(--muted)}
     <button role="tab" id="t-offres" aria-controls="offres" aria-selected="false" data-go="offres"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7L12 17.6 5.8 21l1.4-7L2 9.3l7-.8z"/></svg>Offres</button>
     <button role="tab" id="t-position" aria-controls="position" aria-selected="false" data-go="position"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17" r="3.5"/><circle cx="18.5" cy="17" r="3.5"/><path d="M5.5 17l4-8h6l3 8M9.5 9L12 17h2M14 5h2l1.5 4"/></svg>Position</button>
     <button role="tab" id="t-zones" aria-controls="zones" aria-selected="false" data-go="zones"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Zones</button>
+    <button role="tab" id="t-muscu" aria-controls="muscu" aria-selected="false" data-go="muscu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg>Muscu</button>
   </div>
 </nav>
 
@@ -978,7 +1072,7 @@ function setSeg(id,attr,val){const b=$(id).querySelector(`[data-${attr}="${val}"
 function persist(ids,fn){ids.forEach(id=>{const el=$('#'+id);const v=store.get(id,null);if(v!==null&&v!=='')el.value=v;el.addEventListener('input',()=>{store.set(id,el.value);fn()});});}
 
 /* ---------- Onglets ---------- */
-const TABS=['avis','offres','position','zones'];
+const TABS=['avis','offres','position','zones','muscu'];
 function go(t,push){if(!TABS.includes(t))t='avis';TABS.forEach(x=>{$('#'+x).hidden=x!==t;$('#t-'+x).setAttribute('aria-selected',x===t)});window.scrollTo(0,0);if(push)history.replaceState(null,'','#'+t);store.set('tab',t);}
 $$('[data-go]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();go(b.dataset.go,true)}));
 go((location.hash||'').slice(1)||'avis');
@@ -1184,6 +1278,112 @@ document.querySelectorAll('#pSel button').forEach(b=>b.addEventListener('click',
 $('#pReset').addEventListener('click',()=>{pts=[];draw()});
 $('#pUse').addEventListener('click',()=>{if(val===null)return;const el=document.getElementById('a-'+cur);if(!el)return;el.value=val;el.dispatchEvent(new Event('input',{bubbles:true}));el.scrollIntoView({behavior:'smooth',block:'center'})});
 help();})();
+</script>
+<script>
+/* ---------- Muscu : carnet de charges (stocké sur le téléphone) ---------- */
+(()=>{
+const SUG=['Squat','Soulevé de terre','Développé couché','Fentes','Hip thrust','Presse à cuisses','Leg curl','Leg extension','Mollets','Tirage vertical','Rowing','Tractions','Développé militaire','Step-up','Soulevé de terre jambe tendue','Gainage'];
+const load=(k,d)=>{try{return JSON.parse(localStorage.getItem('pm.'+k))||d}catch(e){return d}};
+const save=(k,v)=>{try{localStorage.setItem('pm.'+k,JSON.stringify(v))}catch(e){}};
+const today=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)};
+let S=load('muscu',[]);           // séances enregistrées : [{id,date,ex:[{n,sets:[{kg,r}]}]}]
+let D=load('muscuDraft',null)||{date:today(),ex:[]}; // séance en cours
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const key=n=>n.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+const f=(x,d=1)=>{const r=Math.round(x*10**d)/10**d;return String(r).replace('.',',')};
+const nv=v=>{const x=parseFloat(String(v).replace(',','.'));return isFinite(x)?x:null};
+const fdate=s=>{const [y,m,d]=s.split('-');return d+'/'+m+(y!==String(new Date().getFullYear())?'/'+y.slice(2):'')};
+const sorted=()=>[...S].sort((a,b)=>a.date<b.date?1:a.date>b.date?-1:b.id-a.id);
+const valid=sets=>sets.filter(s=>nv(s.kg)!==null&&nv(s.r)>0);
+const top=sets=>Math.max(...valid(sets).map(s=>nv(s.kg)));
+const vol=sets=>valid(sets).reduce((a,s)=>a+nv(s.kg)*nv(s.r),0);
+const fsets=sets=>{const v=valid(sets);if(!v.length)return'—';const same=v.every(s=>nv(s.kg)===nv(v[0].kg)&&nv(s.r)===nv(v[0].r));
+  if(same)return`${v.length} × ${nv(v[0].r)} à ${f(nv(v[0].kg))} kg`;
+  if(v.every(s=>nv(s.kg)===nv(v[0].kg)))return v.map(s=>nv(s.r)).join(', ')+` rép à ${f(nv(v[0].kg))} kg`;
+  return v.map(s=>`${f(nv(s.kg))} kg × ${nv(s.r)}`).join(' · ')};
+function last(name,before){const k=key(name);for(const s of sorted()){if(before&&s.date>before)continue;const e=s.ex.find(x=>key(x.n)===k);if(e)return{date:s.date,sets:e.sets}}return null}
+const names=()=>{const m=new Map();sorted().forEach(s=>s.ex.forEach(e=>{if(!m.has(key(e.n)))m.set(key(e.n),e.n)}));return[...m.values()]};
+const persistD=()=>save('muscuDraft',D);
+
+/* -- Ma séance -- */
+function tag(cur,prev,unit,label){const d=cur-prev;if(Math.abs(d)<1e-9)return`<span class="mu-tag">${label} =</span>`;
+  return`<span class="mu-tag ${d>0?'up':'down'}">${label} ${d>0?'+':'−'}${f(Math.abs(d))} ${unit}</span>`}
+const cmpTags=(e,p)=>p&&valid(e.sets).length&&valid(p.sets).length?tag(top(e.sets),top(p.sets),'kg','Charge max')+tag(vol(e.sets),vol(p.sets),'kg','Tonnage'):'';
+function renderEx(){
+  const box=$('#muEx');
+  if(!D.ex.length){box.innerHTML='<div class="mu-empty">Ajoute les exercices de ta séance.<br>Si tu les as déjà faits, l’app reprend tes charges de la dernière fois.</div>'}
+  else box.innerHTML=D.ex.map((e,i)=>{const p=last(e.n,D.date);let cmp='';
+    cmp=`<div class="mu-cmp">${cmpTags(e,p)}</div>`;
+    return`<div class="mu-x" data-i="${i}"><div class="mu-xh"><h4>${esc(e.n)}</h4><button type="button" class="mu-del" data-a="delx" aria-label="Retirer ${esc(e.n)}">×</button></div>
+    <p class="mu-last">${p?`Dernière fois (${fdate(p.date)}) : <b>${fsets(p.sets)}</b>`:'Première fois pour cet exercice'}</p>
+    <div class="mu-hd"><span></span><span>Charge</span><span></span><span>Répét.</span><span></span></div>
+    <div class="mu-sets">${e.sets.map((s,j)=>`<div class="mu-set" data-j="${j}"><span class="n">${j+1}</span>
+      <div class="mu-f"><input type="text" inputmode="decimal" value="${esc(s.kg)}" data-k="kg" aria-label="Charge série ${j+1}"><span>kg</span></div><span class="by">×</span>
+      <div class="mu-f"><input type="text" inputmode="numeric" value="${esc(s.r)}" data-k="r" aria-label="Répétitions série ${j+1}"><span>rép</span></div>
+      <button type="button" class="mu-rm" data-a="dels" aria-label="Supprimer la série ${j+1}">−</button></div>`).join('')}</div>
+    <button type="button" class="mu-plus" data-a="adds">+ Ajouter une série</button>${cmp}</div>`}).join('');
+  $('#muSave').hidden=!D.ex.length;
+  const used=new Set(D.ex.map(e=>key(e.n)));const mine=names();
+  $('#muChips').innerHTML=(mine.length?mine:SUG.slice(0,6)).filter(n=>!used.has(key(n))).slice(0,8).map(n=>`<button type="button">${esc(n)}</button>`).join('');
+  $('#muList').innerHTML=[...new Set([...mine,...SUG])].map(n=>`<option value="${esc(n)}">`).join('');
+}
+function addEx(n){n=(n||'').trim();if(!n)return;if(D.ex.some(e=>key(e.n)===key(n))){$('#muName').value='';return}
+  const p=last(n,D.date);D.ex.push({n,sets:p?p.sets.map(s=>({kg:s.kg,r:s.r})):[{kg:'',r:''},{kg:'',r:''},{kg:'',r:''}]});
+  $('#muName').value='';persistD();renderEx();$('#muMsg').hidden=true}
+$('#muAddBtn').addEventListener('click',()=>addEx($('#muName').value));
+$('#muName').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addEx(e.target.value)}});
+$('#muChips').addEventListener('click',e=>{const b=e.target.closest('button');if(b)addEx(b.textContent)});
+$('#muEx').addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const i=+b.closest('.mu-x').dataset.i,ex=D.ex[i];
+  if(b.dataset.a==='delx')D.ex.splice(i,1);
+  if(b.dataset.a==='adds'){const l=ex.sets[ex.sets.length-1]||{kg:'',r:''};ex.sets.push({kg:l.kg,r:l.r})}
+  if(b.dataset.a==='dels'){ex.sets.splice(+b.closest('.mu-set').dataset.j,1)}
+  persistD();renderEx()});
+$('#muEx').addEventListener('input',e=>{const t=e.target;if(!t.dataset.k)return;const i=+t.closest('.mu-x').dataset.i,j=+t.closest('.mu-set').dataset.j;
+  D.ex[i].sets[j][t.dataset.k]=t.value.replace('.',',');persistD();
+  t.closest('.mu-x').querySelector('.mu-cmp').innerHTML=cmpTags(D.ex[i],last(D.ex[i].n,D.date))});
+const md=$('#muDate');md.value=D.date;md.addEventListener('change',()=>{D.date=md.value||today();persistD();renderEx()});
+$('#muSave').addEventListener('click',()=>{
+  const ex=D.ex.map(e=>({n:e.n,sets:valid(e.sets).map(s=>({kg:String(s.kg).replace('.',','),r:String(nv(s.r))}))})).filter(e=>e.sets.length);
+  const m=$('#muMsg');if(!ex.length){m.hidden=false;m.style.color='var(--accent2)';m.textContent='Remplis au moins une série (charge et répétitions).';return}
+  S.push({id:Date.now(),date:D.date||today(),ex});save('muscu',S);
+  D={date:today(),ex:[]};persistD();md.value=D.date;renderEx();renderAll();
+  m.hidden=false;m.style.color='';m.textContent='Séance enregistrée. Bravo !'});
+
+/* -- Progression -- */
+function chart(pts){if(pts.length<2)return'';const W=640,H=220,pl=44,pr=14,pt=16,pb=30;
+  const ys=pts.map(p=>p.y),lo=Math.min(...ys),hi=Math.max(...ys),st=[1,2,2.5,5,10,20,25,50,100].find(v=>Math.floor(lo/v)*v+3*v>=hi+v*.2)||200,y0=Math.floor(lo/st)*st,y1=y0+st*3;
+  const X=i=>pl+(W-pl-pr)*i/(pts.length-1),Y=v=>pt+(H-pt-pb)*(1-(v-y0)/(y1-y0));
+  const grid=[0,1,2,3].map(k=>{const v=y0+st*k;return`<line x1="${pl}" x2="${W-pr}" y1="${Y(v)}" y2="${Y(v)}" stroke="#ebe8e3"/><text x="${pl-8}" y="${Y(v)+4}" text-anchor="end" font-size="12" fill="#77736d">${f(v)}</text>`}).join('');
+  const step=Math.ceil(pts.length/6);
+  const xl=pts.map((p,i)=>(i%step===0||i===pts.length-1)?`<text x="${X(i)}" y="${H-8}" text-anchor="middle" font-size="12" fill="#77736d">${fdate(p.d)}</text>`:'').join('');
+  const path=pts.map((p,i)=>(i?'L':'M')+X(i).toFixed(1)+' '+Y(p.y).toFixed(1)).join('');
+  return`<svg class="mu-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Évolution de la charge max">${grid}<path d="${path}" fill="none" stroke="#d8341c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>${pts.map((p,i)=>`<circle cx="${X(i)}" cy="${Y(p.y)}" r="4.5" fill="#fff" stroke="#d8341c" stroke-width="2.5"/>`).join('')}${xl}</svg>`}
+function renderProg(){const all=names(),sel=$('#muPick');const cur=sel.value||store.get('muPick','');
+  if(!all.length){sel.innerHTML='';sel.disabled=true;$('#muProg').innerHTML='<div class="mu-empty">Enregistre ta première séance pour voir ta progression ici.</div>';return}
+  sel.disabled=false;sel.innerHTML=all.map(n=>`<option>${esc(n)}</option>`).join('');sel.value=all.find(n=>n===cur)||all[0];
+  const k=key(sel.value),rows=[...sorted()].reverse().map(s=>{const e=s.ex.find(x=>key(x.n)===k);return e&&{d:s.date,sets:e.sets,y:top(e.sets),v:vol(e.sets)}}).filter(Boolean);
+  const first=rows[0],lastR=rows[rows.length-1],best=Math.max(...rows.map(r=>r.y)),gain=lastR.y-first.y;
+  $('#muProg').innerHTML=`<div class="mu-k"><div><span>Dernière</span><b>${f(lastR.y)} kg</b></div><div><span>Record</span><b>${f(best)} kg</b></div><div><span>Progrès</span><b class="${gain>0?'up':''}">${gain>0?'+':gain<0?'−':''}${f(Math.abs(gain))} kg</b></div></div>
+   ${rows.length>1?`<div class="panel">${chart(rows)}<p class="note" style="margin-top:6px">Charge la plus lourde de chaque séance.</p></div>`:''}
+   <div class="panel">${[...rows].reverse().map(r=>`<div class="mu-row"><span class="d">${fdate(r.d)}</span><span class="s">${fsets(r.sets)}</span></div>`).join('')}</div>`}
+$('#muPick').addEventListener('change',e=>{store.set('muPick',e.target.value);renderProg()});
+
+/* -- Historique -- */
+function renderHist(){const L=sorted();
+  $('#muHist').innerHTML=L.length?L.map(s=>`<div class="mu-s"><div class="mu-sh"><b>${new Date(s.date+'T12:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'})}</b><button type="button" data-id="${s.id}">Supprimer</button></div><ul>${s.ex.map(e=>`<li><span>${esc(e.n)}</span><span>${fsets(e.sets)}</span></li>`).join('')}</ul></div>`).join(''):'<div class="mu-empty">Aucune séance enregistrée pour l’instant.</div>';
+  const l=L[0];$('#muWa').hidden=!l;
+  if(l)$('#muWa').href='https://wa.me/33621349226?text='+encodeURIComponent(`Séance muscu du ${fdate(l.date)} :\n`+l.ex.map(e=>`• ${e.n} : ${fsets(e.sets)}`).join('\n'))}
+$('#muHist').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(!b)return;
+  if(b.dataset.c!=='1'){b.dataset.c='1';b.textContent='Confirmer la suppression';return}
+  S=S.filter(s=>String(s.id)!==b.dataset.id);save('muscu',S);renderAll()});
+$('#muExport').addEventListener('click',()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({app:'pm-training',muscu:S},null,1)],{type:'application/json'}));a.download='carnet-muscu-'+today()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)});
+$('#muImport').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const j=JSON.parse(await file.text());const arr=Array.isArray(j)?j:j.muscu;if(!Array.isArray(arr))throw 0;
+  const ids=new Set(S.map(s=>s.id));arr.forEach(s=>{if(s&&s.date&&Array.isArray(s.ex)&&!ids.has(s.id))S.push(s)});save('muscu',S);renderAll()}catch(err){}e.target.value=''});
+
+function renderAll(){renderEx();renderProg();renderHist()}
+seg('#muSub',b=>{$$('[data-mu]').forEach(x=>x.hidden=x.dataset.mu!==b.dataset.m);store.set('muSub',b.dataset.m);if(b.dataset.m!=='new')renderAll()});
+renderAll();setSeg('#muSub','m',store.get('muSub','new'));
+})();
 </script>
 <script type="module">
 const $=q=>document.querySelector(q),V=$('#pVideo'),O=$('#pOver'),oc=O.getContext('2d');let lm=null,run=false,rec=null,lastT=-1;
